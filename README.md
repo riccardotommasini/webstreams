@@ -80,6 +80,5 @@ WHERE
 
 ### To Analyse for further queries
 
-[] https://blog.gdeltproject.org/google-bigquery-gkg-2-0-sample-queries/
-[] https://gigaom.com/2014/05/29/more-than-250-million-global-events-are-now-in-the-cloud-for-anyone-to-analyze/
-[] [Schema CSV](https://bigquery.cloud.google.com/table/gdelt-bq:gdeltv2.iatvgkg?fbclid=IwAR36EwamNl1E54k5QkyERrp1wmJPHbAFF3-NFGeSEk6sqQlvSWchkbSOTXw)
+[] [https://blog.gdeltproject.org/google-bigquery-gkg-2-0-sample-queries/](Queries1)
+[] [https://gigaom.com/2014/05/29/more-than-250-million-global-events-are-now-in-the-cloud-for-anyone-to-analyze/](Queries2) [Schema CSV](https://bigquery.cloud.google.com/table/gdelt-bq:gdeltv2.iatvgkg?fbclid=IwAR36EwamNl1E54k5QkyERrp1wmJPHbAFF3-NFGeSEk6sqQlvSWchkbSOTXw)
