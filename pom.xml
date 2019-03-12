@@ -22,6 +22,15 @@
 
     <repositories>
         <repository>
+            <id>central</id>
+            <name>Maven Repository Switchboard</name>
+            <layout>default</layout>
+            <url>http://repo1.maven.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
@@ -33,7 +42,26 @@
             <groupId>com.github.riccardotommasini</groupId>
             <artifactId>csparql2</artifactId>
             <version>2.2.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.github.jsonld-java.jsonld-java</groupId>
+                    <artifactId>jsonld-java</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>27.0.1-jre</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.8</version>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.jena</groupId>
             <artifactId>jena-core</artifactId>
@@ -43,6 +71,12 @@
             <groupId>org.apache.jena</groupId>
             <artifactId>jena-arq</artifactId>
             <version>3.7.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.github.jsonld-java</groupId>
+                    <artifactId>jsonld-java</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.jena</groupId>
@@ -50,9 +84,9 @@
             <version>3.7.0</version>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>it.polimi.deib.rsp.jasper</groupId>-->
-            <!--<artifactId>csparql2</artifactId>-->
-            <!--<version>2.2.0</version>-->
+        <!--<groupId>it.polimi.deib.rsp.jasper</groupId>-->
+        <!--<artifactId>csparql2</artifactId>-->
+        <!--<version>2.2.0</version>-->
         <!--</dependency>-->
         <dependency>
             <groupId>junit</groupId>
@@ -85,6 +119,33 @@
             <version>3.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.taxonic.carml</groupId>
+            <artifactId>carml-engine</artifactId>
+            <version>0.2.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
+        <!-- Choose the resolvers to suit your need -->
+        <dependency>
+            <groupId>com.taxonic.carml</groupId>
+            <artifactId>carml-logical-source-resolver-jsonpath</artifactId>
+            <version>0.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.taxonic.carml</groupId>
+            <artifactId>carml-logical-source-resolver-xpath</artifactId>
+            <version>0.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.taxonic.carml</groupId>
+            <artifactId>carml-logical-source-resolver-csv</artifactId>
+            <version>0.2.3</version>
+        </dependency>
     </dependencies>
 </project>
