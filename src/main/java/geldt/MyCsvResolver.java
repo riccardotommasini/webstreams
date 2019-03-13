@@ -3,6 +3,7 @@ package geldt;
 import com.taxonic.carml.logical_source_resolver.CsvResolver;
 import com.taxonic.carml.model.LogicalSource;
 import com.univocity.parsers.common.record.Record;
+import com.univocity.parsers.csv.CsvFormat;
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
 
@@ -21,6 +22,9 @@ public class MyCsvResolver extends CsvResolver {
         settings.setHeaders(headers);
         settings.setLineSeparatorDetectionEnabled(true);
         settings.setDelimiterDetectionEnabled(true, '\t');
+        CsvFormat format = new CsvFormat();
+        format.setDelimiter('\t');
+        settings.setFormat(format);
         settings.setReadInputOnSeparateThread(true);
     }
 

@@ -7,6 +7,7 @@ import com.taxonic.carml.vocab.Rdf;
 import it.polimi.deib.rsp.geldt.GELDTArticleExample;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.rio.RDFFormat;
+import org.eclipse.rdf4j.rio.Rio;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -47,6 +48,7 @@ public class API {
             } else if (todownload.contains("mentions")) {
                 header = "GLOBALEVENTID    EventTimeDate    MentionTimeDate    MentionType    MentionSourceName    MentionIdentifier    SentenceID    Actor1CharOffset    Actor2CharOffset    ActionCharOffset    InRawText    Confidence    MentionDocLen    MentionDocTone    MentionDocTranslationInfo    Extras";
                 mappingfile = "mentions";
+                continue;
             } else if (todownload.contains("gkg")) {
                 continue;
             }
@@ -88,11 +90,15 @@ public class API {
             //close last ZipEntry
             zis.closeEntry();
 
-            mapper.bindInputStream("GELDTStream", new BufferedInputStream(new ByteArrayInputStream(dos.toByteArray())));
+            mapper.bindInputStream("GELDTStream", new ByteArrayInputStream(dos.toByteArray()));
 
             Model map = mapper.map(mapping);
 
-            map.forEach(statement -> System.out.println(statement.getSubject() + " - " + statement.getPredicate() + " - " + statement.getObject()));
+            FileOutputStream fos = new FileOutputStream("/Users/riccardo/_Projects/web/geldt/src/main/resources/export.ttl");
+            Rio.write(map, fos, RDFFormat.TURTLE);
+            FileOutputStream fos1 = new FileOutputStream("/Users/riccardo/_Projects/web/geldt/src/main/resources/export.trig");
+
+            Rio.write(map, fos1, RDFFormat.TRIG);
 
             readzip(dest.getPath(), connection1.getInputStream(), new byte[1024]);
         }
