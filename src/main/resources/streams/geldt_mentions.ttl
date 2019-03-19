@@ -21,9 +21,9 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate geldt:actor;
+    rr:predicate geldt:source;
     rr:objectMap [
-      rml:reference "Actor1Code";
+      rml:reference "MentionSourceName";
       ]
     ];
 

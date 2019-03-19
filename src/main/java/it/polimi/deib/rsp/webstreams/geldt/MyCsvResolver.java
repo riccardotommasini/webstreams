@@ -1,4 +1,4 @@
-package geldt;
+package geldt.streaming;
 
 import com.taxonic.carml.logical_source_resolver.CsvResolver;
 import com.taxonic.carml.model.LogicalSource;

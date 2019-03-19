@@ -4,6 +4,7 @@ import com.taxonic.carml.engine.RmlMapper;
 import com.taxonic.carml.model.TriplesMap;
 import com.taxonic.carml.util.RmlMappingLoader;
 import com.taxonic.carml.vocab.Rdf;
+import geldt.streaming.MyCsvResolver;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.rio.RDFFormat;
 
