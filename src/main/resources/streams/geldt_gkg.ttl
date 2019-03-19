@@ -30,4 +30,47 @@
       ]
     ];
 
+
+
+
+  rr:predicateObjectMap [
+    rr:predicate gdelt:date;
+    rr:objectMap [
+      rml:reference "DATE"
+    ]
+  ];
+
+
+  rr:predicateObjectMap [
+    rr:predicate gdelt:sourceName;
+    rr:objectMap [
+      rml:reference "SourceCommonName"
+    ]
+  ];
+
+
+  rr:predicateObjectMap [
+    rr:predicate gdelt:documentId;
+    rr:objectMap [
+      rml:reference "DocumentIdentifier"
+    ]
+  ];
+
+
+  rr:predicateObjectMap [
+    rr:predicate gdelt:shareImage;
+    rr:objectMap [
+      rml:reference "SharingImage"
+    ]
+  ];
+
+
+  rr:predicateObjectMap [
+    rr:predicate gdelt:GKGextras;
+    rr:objectMap [
+      rml:reference "Extras"
+    ]
+  ];
+
+
 .
