@@ -60,6 +60,16 @@
       rr:class geldt:Actor
     ];
 
+
+
+  rr:predicateObjectMap [
+    rr:predicate geldt:EventsourceURL;
+    rr:objectMap [
+      rml:reference "SOURCEURL";
+      ]
+    ];
+
+
   rr:predicateObjectMap [
     rr:predicate geldt:actorCode;
     rr:objectMap [
@@ -217,7 +227,279 @@
 
 
 
+  rr:predicateObjectMap [
+        rr:predicate geldt:eventDate;
+        rr:objectMap [
+          rml:reference "SQLDATE";
+          ]
+        ];
 
+
+
+  rr:predicateObjectMap [
+        rr:predicate geldt:eventMonthYear;
+        rr:objectMap [
+          rml:reference "MonthYear";
+          ]
+        ];
+
+  rr:predicateObjectMap [
+        rr:predicate geldt:eventYear;
+        rr:objectMap [
+          rml:reference "Year";
+          ]
+        ];
+
+
+  rr:predicateObjectMap [
+        rr:predicate geldt:eventYear;
+        rr:objectMap [
+          rml:reference "Year";
+          ]
+        ];
+
+  rr:predicateObjectMap [
+        rr:predicate geldt:isRootEvent;
+        rr:objectMap [
+          rml:reference "IsRootEvent";
+          ]
+        ];
+
+
+  rr:predicateObjectMap [
+        rr:predicate geldt:eventBaseCode;
+        rr:objectMap [
+          rml:reference "EventBaseCode";
+          ]
+        ];
+
+
+     rr:predicateObjectMap [
+           rr:predicate geldt:quadClass;
+           rr:objectMap [
+             rml:reference "QuadClass";
+             ]
+           ];
+
+
+     rr:predicateObjectMap [
+           rr:predicate geldt:goldsteinScale;
+           rr:objectMap [
+             rml:reference "GoldsteinScale";
+             ]
+           ];
+
+
+        rr:predicateObjectMap [
+              rr:predicate geldt:mentionsNumber;
+              rr:objectMap [
+                rml:reference "NumMentions";
+                ]
+              ];
+
+
+         rr:predicateObjectMap [
+               rr:predicate geldt:sourcesNumber;
+               rr:objectMap [
+                 rml:reference "NumSources";
+                 ]
+               ];
+
+
+         rr:predicateObjectMap [
+               rr:predicate geldt:articlesNumber;
+               rr:objectMap [
+                 rml:reference "NumArticles";
+                 ]
+               ];
+
+
+         rr:predicateObjectMap [
+               rr:predicate geldt:toneAverage;
+               rr:objectMap [
+                 rml:reference "AvgTone";
+                 ]
+               ];
+
+
+        rr:predicateObjectMap [
+              rr:predicate geldt:geoType;
+              rr:objectMap [
+                rml:reference "Actor1Geo_Type";
+                ]
+              ];
+
+
+        rr:predicateObjectMap [
+              rr:predicate geldt:geoType;
+              rr:objectMap [
+                rml:reference "Actor2Geo_Type";
+                ]
+              ];
+
+
+              rr:predicateObjectMap [
+                    rr:predicate geldt:geoType;
+                    rr:objectMap [
+                      rml:reference "ActionGeo_Type";
+                      ]
+                    ];
+
+      rr:predicateObjectMap [
+            rr:predicate geldt:geoFullName;
+            rr:objectMap [
+              rml:reference "Actor1Geo_FullName";
+              ]
+            ];
+
+          rr:predicateObjectMap [
+                rr:predicate geldt:geoFullName;
+                rr:objectMap [
+                  rml:reference "Actor2Geo_FullName";
+                  ]
+                ];
+
+          rr:predicateObjectMap [
+                rr:predicate geldt:geoFullName;
+                rr:objectMap [
+                  rml:reference "ActionGeo_FullName";
+                  ]
+                ];
+
+          rr:predicateObjectMap [
+                rr:predicate geldt:geoCountryCode;
+                rr:objectMap [
+                  rml:reference "Actor1Geo_CountryCode";
+                  ]
+                ];
+           rr:predicateObjectMap [
+                 rr:predicate geldt:geoCountryCode;
+                 rr:objectMap [
+                   rml:reference "Actor2Geo_CountryCode";
+                   ]
+                 ];
+
+           rr:predicateObjectMap [
+                 rr:predicate geldt:geoCountryCode;
+                 rr:objectMap [
+                   rml:reference "ActionGeo_CountryCode";
+                   ]
+                 ];
+
+
+          rr:predicateObjectMap [
+                rr:predicate geldt:geoADM1Code;
+                rr:objectMap [
+                  rml:reference "Actor1Geo_ADM1Code";
+                  ]
+                ];
+
+
+          rr:predicateObjectMap [
+                rr:predicate geldt:geoADM1Code;
+                rr:objectMap [
+                  rml:reference "Actor2Geo_ADM1Code";
+                  ]
+                ];
+
+
+          rr:predicateObjectMap [
+                rr:predicate geldt:geoADM1Code;
+                rr:objectMap [
+                  rml:reference "ActionGeo_ADM1Code";
+                  ]
+                ];
+
+
+          rr:predicateObjectMap [
+                rr:predicate geldt:geoADM2Code;
+                rr:objectMap [
+                  rml:reference "Actor1Geo_ADM2Code";
+                  ]
+                ];
+
+          rr:predicateObjectMap [
+                rr:predicate geldt:geoADM2Code;
+                rr:objectMap [
+                  rml:reference "Actor2Geo_ADM2Code";
+                  ]
+                ];
+
+          rr:predicateObjectMap [
+                rr:predicate geldt:geoADM2Code;
+                rr:objectMap [
+                  rml:reference "ActionGeo_ADM2Code";
+                  ]
+                ];
+
+          rr:predicateObjectMap [
+                rr:predicate geldt:geoLNAG;
+                rr:objectMap [
+                  rml:reference "Actor1Geo_Long";
+                  ]
+                ];
+
+
+      rr:predicateObjectMap [
+            rr:predicate geldt:geoLNAG;
+            rr:objectMap [
+              rml:reference "Actor2Geo_Long";
+              ]
+            ];
+
+      rr:predicateObjectMap [
+            rr:predicate geldt:geoLNAG;
+            rr:objectMap [
+              rml:reference "ActionGeo_Long";
+              ]
+            ];
+
+
+          rr:predicateObjectMap [
+                rr:predicate geldt:geoLAT;
+                rr:objectMap [
+                  rml:reference "Actor1Geo_Lat";
+                  ]
+                ];
+
+
+      rr:predicateObjectMap [
+            rr:predicate geldt:geoLAT;
+            rr:objectMap [
+              rml:reference "Actor2Geo_Lat";
+              ]
+            ];
+
+      rr:predicateObjectMap [
+            rr:predicate geldt:geoLAT;
+            rr:objectMap [
+              rml:reference "ActionGeo_Lat";
+              ]
+            ];
+
+
+      rr:predicateObjectMap [
+            rr:predicate geldt:geoFeatureID;
+            rr:objectMap [
+              rml:reference "Actor1Geo_FeatureID";
+              ]
+            ];
+
+
+      rr:predicateObjectMap [
+            rr:predicate geldt:geoFeatureID;
+            rr:objectMap [
+              rml:reference "Actor2Geo_FeatureID";
+              ]
+            ];
+
+
+      rr:predicateObjectMap [
+            rr:predicate geldt:geoFeatureID;
+            rr:objectMap [
+              rml:reference "ActionGeo_FeatureID";
+              ]
+            ];
 
 .
 

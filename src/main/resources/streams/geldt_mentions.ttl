@@ -22,10 +22,123 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate geldt:source;
+    rr:predicate geldt:mentionID;
     rr:objectMap [
-      rml:reference "MentionSourceName";
+      rml:reference "MentionIdentifier";
       ]
     ];
 
+
+  rr:predicateObjectMap [
+      rr:predicate geldt:eventDateTime;
+      rr:objectMap [
+         rr:template "http://geldt.com#{EventTimeDate}";
+        ]
+      ];
+
+
+  rr:predicateObjectMap [
+      rr:predicate geldt:mentionDateTime;
+      rr:objectMap [
+         rr:template "http://geldt.com#{MentionTimeDate}";
+        ]
+      ];
+
+
+  rr:predicateObjectMap [
+      rr:predicate geldt:mentionType;
+      rr:objectMap [
+         rr:template "http://geldt.com#{MentionType}";
+        ]
+      ];
+
+
+  rr:predicateObjectMap [
+      rr:predicate geldt:mentionSource;
+      rr:objectMap [
+         rr:template "http://geldt.com#{MentionSourceName}";
+        ]
+      ];
+
+
+  rr:predicateObjectMap [
+      rr:predicate geldt:mentionSource;
+      rr:objectMap [
+         rr:template "http://geldt.com#{MentionSourceName}";
+        ]
+      ];
+
+
+  rr:predicateObjectMap [
+      rr:predicate geldt:sentenceID;
+      rr:objectMap [
+         rr:template "http://geldt.com#{SentenceID}";
+        ]
+      ];
+
+
+  rr:predicateObjectMap [
+      rr:predicate geldt:actorCharOffset;
+      rr:objectMap [
+         rr:template "http://geldt.com#{Actor1CharOffset}";
+        ]
+      ];
+
+  rr:predicateObjectMap [
+      rr:predicate geldt:actorCharOffset;
+      rr:objectMap [
+         rr:template "http://geldt.com#{Actor2CharOffset}";
+        ]
+      ];
+
+  rr:predicateObjectMap [
+      rr:predicate geldt:actionCharOffset;
+      rr:objectMap [
+         rr:template "http://geldt.com#{ActionCharOffset}";
+        ]
+      ];
+
+
+  rr:predicateObjectMap [
+      rr:predicate geldt:inRawText;
+      rr:objectMap [
+         rr:template "http://geldt.com#{InRawText}";
+        ]
+      ];
+
+
+   rr:predicateObjectMap [
+       rr:predicate geldt:confidence;
+       rr:objectMap [
+          rr:template "http://geldt.com#{Confidence}";
+         ]
+       ];
+
+  rr:predicateObjectMap [
+      rr:predicate geldt:mentionDocLen;
+      rr:objectMap [
+         rr:template "http://geldt.com#{MentionDocLen}";
+        ]
+      ];
+
+   rr:predicateObjectMap [
+        rr:predicate geldt:mentionDocTone;
+        rr:objectMap [
+           rr:template "http://geldt.com#{MentionDocTone}";
+          ]
+        ];
+
+   rr:predicateObjectMap [
+       rr:predicate geldt:mentionTranslationInfo;
+       rr:objectMap [
+          rr:template "http://geldt.com#{MentionDocTranslationInfo}";
+         ]
+       ];
+
+   rr:predicateObjectMap [
+     rr:predicate geldt:mentionExtas;
+     rr:objectMap [
+        rr:template "http://geldt.com#{Extras}";
+       ]
+     ];
 .
