@@ -1,4 +1,4 @@
-package it.polimi.deib.rsp.geldt;
+package it.polimi.deib.rsp;
 
 import it.polimi.jasper.streams.RegisteredEPLStream;
 import it.polimi.jasper.streams.schema.GraphStreamSchema;
@@ -40,7 +40,7 @@ public class GELDTGraphStream extends RDFStream implements Runnable {
     public GELDTGraphStream(int sample, String keywords, String type) {
         super(null);
         this.sgraph = ModelFactory.createDefaultModel();
-        this.sgraph.read(GELDTImageExample.class.getResource("/geldt/streams/" + type + "/sgraph").getPath(), "TTL");
+        this.sgraph.read(GELDTImageExample.class.getResource("/geldt/api/" + type + "/sgraph").getPath(), "TTL");
         this.type = keywords;
         this.sample = sample;
         Query query = QueryFactory.create("" +
@@ -53,7 +53,7 @@ public class GELDTGraphStream extends RDFStream implements Runnable {
         if (resultSet.hasNext())
             super.stream_uri = resultSet.next().get("?url").toString();
 
-        URL resource = GELDTGraphStream.class.getResource("/geldt/streams/" + type + "/igraph");
+        URL resource = GELDTGraphStream.class.getResource("/geldt/api/" + type + "/igraph");
         igraphpath = resource.getPath();
 
     }

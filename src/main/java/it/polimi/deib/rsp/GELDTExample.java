@@ -1,4 +1,4 @@
-package it.polimi.deib.rsp.geldt;
+package it.polimi.deib.rsp;
 
 import it.polimi.jasper.engine.Jasper;
 import org.apache.commons.io.FileUtils;
@@ -15,7 +15,7 @@ public abstract class GELDTExample {
     static Jasper sr;
 
     public static String getQuery(String nameQuery, String suffix, String type) throws IOException {
-        URL resource = GELDTExample.class.getResource("/geldt/streams/" + type + "/" + nameQuery + suffix);
+        URL resource = GELDTExample.class.getResource("/geldt/api/" + type + "/" + nameQuery + suffix);
         System.out.println(resource.getPath());
         File file = new File(resource.getPath());
         return FileUtils.readFileToString(file);

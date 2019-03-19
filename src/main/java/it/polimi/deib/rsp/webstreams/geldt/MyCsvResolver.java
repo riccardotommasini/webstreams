@@ -1,4 +1,4 @@
-package geldt.streaming;
+package it.polimi.deib.rsp.webstreams.geldt;
 
 import com.taxonic.carml.logical_source_resolver.CsvResolver;
 import com.taxonic.carml.model.LogicalSource;
@@ -16,16 +16,17 @@ public class MyCsvResolver extends CsvResolver {
     CsvParserSettings settings = new CsvParserSettings();
 
 
-    public MyCsvResolver(String[] headers) {
+    public MyCsvResolver(String[] headers, char delimiter) {
         this.headers = headers;
         settings.setHeaderExtractionEnabled(false);
         settings.setHeaders(headers);
         settings.setLineSeparatorDetectionEnabled(true);
         settings.setDelimiterDetectionEnabled(true, '\t');
         CsvFormat format = new CsvFormat();
-        format.setDelimiter('\t');
+        format.setDelimiter(delimiter);
         settings.setFormat(format);
         settings.setReadInputOnSeparateThread(true);
+        settings.setMaxCharsPerColumn(20000);
     }
 
     @Override

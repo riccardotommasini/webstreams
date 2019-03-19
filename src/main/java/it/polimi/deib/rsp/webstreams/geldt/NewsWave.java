@@ -1,6 +1,6 @@
-package geldt.streaming;
+package it.polimi.deib.rsp.webstreams.geldt;
 
-import it.polimi.deib.rsp.geldt.GELDTArticleExample;
+import lombok.extern.log4j.Log4j;
 import spark.Service;
 
 import java.io.*;
@@ -9,46 +9,60 @@ import java.net.URL;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+@Log4j
 public class NewsWave {
 
     private static final String spec = "http://data.gdeltproject.org/gdeltv2/lastupdate.txt";
-    private static final String header_export = "GLOBALEVENTID    SQLDATE    MonthYear    Year    FractionDate    Actor1Code    Actor1Name    Actor1CountryCode    Actor1KnownGroupCode    Actor1EthnicCode    Actor1Religion1Code    Actor1Religion2Code    Actor1Type1Code    Actor1Type2Code    Actor1Type3Code    Actor2Code    Actor2Name    Actor2CountryCode    Actor2KnownGroupCode    Actor2EthnicCode    Actor2Religion1Code    Actor2Religion2Code    Actor2Type1Code    Actor2Type2Code    Actor2Type3Code    IsRootEvent    EventCode    EventBaseCode    EventRootCode    QuadClass    GoldsteinScale    NumMentions    NumSources    NumArticles    AvgTone    Actor1Geo_Type    Actor1Geo_FullName    Actor1Geo_CountryCode    Actor1Geo_ADM1Code    Actor1Geo_ADM2Code    Actor1Geo_Lat    Actor1Geo_Long    Actor1Geo_FeatureID    Actor2Geo_Type    Actor2Geo_FullName    Actor2Geo_CountryCode    Actor2Geo_ADM1Code    Actor2Geo_ADM2Code    Actor2Geo_Lat    Actor2Geo_Long    Actor2Geo_FeatureID    ActionGeo_Type    ActionGeo_FullName    ActionGeo_CountryCode     ActionGeo_ADM1Code    ActionGeo_ADM2Code    ActionGeo_Lat    ActionGeo_Long    ActionGeo_FeatureID    DATEADDED    SOURCEURL";
+    private static final String header_export = "GLOBALEVENTID\tSQLDATE\tMonthYear\tYear\tFractionDate\tActor1Code\tActor1Name\tActor1CountryCode\tActor1KnownGroupCode\tActor1EthnicCode\tActor1Religion1Code\tActor1Religion2Code\tActor1Type1Code\tActor1Type2Code\tActor1Type3Code\tActor2Code\tActor2Name\tActor2CountryCode\tActor2KnownGroupCode\tActor2EthnicCode\tActor2Religion1Code\tActor2Religion2Code\tActor2Type1Code\tActor2Type2Code\tActor2Type3Code\tIsRootEvent\tEventCode\tEventBaseCode\tEventRootCode\tQuadClass\tGoldsteinScale\tNumMentions\tNumSources\tNumArticles\tAvgTone\tActor1Geo_Type\tActor1Geo_FullName\tActor1Geo_CountryCode\tActor1Geo_ADM1Code\tActor1Geo_ADM2Code\tActor1Geo_Lat\tActor1Geo_Long\tActor1Geo_FeatureID\tActor2Geo_Type\tActor2Geo_FullName\tActor2Geo_CountryCode\tActor2Geo_ADM1Code\tActor2Geo_ADM2Code\tActor2Geo_Lat\tActor2Geo_Long\tActor2Geo_FeatureID\tActionGeo_Type\tActionGeo_FullName\tActionGeo_CountryCode\tActionGeo_ADM1Code\tActionGeo_ADM2Code\tActionGeo_Lat\tActionGeo_Long\tActionGeo_FeatureID\tDATEADDED\tSOURCEURL";
     private static final String mapping_export = "export.ttl";
-    private static final String header_mentions = "GLOBALEVENTID    SQLDATE    MonthYear    Year    FractionDate    Actor1Code    Actor1Name    Actor1CountryCode    Actor1KnownGroupCode    Actor1EthnicCode    Actor1Religion1Code    Actor1Religion2Code    Actor1Type1Code    Actor1Type2Code    Actor1Type3Code    Actor2Code    Actor2Name    Actor2CountryCode    Actor2KnownGroupCode    Actor2EthnicCode    Actor2Religion1Code    Actor2Religion2Code    Actor2Type1Code    Actor2Type2Code    Actor2Type3Code    IsRootEvent    EventCode    EventBaseCode    EventRootCode    QuadClass    GoldsteinScale    NumMentions    NumSources    NumArticles    AvgTone    Actor1Geo_Type    Actor1Geo_FullName    Actor1Geo_CountryCode    Actor1Geo_ADM1Code    Actor1Geo_ADM2Code    Actor1Geo_Lat    Actor1Geo_Long    Actor1Geo_FeatureID    Actor2Geo_Type    Actor2Geo_FullName    Actor2Geo_CountryCode    Actor2Geo_ADM1Code    Actor2Geo_ADM2Code    Actor2Geo_Lat    Actor2Geo_Long    Actor2Geo_FeatureID    ActionGeo_Type    ActionGeo_FullName    ActionGeo_CountryCode     ActionGeo_ADM1Code    ActionGeo_ADM2Code    ActionGeo_Lat    ActionGeo_Long    ActionGeo_FeatureID    DATEADDED    SOURCEURL";
+    private static final String header_mentions = "GLOBALEVENTID\tEventTimeDate\tMentionTimeDate\tMentionType\tMentionSourceName\tMentionIdentifier\tSentenceID\tActor1CharOffset\tActor2CharOffset\tActionCharOffset\tInRawText\tConfidence\tMentionDocLen\tMentionDocTone\tMentionDocTranslationInfo\tExtras";
+
     private static final String mapping_mentions = "mentions.ttl";
-    private static final String header_gkg = "GLOBALEVENTID    EventTimeDate    MentionTimeDate    MentionType    MentionSourceName    MentionIdentifier    SentenceID    Actor1CharOffset    Actor2CharOffset    ActionCharOffset    InRawText    Confidence    MentionDocLen    MentionDocTone    MentionDocTranslationInfo    Extras";
+    private static final String header_gkg = "GKGRECORDID\tDATE\tSourceCollectionIdentifier\tSourceCommonName\tDocumentIdentifier\tCounts\tV2Counts\tThemes\tV2Themes\tLocations\tV2Locations\tPersons\tV2Persons\tOrganizations\tV2Organizations\tV2Tone\tDates\tGCAM\tSharingImage\tRelatedImages\tSocialImageEmbeds\tSocialVideoEmbeds\tQuotations\tAllNames\tAmounts\tTranslationInfo\tExtras";
     private static final String mapping_gkg = "gkg.ttl";
     private static GELDTWebSocketHandler handler;
 
+    private static final String gkg1 = "gkg";
+    private static final String mentions1 = "mentions";
+    private static final String export = "events";
+    private static final String export_name = "export";
+    private static final String sgraph = "sgraph";
+
+    private static final int sgraph_port = 80;
+    private static final int sgraph_thread = 10;
+    private static final int stream_port = 8080;
+    private static final int stream_thread = 20;
+
+    private static final String apimethod = "GET";
+    public static final String stream_name = "GELDTStream";
+
     public static void main(String[] args) throws IOException {
 
-        Service service1 = Service.ignite().port(80).threadPool(20);
-        Service service2 = Service.ignite().port(8080).threadPool(10);
 
+        Service service1 = Service.ignite().port(sgraph_port).threadPool(sgraph_thread);
+        Service service2 = Service.ignite().port(stream_port).threadPool(stream_thread);
 
-        service1.get("/sgraph", (req, res) -> {
-
+        service1.get(File.separator + sgraph, (req, res) -> {
             return "";
-
+            //TODO
         });
 
         GELDTWebSocketHandler events;
-        service2.webSocket("/events", events = new GELDTWebSocketHandler(header_export, mapping_export));
+        service2.webSocket(File.separator + export, events = new GELDTWebSocketHandler(header_export, mapping_export, '\t'));
 
-//        GELDTWebSocketHandler mentions;
-//        webSocket("/mentions", mentions = new GELDTWebSocketHandler(header_mentions, mapping_mentions));
-//
-//        GELDTWebSocketHandler gkg;
-//        webSocket("/gkg", gkg = new GELDTWebSocketHandler(header_gkg, mapping_gkg));
+        GELDTWebSocketHandler mentions;
+        service2.webSocket(File.separator + mentions1, mentions = new GELDTWebSocketHandler(header_mentions, mapping_mentions, '\t'));
 
+        GELDTWebSocketHandler gkg;
+        service2.webSocket(File.separator + gkg1, gkg = new GELDTWebSocketHandler(header_gkg, mapping_gkg, '\t'));
         service1.init();
         service2.init();
 
-        URL dest = GELDTArticleExample.class.getResource("/geldt/csv/");
+        URL dest = NewsWave.class.getResource("/csv/");
 
         URL url = new URL(spec);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
+        connection.setRequestMethod(apimethod);
 
         BufferedReader br;
         if (200 <= connection.getResponseCode() && connection.getResponseCode() <= 299) {
@@ -62,29 +76,40 @@ public class NewsWave {
 
             URL todownload_url = new URL(todownload);
             HttpURLConnection connection1 = (HttpURLConnection) todownload_url.openConnection();
-            connection1.setRequestMethod("GET");
+            connection1.setRequestMethod(apimethod);
 
-            ZipInputStream zis = new ZipInputStream(connection1.getInputStream());
+            InputStream inputStream = connection1.getInputStream();
+            ZipInputStream zis = new ZipInputStream(inputStream);
 
             ByteArrayOutputStream dos = new ByteArrayOutputStream();
 
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[5000];
 
             ZipEntry ze = zis.getNextEntry();
 
-            System.out.println(ze.getName());
+            log.info(ze.getName());
 
-            if(ze.getName().contains("export"))
-                handler=events;
+            if (ze.getName().contains(export_name))
+                handler = events;
+            else if (ze.getName().contains(mentions1))
+                handler = mentions;
+            else if (ze.getName().contains(gkg1))
+                handler = gkg;
             else
                 continue;
 
             while (ze != null) {
                 int len;
+                File f = new File(dest.getPath() + File.separator + ze.getName());
+                FileOutputStream fos = new FileOutputStream(f);
+                log.info("saving file at [" + f.getAbsolutePath() + "]");
                 while ((len = zis.read(buffer)) > 0) {
                     dos.write(buffer, 0, len);
+                    //save to a file
+                    fos.write(buffer, 0, len);
                 }
                 dos.close();
+                fos.close();
                 //close this ZipEntry
                 zis.closeEntry();
                 ze = zis.getNextEntry();
@@ -92,16 +117,8 @@ public class NewsWave {
             //close last ZipEntry
             zis.closeEntry();
 
-            handler.bindInputStream("GELDTStream", new ByteArrayInputStream(dos.toByteArray()));
+            handler.bindInputStream(stream_name, new ByteArrayInputStream(dos.toByteArray()));
 
-
-//            FileOutputStream fos = new FileOutputStream("/Users/riccardo/_Projects/web/geldt/src/main/resources/export.ttl");
-//            Rio.write(map, fos, RDFFormat.TURTLE);
-//            FileOutputStream fos1 = new FileOutputStream("/Users/riccardo/_Projects/web/geldt/src/main/resources/export.trig");
-//
-//            Rio.write(map, fos1, RDFFormat.TRIG);
-
-//            readzip(dest.getPath(), connection1.getInputStream(), new byte[1024]);
         }
 
     }

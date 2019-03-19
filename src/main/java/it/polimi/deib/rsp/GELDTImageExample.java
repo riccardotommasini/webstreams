@@ -1,4 +1,4 @@
-package it.polimi.deib.rsp.geldt;
+package it.polimi.deib.rsp;
 
 import it.polimi.jasper.engine.Jasper;
 import it.polimi.jasper.spe.operators.r2s.formatter.ResponseFormatterFactory;

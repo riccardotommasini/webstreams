@@ -1,4 +1,4 @@
-package geldt;
+package it.polimi.deib.rsp.webstreams;
 
 
 import com.google.common.collect.Maps;

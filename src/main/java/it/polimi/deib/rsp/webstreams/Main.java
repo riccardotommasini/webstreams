@@ -1,10 +1,10 @@
-package geldt;
+package it.polimi.deib.rsp.webstreams;
 
 import com.taxonic.carml.engine.RmlMapper;
 import com.taxonic.carml.model.TriplesMap;
 import com.taxonic.carml.util.RmlMappingLoader;
 import com.taxonic.carml.vocab.Rdf;
-import geldt.streaming.MyCsvResolver;
+import it.polimi.deib.rsp.webstreams.geldt.MyCsvResolver;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.rio.RDFFormat;
 
@@ -24,7 +24,7 @@ public class Main {
                 RmlMapper
                         .newBuilder()
                         // Add the resolvers to suit your need
-                        .setLogicalSourceResolver(Rdf.Ql.Csv, new MyCsvResolver(new String[]{"id", "stop", "latitude", "longitude"}))
+                        .setLogicalSourceResolver(Rdf.Ql.Csv, new MyCsvResolver(new String[]{"id", "stop", "latitude", "longitude"}, '\t'))
                         // set file directory for sources in mapping.ttl
                         .fileResolver(Paths.get("/Users/riccardo/_Projects/web/geldt/src/main/resources/airport.csv"))
                         // set classpath basepath for sources in mapping.ttl

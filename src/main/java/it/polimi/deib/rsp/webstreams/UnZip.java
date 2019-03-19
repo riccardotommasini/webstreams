@@ -1,6 +1,6 @@
-package geldt;
+package it.polimi.deib.rsp.webstreams;
 
-import it.polimi.deib.rsp.geldt.GELDTArticleExample;
+import it.polimi.deib.rsp.GELDTArticleExample;
 
 import java.io.*;
 import java.net.URL;
@@ -38,15 +38,7 @@ public class UnZip {
         while(ze != null){
             String fileName = ze.getName();
             File newFile = new File(destDir + File.separator + fileName);
-            System.out.println("Unzipping to "+newFile.getAbsolutePath());
-            //create directories for sub directories in zip
-            new File(newFile.getParent()).mkdirs();
-            FileOutputStream fos = new FileOutputStream(newFile);
-            int len;
-            while ((len = zis.read(buffer)) > 0) {
-                fos.write(buffer, 0, len);
-            }
-            fos.close();
+            saveFile(buffer, zis, newFile);
             //close this ZipEntry
             zis.closeEntry();
             ze = zis.getNextEntry();
@@ -55,6 +47,18 @@ public class UnZip {
         zis.closeEntry();
         zis.close();
         fis.close();
+    }
+
+    public static void saveFile(byte[] buffer, ZipInputStream zis, File newFile) throws IOException {
+        System.out.println("Unzipping to "+newFile.getAbsolutePath());
+        //create directories for sub directories in zip
+        new File(newFile.getParent()).mkdirs();
+        FileOutputStream fos = new FileOutputStream(newFile);
+        int len;
+        while ((len = zis.read(buffer)) > 0) {
+            fos.write(buffer, 0, len);
+        }
+        fos.close();
     }
 }
 
