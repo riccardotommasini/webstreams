@@ -13,12 +13,16 @@ import org.eclipse.jetty.websocket.api.annotations.OnWebSocketConnect;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.rio.*;
+import org.eclipse.rdf4j.rio.RDFFormat;
+import org.eclipse.rdf4j.rio.RDFWriter;
+import org.eclipse.rdf4j.rio.Rio;
 import org.eclipse.rdf4j.rio.helpers.BasicWriterSettings;
 import org.eclipse.rdf4j.rio.helpers.JSONLDMode;
 import org.eclipse.rdf4j.rio.helpers.JSONLDSettings;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.StringWriter;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +36,12 @@ public class GELDTWebSocketHandler {
     private String sender, msg;
     private List<Session> users = new ArrayList<>();
 
-    public GELDTWebSocketHandler(String header, String mappingfile, char delimiter) {
+    public GELDTWebSocketHandler(String header, String mappingfile, char delimiter, Object... functions) {
         this.mapper =
                 RmlMapper
                         .newBuilder()
                         .setLogicalSourceResolver(Rdf.Ql.Csv, new MyCsvResolver(header.split("\t"), delimiter))
+                        .addFunctions(functions)
                         .build();
         String first = "/Users/riccardo/_Projects/web/geldt/src/main/resources/streams/geldt_" + mappingfile;
 
@@ -75,9 +80,9 @@ public class GELDTWebSocketHandler {
                 .flatMap(tm -> mapper.map(tm, refObjectTriplesMaps).stream())
                 .map(this::toJSONLD)
                 .forEach(s -> users.stream()
-                .filter(Session::isOpen)
-                .map(Session::getRemote)
-                .forEach(session -> send(s, session)));
+                        .filter(Session::isOpen)
+                        .map(Session::getRemote)
+                        .forEach(session -> send(s, session)));
 
         mapper.clearSourceManager();
 
@@ -85,13 +90,17 @@ public class GELDTWebSocketHandler {
 
     private String toJSONLD(Model model) {
         StringWriter stringWriter = new StringWriter();
-        RDFWriter rdfWriter = Rio.createWriter(RDFFormat.JSONLD, stringWriter);
+        RDFWriter rdfWriter = Rio.createWriter(RDFFormat.TURTLE, stringWriter);
 
-        rdfWriter.getWriterConfig().set(JSONLDSettings.JSONLD_MODE, JSONLDMode.COMPACT);
-        rdfWriter.getWriterConfig().set(JSONLDSettings.OPTIMIZE, true);
-        rdfWriter.getWriterConfig().set(BasicWriterSettings.PRETTY_PRINT, true);
+        //rdfWriter.getWriterConfig().set(JSONLDSettings.JSONLD_MODE, JSONLDMode.COMPACT);
+        //rdfWriter.getWriterConfig().set(JSONLDSettings.OPTIMIZE, true);
+        //rdfWriter.getWriterConfig().set(BasicWriterSettings.PRETTY_PRINT, true);
 
+        model.setNamespace("geldt", "http://geldt.org/vocab/");
+        model.setNamespace("gkg", "http://geldt.org/gkg/");
+        model.setNamespace("geldti", "http://geldt.org/instance/");
         Rio.write(model, rdfWriter);
+
         return stringWriter.toString();
     }
 

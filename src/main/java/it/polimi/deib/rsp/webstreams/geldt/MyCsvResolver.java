@@ -26,7 +26,7 @@ public class MyCsvResolver extends CsvResolver {
         format.setDelimiter(delimiter);
         settings.setFormat(format);
         settings.setReadInputOnSeparateThread(true);
-        settings.setMaxCharsPerColumn(20000);
+        settings.setMaxCharsPerColumn(100000000);
     }
 
     @Override

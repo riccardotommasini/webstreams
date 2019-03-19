@@ -1,5 +1,6 @@
 package it.polimi.deib.rsp.webstreams.geldt;
 
+import it.polimi.deib.rsp.webstreams.geldt.functions.*;
 import lombok.extern.log4j.Log4j;
 import spark.Service;
 
@@ -35,6 +36,9 @@ public class NewsWave {
 
     private static final String apimethod = "GET";
     public static final String stream_name = "GELDTStream";
+    public static final String prefix = "http://geldt.org/gkg/";
+    public static final String semicolon = ";";
+
 
     public static void main(String[] args) throws IOException {
 
@@ -54,7 +58,12 @@ public class NewsWave {
         service2.webSocket(File.separator + mentions1, mentions = new GELDTWebSocketHandler(header_mentions, mapping_mentions, '\t'));
 
         GELDTWebSocketHandler gkg;
-        service2.webSocket(File.separator + gkg1, gkg = new GELDTWebSocketHandler(header_gkg, mapping_gkg, '\t'));
+        service2.webSocket(File.separator + gkg1, gkg = new GELDTWebSocketHandler(header_gkg, mapping_gkg, '\t',
+                new DBPediaPeopleLookup(),
+                new URISplitFunction(semicolon),
+                new RegexSplitterFunction("(.*)<PAGE_PRECISEPUBTIMESTAMP>([0-9]+)</PAGE_PRECISEPUBTIMESTAMP>(.*)", 2),
+                new GenericSplitFunction(semicolon, prefix),
+                new ThemeV2SplitFunction(semicolon, prefix)));
         service1.init();
         service2.init();
 
@@ -90,9 +99,11 @@ public class NewsWave {
             log.info(ze.getName());
 
             if (ze.getName().contains(export_name))
-                handler = events;
+//                handler = events;
+                continue;
             else if (ze.getName().contains(mentions1))
-                handler = mentions;
+//                handler = mentions;
+                continue;
             else if (ze.getName().contains(gkg1))
                 handler = gkg;
             else
