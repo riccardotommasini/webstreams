@@ -260,3 +260,235 @@ LIMIT 20
 
  }
  LIMIT 20
+
+ ###################################################GKG##################################################
+
+
+#19 get latitude, longitude, Tone and DocumentIdentifier (sourceURL) of all documents related to the Theme of "REFUGEE" and specially from "Syria" as location the GDELT GKG
+
+
+SELECT ?long ?lat ?toneVal ?documentSourceURL
+WHERE{
+
+    ?GKGDoc gdelt:hasDocIdentifier ?documentSourceURL;
+            gdelt:hasTone  ?tone;
+            gdelt:hasLocation ?loc;
+            gdelt:hasThemes ?themes.
+
+
+    ?tone gdelt:hasToneValue  ?toneVal.
+    ?loc  gdelt:hasLat ?lat.
+    ?loc  gdelt:hasLong ?long.
+    ?loc  gdelt:hasLocationFullName "Syria"^^xsd:string.
+
+    FILTER regex(?themes, "REFUGEE", "i").
+}
+
+
+
+#20 Get only the Non-English documents that are mentioning refugees and Syria
+
+
+SELECT *
+WHERE{
+
+    ?GKGDoc gdelt:hasRecordID ?recordID;
+            gdelt:hasLocation ?loc;
+            gdelt:hasThemes ?themes.
+
+     ?loc  gdelt:hasLocationFullName "Syria"^^xsd:string.
+
+     FILTER regex(?themes, "REFUGEE", "i" )
+     FILTER regex(?recordID, "T", "i" )
+}
+
+
+
+#21 Get only the English documents that are mentioning refugees and Syria
+
+
+SELECT *
+WHERE{
+
+    ?GKGDoc gdelt:hasRecordID ?GKGDocID;
+            gdelt:hasLocation ?loc;
+            gdelt:hasThemes ?themes.
+
+     ?loc  gdelt:hasLocationFullName "Syria"^^xsd:string.
+
+     FILTER regex(?themes, "REFUGEE", "i" )
+     FILTER NOT EXISTS regex(?GKGDocID, "T", "i" )
+}
+
+
+#22 Get All COUNTS  during the past 15 minutes in all documents
+
+
+SELECT ?GKGDocID ?countType ?countVal ?objectsCounted ?documentSourceURL
+WHERE{
+
+    ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+            gdelt:hasDocIdentifier  ?documentSourceURL;
+            gdelt:hasCounts ?count.
+
+    ?count gdelt:hasCountType ?countType;
+           gdelt:hasCountVal ?countVal;
+           gdelt:hasCountedObjects ?objectsCounted.
+}
+
+
+
+#23 Get number of KILLED people during the past 15 minutes in all documnets
+
+
+SELECT ?GKGDocID ?countVal ?objectsCounted ?documentSourceURL
+WHERE{
+
+    ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+            gdelt:hasDocIdentifier  ?documentSourceURL;
+            gdelt:hasCounts ?count.
+
+    ?count gdelt:hasCountType "KILL"^^xsd:string;
+           gdelt:hasCountVal ?countVal;
+           gdelt:hasCountedObjects ?objectsCounted.
+}
+
+
+#24 Get all KILLED people during the past 15 minutes whose numbers exceed 1000 (Disaster for example Earthquake) in all documents
+
+
+SELECT ?GKGDocID ?countVal ?objectsCounted ?documentSourceURL
+WHERE{
+
+    ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+            gdelt:hasDocIdentifier  ?documentSourceURL;
+            gdelt:hasCounts ?count.
+
+    ?count gdelt:hasCountType "KILL"^^xsd:string;
+           gdelt:hasCountVal ?countVal;
+           gdelt:hasCountedObjects ?objectsCounted.
+
+     FILTER ( ?countVal >= 1000)
+}
+
+
+#25 Get number of KIDNAPed people during the past 15 minutes in all documnets
+
+
+SELECT ?(sum(distinct ?countVal) as ?Total-Kidnaped)
+WHERE{
+
+    ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+            gdelt:hasDocIdentifier  ?documentSourceURL;
+            gdelt:hasCounts ?count.
+
+    ?count gdelt:hasCountType "KIDNAP"^^xsd:string;
+           gdelt:hasCountVal ?countVal;
+           gdelt:hasCountedObjects ?objectsCounted.
+
+}
+
+
+
+#26  Get total numbers of all counts during the past 15 minutes in all documents
+
+
+SELECT   ?countType  ?(sum(distinct ?countVal) as ?TotalCount)
+WHERE{
+
+    ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+            gdelt:hasDocIdentifier  ?documentSourceURL;
+            gdelt:hasCounts ?count.
+
+    ?count gdelt:hasCountType "KIDNAP"^^xsd:string;
+           gdelt:hasCountVal ?countVal;
+           gdelt:hasCountedObjects ?objectsCounted.
+
+}
+GROUP BY (?countType)
+
+
+#27 Get All 'THEMES' Related to All documents  during the past 15 minutes in all documents.
+
+
+
+SELECT ?GKGDocID ?themes
+WHERE{
+
+    ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+            gdelt:hasThemes         ?themes.
+}
+
+
+
+#28 Get All 'PERSONS'  Related to All documents  during the past 15 minutes in all documents.
+
+
+
+SELECT ?GKGDocID ?persons
+WHERE{
+
+    ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+            gdelt:hasPersons        ?persons.
+}
+
+
+#29 Get All 'QOUTATIONS'  Related to All documents  during the past 15 minutes in all documents.
+
+
+SELECT ?GKGDocID ?qoutations
+WHERE{
+
+    ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+            gdelt:hasPersons        ?qoutations.
+}
+
+
+
+#30 Get EventIDs, Actors, Counts {Or any Other Stuff from GKG} for events occurring during the past 15 minutes in all documents
+
+SELECT ?eventID  ?actor1Name ?actor2Name ?countType ?countVal ?objectsCounted
+WHERE{
+
+  ?event      a   gdelt:Event;
+              gdelt:hasEventCode ?eventCode;
+              gdelt:hasActor1 ?actor1;
+              gdelt:hasActor2 ?actor2;
+              gdelt:hasMention ?mention;
+              gdelt:hasGlobalEventID ?globalEventID.
+
+   ?mention gdelt:hasMentionIdentifier ?mentionID;
+            gdelt:hasGKGDocID ?GKGdocID;
+            gdelt:hasGKGCounts ?count.
+
+   ?count gdelt:hasCountType ?countType;
+               gdelt:hasCountVal ?countVal;
+               gdelt:hasCountedObjects ?objectsCounted.
+
+    FILTER(?globalEventID=?mentionIdentifier  && ?mentionIdentifier=GKGdocID)
+}
+
+
+#30  Filter events to just those mentioned in articles that focus on certain themes ('GENERAL_GOVERNMENT')
+    #and related somehow to (IRAQ)  or groups.
+
+
+SELECT ?eventID  ?actor1Name ?actor2Name ?countType ?countVal ?objectsCounted
+WHERE{
+
+  ?event      a   gdelt:Event;
+              gdelt:hasEventCode ?eventCode;
+              gdelt:hasActor1 ?actor1;
+              gdelt:hasActor2 ?actor2;
+              gdelt:hasMention ?mention;
+              gdelt:hasGlobalEventID ?globalEventID.
+
+   ?mention gdelt:hasMentionIdentifier ?mentionID;
+            gdelt:hasGKGDocID ?GKGdocID;
+            gdelt:hasGKGTheme ?theme;
+            gdelt:hasGKGLocation ?loc.
+
+    ?loc  gdelt:hasLocationFullName "Iraq"^^xsd:string.
+
+    FILTER(?globalEventID=?mentionIdentifier  && ?mentionIdentifier=GKGdocID)
+}
