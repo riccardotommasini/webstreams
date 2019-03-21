@@ -1,4 +1,4 @@
-package it.polimi.deib.rsp;
+package it.polimi.deib.rsp.rsp;
 
 import it.polimi.jasper.streams.RegisteredEPLStream;
 import it.polimi.jasper.streams.schema.GraphStreamSchema;

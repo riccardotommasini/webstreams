@@ -27,6 +27,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @WebSocket
 public class GELDTWebSocketHandler {
@@ -77,7 +78,7 @@ public class GELDTWebSocketHandler {
 
         mapping.stream()
                 .filter((tm) -> !functionValueTriplesMaps.contains(tm) && !refObjectTriplesMaps.contains(tm))
-                .flatMap(tm -> mapper.map(tm, refObjectTriplesMaps).stream())
+                .flatMap(tm -> mapper.map(tm, refObjectTriplesMaps))
                 .map(this::toJSONLD)
                 .forEach(s -> users.stream()
                         .filter(Session::isOpen)
@@ -99,6 +100,7 @@ public class GELDTWebSocketHandler {
         model.setNamespace("geldt", "http://geldt.org/vocab/");
         model.setNamespace("gkg", "http://geldt.org/gkg/");
         model.setNamespace("geldti", "http://geldt.org/instance/");
+        model.setNamespace("rdfs", "http://www.w3.org/TR/rdf-schema/");
         Rio.write(model, rdfWriter);
 
         return stringWriter.toString();

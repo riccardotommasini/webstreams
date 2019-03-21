@@ -1,6 +1,6 @@
-package it.polimi.deib.rsp.webstreams;
+package it.polimi.deib.rsp.junk;
 
-import it.polimi.deib.rsp.GELDTArticleExample;
+import it.polimi.deib.rsp.rsp.GELDTArticleExample;
 
 import java.io.*;
 import java.net.URL;

@@ -13,6 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,12 +22,17 @@ public class DBPediaPeopleLookup {
 
     Gson gson = new Gson();
     public String dbpedia = "https://api.dbpedia-spotlight.org/en/annotate?";
-    private String types = "Http%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2FPerson";
+
+    public DBPediaPeopleLookup(String... t) {
+        this.types = URLEncoder.encode(Arrays.stream(t).reduce("", (s1, s2) -> s1 + "," + s2));
+    }
+
+    private final String types;
+
 
     @FnoFunction("http://example.org/lookup")
     public List<String> lookup(@FnoParam("http://example.org/toLookup") String peeps) throws IOException {
 
-        long l = System.currentTimeMillis();
         if (peeps != null) {
             String x = URLEncoder.encode(peeps);
 
@@ -43,7 +49,6 @@ public class DBPediaPeopleLookup {
                     JSONObject jsonElement = gson.fromJson(line, JSONObject.class);
                     ArrayList<LinkedTreeMap> resources = (ArrayList<LinkedTreeMap>) jsonElement.get("Resources");
                     if (resources != null) {
-                        System.out.println(System.currentTimeMillis()- l);
                         return resources
                                 .stream().map(jsonObject -> jsonObject.get("@URI"))
                                 .map(Object::toString).collect(Collectors.toList());
@@ -52,7 +57,6 @@ public class DBPediaPeopleLookup {
                 }
             }
         }
-        System.out.println(System.currentTimeMillis()- l);
         return Collections.emptyList();
     }
 

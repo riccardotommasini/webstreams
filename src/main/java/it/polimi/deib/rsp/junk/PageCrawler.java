@@ -1,4 +1,4 @@
-package it.polimi.deib.rsp.webstreams;
+package it.polimi.deib.rsp.junk;
 
 import org.apache.commons.text.StringEscapeUtils;
 import org.jsoup.Jsoup;
@@ -13,7 +13,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-public class JoUP {
+public class PageCrawler {
     public static void main(String[] args) throws IOException {
 
         Document doc = Jsoup.connect("https://www.outlookindia.com/website/story/world-news-pakistanis-collect-rs-10-bn-through-crowdfunding-for-dams-project-imran-khan-says-thank-you/326946").get();

@@ -1,4 +1,4 @@
-package it.polimi.deib.rsp.webstreams;
+package it.polimi.deib.rsp.webstreams.wikimedia;
 
 
 import com.google.common.collect.Maps;

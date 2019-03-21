@@ -1,4 +1,4 @@
-package it.polimi.deib.rsp.webstreams;
+package it.polimi.deib.rsp.junk;
 
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MainDBPedia {
+public class Spotlight {
 
     public static void main(String[] args) throws IOException {
 

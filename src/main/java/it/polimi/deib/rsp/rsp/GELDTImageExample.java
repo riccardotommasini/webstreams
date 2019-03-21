@@ -1,4 +1,4 @@
-package it.polimi.deib.rsp;
+package it.polimi.deib.rsp.rsp;
 
 import it.polimi.jasper.engine.Jasper;
 import it.polimi.jasper.spe.operators.r2s.formatter.ResponseFormatterFactory;
@@ -14,20 +14,19 @@ import java.net.URL;
 /**
  * Created by Riccardo on 03/08/16.
  */
-public class GELDTArticleExample extends GELDTExample {
-
+public class GELDTImageExample extends GELDTExample {
 
     public static void main(String[] args) throws InterruptedException, IOException, ConfigurationException {
 
-        URL resource = GELDTArticleExample.class.getResource("/geldt/csparqlGELDT.properties");
+        URL resource = GELDTImageExample.class.getResource("/geldt/csparqlGELDT.properties");
         QueryConfiguration config = new QueryConfiguration(resource.getPath());
         EngineConfiguration ec = EngineConfiguration.loadConfig("/geldt/csparqlGELDT.properties");
 
         sr = new Jasper(0, ec);
 
-        String type = "article";
+        String type = "image";
 
-        GELDTGraphStream dt = new GELDTGraphStream(3, "Donald Trump", type);
+        GELDTGraphStream dt = new GELDTGraphStream(2, "Donald Trump", type);
 
         System.out.println(dt);
 
@@ -45,5 +44,6 @@ public class GELDTArticleExample extends GELDTExample {
             cqe.add(ResponseFormatterFactory.getSelectResponseSysOutFormatter("CSV", true));
         }
     }
+
 
 }

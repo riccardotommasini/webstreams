@@ -60,6 +60,7 @@ public class NewsWave {
         GELDTWebSocketHandler gkg;
         service2.webSocket(File.separator + gkg1, gkg = new GELDTWebSocketHandler(header_gkg, mapping_gkg, '\t',
                 new DBPediaPeopleLookup(),
+                new DBPediaPeopleLookup("http://xmlns.com/foaf/0.1/Person,Wikidata:Q5,Wikidata:Q24229398,Wikidata:Q215627,DUL:NaturalPerson,DUL:Agent,Schema:Person,DBpedia:Person,DBpedia:Agent".split(",")),
                 new URISplitFunction(semicolon),
                 new RegexSplitterFunction("(.*)<PAGE_PRECISEPUBTIMESTAMP>([0-9]+)</PAGE_PRECISEPUBTIMESTAMP>(.*)", 2),
                 new GenericSplitFunction(semicolon, prefix),
