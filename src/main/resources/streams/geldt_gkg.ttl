@@ -10,10 +10,11 @@
 @prefix fno: <http://semweb.datasciencelab.be/ns/function#> .
 @prefix rdfs: <http://www.w3.org/TR/rdf-schema/> .
 
+@prefix vocals: <http://w3id.org/rsp/vocals#> .
 
 <streamSource> rml:referenceFormulation ql:CSV ;
-               rml:source [  a carml:Stream ;
-                             carml:streamName "GELDTStream" ;
+               rml:source [  a vocals:Stream ;
+                               vocals:streamName "GELDTStream" ;
                           ] .
 
 <defaultSubjectMap>  rr:template "http://geldt.org/instance/{GKGRECORDID}";

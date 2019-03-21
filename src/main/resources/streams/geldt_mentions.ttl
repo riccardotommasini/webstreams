@@ -83,11 +83,10 @@
          rml:reference "Actor1CharOffset";
         ]
       ];
-
   rr:predicateObjectMap [
       rr:predicate geldt:actorCharOffset;
       rr:objectMap [
-         rr:reference "Actor2CharOffset";
+         rml:reference "Actor2CharOffset";
         ]
       ];
 
@@ -105,7 +104,6 @@
          rml:reference "InRawText";
         ]
       ];
-
 
    rr:predicateObjectMap [
        rr:predicate geldt:confidence;
@@ -141,4 +139,5 @@
         rml:reference "Extras";
        ]
      ];
+
 .

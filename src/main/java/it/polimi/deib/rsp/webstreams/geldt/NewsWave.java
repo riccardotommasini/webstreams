@@ -106,8 +106,15 @@ public class NewsWave extends AbstractWave {
 
             log.info(ze.getName());
 
-            getHandler(events, mentions, gkg, ze);
+            if (ze.getName().contains(export_name))
+//                handler = events;
 
+                continue;
+            else if (ze.getName().contains(mentions1))
+                handler = mentions;
+            else if (ze.getName().contains(gkg1))
+                //handler = gkg;
+                continue;
             ByteArrayOutputStream dos = getByteArrayOutputStream(dest, zis, ze);
 
             if (dos == null) continue;
@@ -117,14 +124,6 @@ public class NewsWave extends AbstractWave {
         }
     }
 
-    private static void getHandler(GELDTWebSocketHandler events, GELDTWebSocketHandler mentions, GELDTWebSocketHandler gkg, ZipEntry ze) {
-        if (ze.getName().contains(export_name))
-            handler = events;
-        else if (ze.getName().contains(mentions1))
-            handler = mentions;
-        else if (ze.getName().contains(gkg1))
-            handler = gkg;
-    }
 
     private static ByteArrayOutputStream getByteArrayOutputStream(URL dest, ZipInputStream zis, ZipEntry ze) throws IOException {
 
