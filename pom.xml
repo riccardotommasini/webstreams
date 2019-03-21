@@ -156,7 +156,7 @@
         <dependency>
             <groupId>com.taxonic.carml</groupId>
             <artifactId>carml-engine</artifactId>
-            <version>0.2.3.2</version>
+            <version>v0.2.3.2</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.google.guava</groupId>
