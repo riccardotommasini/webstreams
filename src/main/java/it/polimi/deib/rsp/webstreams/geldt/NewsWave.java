@@ -2,6 +2,15 @@ package it.polimi.deib.rsp.webstreams.geldt;
 
 import it.polimi.deib.rsp.webstreams.geldt.functions.*;
 import lombok.extern.log4j.Log4j;
+import org.eclipse.rdf4j.model.IRI;
+import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.ValueFactory;
+import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
+import org.eclipse.rdf4j.rio.RDFFormat;
+import org.eclipse.rdf4j.rio.Rio;
+import org.eclipse.rdf4j.rio.WriterConfig;
+import org.eclipse.rdf4j.rio.helpers.JSONLDMode;
+import spark.Response;
 import spark.Service;
 
 import java.io.*;
@@ -15,7 +24,7 @@ public class NewsWave extends AbstractWave {
 
     private static final String spec = "http://data.gdeltproject.org/gdeltv2/lastupdate.txt";
     private static final String header_export = "GLOBALEVENTID\tSQLDATE\tMonthYear\tYear\tFractionDate\tActor1Code\tActor1Name\tActor1CountryCode\tActor1KnownGroupCode\tActor1EthnicCode\tActor1Religion1Code\tActor1Religion2Code\tActor1Type1Code\tActor1Type2Code\tActor1Type3Code\tActor2Code\tActor2Name\tActor2CountryCode\tActor2KnownGroupCode\tActor2EthnicCode\tActor2Religion1Code\tActor2Religion2Code\tActor2Type1Code\tActor2Type2Code\tActor2Type3Code\tIsRootEvent\tEventCode\tEventBaseCode\tEventRootCode\tQuadClass\tGoldsteinScale\tNumMentions\tNumSources\tNumArticles\tAvgTone\tActor1Geo_Type\tActor1Geo_FullName\tActor1Geo_CountryCode\tActor1Geo_ADM1Code\tActor1Geo_ADM2Code\tActor1Geo_Lat\tActor1Geo_Long\tActor1Geo_FeatureID\tActor2Geo_Type\tActor2Geo_FullName\tActor2Geo_CountryCode\tActor2Geo_ADM1Code\tActor2Geo_ADM2Code\tActor2Geo_Lat\tActor2Geo_Long\tActor2Geo_FeatureID\tActionGeo_Type\tActionGeo_FullName\tActionGeo_CountryCode\tActionGeo_ADM1Code\tActionGeo_ADM2Code\tActionGeo_Lat\tActionGeo_Long\tActionGeo_FeatureID\tDATEADDED\tSOURCEURL";
-    private static final String mapping_export = "export.ttl";
+    private static final String mapping_export = "events.ttl";
     private static final String header_mentions = "GLOBALEVENTID\tEventTimeDate\tMentionTimeDate\tMentionType\tMentionSourceName\tMentionIdentifier\tSentenceID\tActor1CharOffset\tActor2CharOffset\tActionCharOffset\tInRawText\tConfidence\tMentionDocLen\tMentionDocTone\tMentionDocTranslationInfo\tExtras";
 
     private static final String mapping_mentions = "mentions.ttl";
@@ -43,6 +52,14 @@ public class NewsWave extends AbstractWave {
     private static GELDTWebSocketHandler gkg;
     private static Service service1;
     private static Service service2;
+    private static Model geldt;
+    private static ValueFactory factory = SimpleValueFactory.getInstance();
+
+    private static IRI sGDELTEventCSVStreamEndpoint = factory.createIRI("https://www.geldt.org/stream#GDELTEventCSVStreamEndpoint");
+    private static IRI sGDELTGKGCSVStreamEndpoint = factory.createIRI("https://www.geldt.org/stream#GDELTGKGCSVStreamEndpoint");
+    private static IRI sGDELTMentionCSVStreamEndpoint = factory.createIRI("https://www.geldt.org/stream#GDELTMentionCSVStreamEndpoint");
+    private static IRI s;
+    private static IRI p = factory.createIRI(" http://www.w3.org/TR/vocab-dcat/accessURL");
 
     public static void main(String[] args) throws IOException {
 
@@ -59,15 +76,29 @@ public class NewsWave extends AbstractWave {
 
     }
 
-    private static void ignite(Object[] functions) {
+    private static void ignite(Object[] functions) throws IOException {
         service1 = Service.ignite().port(sgraph_port).threadPool(sgraph_thread);
         service2 = Service.ignite().port(stream_port).threadPool(stream_thread);
 
-        service1.get(File.separator + sgraph, (req, res) -> {
-            return "";
-            //TODO
-        });
+        geldt = Rio.parse(NewsWave.class.getResourceAsStream("/geldt.ttl"), "", RDFFormat.TURTLE);
 
+        //TODO Stream descriptor for three raw streams
+        service1.get(File.separator + "geldt", (req, res) ->
+                toJsonLD(geldt, res));
+
+//        //TODO stream descriptor for three rdf streams
+        service1.get(File.separator + "geldt" + File.separator + "rsp", (req, res) -> toJsonLD(Rio.parse(NewsWave.class.getResourceAsStream("/rsp.ttl"), "", RDFFormat.TURTLE), res));
+
+//
+//        //TODO detailed description of the event stream
+        service1.get(File.separator + export, (req, res) -> toJsonLD(Rio.parse(NewsWave.class.getResourceAsStream("/" + export + ".ttl"), "", RDFFormat.TURTLE), res));
+//
+//        //TODO detailed description of the mention stream
+        service1.get(File.separator + mentions1, (req, res) -> toJsonLD(Rio.parse(NewsWave.class.getResourceAsStream("/" + mentions1 + ".ttl"), "", RDFFormat.TURTLE), res));
+//
+//        //TODO detailed description of the gkg stream
+        service1.get(File.separator + gkg1, (req, res) -> toJsonLD(Rio.parse(NewsWave.class.getResourceAsStream("/" + gkg1 + ".ttl"), "", RDFFormat.TURTLE), res));
+//
         service2.webSocket(File.separator + export, events = new GELDTWebSocketHandler(header_export, mapping_export, '\t'));
 
         service2.webSocket(File.separator + mentions1, mentions = new GELDTWebSocketHandler(header_mentions, mapping_mentions, '\t'));
@@ -77,6 +108,14 @@ public class NewsWave extends AbstractWave {
 
         service1.init();
         service2.init();
+
+    }
+
+    private static String toJsonLD(Model export2, Response res) {
+        res.type("application/ld+json");
+        StringWriter output = new StringWriter();
+        Rio.write(export2, output, RDFFormat.JSONLD);
+        return output.toString();
     }
 
     private static void geltd() throws IOException {
@@ -96,6 +135,9 @@ public class NewsWave extends AbstractWave {
         while ((line = br.readLine()) != null) {
             String todownload = line.split(" ")[2];
 
+
+            IRI o = factory.createIRI(todownload);
+
             URL todownload_url = new URL(todownload);
             HttpURLConnection connection1 = (HttpURLConnection) todownload_url.openConnection();
             connection1.setRequestMethod(apimethod);
@@ -106,14 +148,23 @@ public class NewsWave extends AbstractWave {
 
             log.info(ze.getName());
 
-            if (ze.getName().contains(export_name))
+            if (ze.getName().contains(export_name)) {
 //              handler = events;
+                s = sGDELTEventCSVStreamEndpoint;
                 continue;
-            else if (ze.getName().contains(mentions1))
+
+            } else if (ze.getName().contains(mentions1)) {
                 handler = mentions;
-            else if (ze.getName().contains(gkg1))
+                s = sGDELTMentionCSVStreamEndpoint;
+
+            } else if (ze.getName().contains(gkg1)) {
                 //handler = gkg;
+                s = sGDELTGKGCSVStreamEndpoint;
                 continue;
+            }
+
+            geldt.add(factory.createStatement(s, p, o));
+
             ByteArrayOutputStream dos = getByteArrayOutputStream(dest, zis, ze);
 
             if (dos == null) continue;

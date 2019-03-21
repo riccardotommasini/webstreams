@@ -40,6 +40,12 @@
 
 
         <dependency>
+            <groupId>com.github.jsonld-java</groupId>
+            <artifactId>jsonld-java</artifactId>
+            <version>0.11.1</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.6</version>
@@ -58,12 +64,6 @@
                     <artifactId>jsonld-java</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.jsonld-java</groupId>
-            <artifactId>jsonld-java</artifactId>
-            <version>0.12.3</version>
         </dependency>
 
         <dependency>
@@ -156,7 +156,7 @@
         <dependency>
             <groupId>com.taxonic.carml</groupId>
             <artifactId>carml-engine</artifactId>
-            <version>0.2.3.1</version>
+            <version>0.2.3.2</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.google.guava</groupId>
