@@ -469,7 +469,7 @@ WHERE{
 }
 
 
-#30  Filter events to just those mentioned in articles that focus on certain themes ('GENERAL_GOVERNMENT')
+#31  Filter events to just those mentioned in articles that focus on certain themes ('GENERAL_GOVERNMENT')
     #and related somehow to (IRAQ)  or groups.
 
 
