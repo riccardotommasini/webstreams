@@ -1,6 +1,7 @@
-package it.polimi.deib.rsp.webstreams.geldt;
+package it.polimi.deib.rsp.webstreams.wikimedia;
 
 import com.taxonic.carml.engine.RmlMapper;
+import com.taxonic.carml.logical_source_resolver.JsonPathResolver;
 import com.taxonic.carml.model.TermMap;
 import com.taxonic.carml.model.TriplesMap;
 import com.taxonic.carml.rdf_mapper.util.ImmutableCollectors;
@@ -26,21 +27,21 @@ import java.util.List;
 import java.util.Set;
 
 @WebSocket
-public class GELDTWebSocketHandler {
+public class WikimediaWebSocketHandler {
 
     private final RmlMapper mapper;
     private final Set<TriplesMap> mapping;
     private String sender, msg;
     private List<Session> users = new ArrayList<>();
 
-    public GELDTWebSocketHandler(String header, String mappingfile, char delimiter, Object... functions) {
+    public WikimediaWebSocketHandler(String mappingfile, Object... functions) {
         this.mapper =
                 RmlMapper
                         .newBuilder()
-                        .setLogicalSourceResolver(Rdf.Ql.Csv, new MyCsvResolver(header.split("\t"), delimiter))
+                        .setLogicalSourceResolver(Rdf.Ql.JsonPath, new JsonPathResolver())
                         .addFunctions(functions)
                         .build();
-        String first = "/Users/riccardo/_Projects/web/geldt/src/main/resources/streams/geldt_" + mappingfile;
+        String first = "/Users/riccardo/_Projects/web/geldt/src/main/resources/streams/wikimedia_" + mappingfile;
 
         this.mapping =
                 RmlMappingLoader
@@ -66,8 +67,6 @@ public class GELDTWebSocketHandler {
 
     public void bindInputStream(String geldtStream, ByteArrayInputStream byteArrayInputStream) {
         mapper.bindInputStream(geldtStream, byteArrayInputStream);
-
-
         Set functionValueTriplesMaps = mapper.getTermMaps(mapping).filter((t) -> t.getFunctionValue() != null).map(TermMap::getFunctionValue).collect(ImmutableCollectors.toImmutableSet());
         Set<TriplesMap> refObjectTriplesMaps = mapper.getAllTriplesMapsUsedInRefObjectMap(mapping);
 
@@ -107,5 +106,9 @@ public class GELDTWebSocketHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void addSource(String stream_name, String s) {
+
     }
 }

@@ -11,10 +11,10 @@
 @prefix rdfs: <http://www.w3.org/TR/rdf-schema/> .
 
 
-<streamSource> rml:source [  a carml:Stream ;
+<streamSource> rml:referenceFormulation ql:CSV ;
+               rml:source [  a carml:Stream ;
                              carml:streamName "GELDTStream" ;
-                          ] ;
-               rml:referenceFormulation ql:CSV .
+                          ] .
 
 <defaultSubjectMap>  rr:template "http://geldt.org/instance/{GKGRECORDID}";
                      rr:class geldt:GKG ;

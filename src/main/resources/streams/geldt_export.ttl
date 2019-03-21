@@ -23,28 +23,28 @@
   ];
 
   rr:predicateObjectMap [
-      rr:predicate geldt:type;
+      rr:predicate rdf:type;
       rr:objectMap [
          rr:template "http://geldt.com#{EventCode}";
         ]
       ];
 
   rr:predicateObjectMap [
-        rr:predicate geldt:rootType;
+        rr:predicate rdf:type;
         rr:objectMap [
           rr:template "http://geldt.com#{EventRootCode}";
           ]
         ];
 
   rr:predicateObjectMap [
-    rr:predicate geldt:actor;
+    rr:predicate geldt:actor1;
      rr:objectMap [ rr:parentTriplesMap <#Actor1TriplesMap> ];
     ];
 
   rr:predicateObjectMap [
-    rr:predicate geldt:actor;
+    rr:predicate geldt:actor2;
      rr:objectMap [ rr:parentTriplesMap <#Actor2TriplesMap> ];
-    ]
+    ];
 
 
       rr:predicateObjectMap [
@@ -291,7 +291,7 @@
         rr:objectMap [
           rml:reference "Actor1Type3Code";
           ]
-        ]
+        ];
 
     rr:predicateObjectMap [
                rr:predicate geldt:geoType;

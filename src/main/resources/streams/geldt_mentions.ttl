@@ -1,5 +1,5 @@
 @prefix : <http://vocab.org/transit/terms/>.
-        @prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
 @prefix rml: <http://semweb.mmlab.be/ns/rml#>.
 @prefix ql: <http://semweb.mmlab.be/ns/ql#>.
 @prefix geldt: <http://geldt.org/vocab/>.
@@ -17,7 +17,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://geldt.com/{GLOBALEVENTID}";
+    rr:template "http://geldt.org/instance/{GLOBALEVENTID}";
     rr:class geldt:Mention
   ];
 
@@ -48,7 +48,7 @@
   rr:predicateObjectMap [
       rr:predicate geldt:mentionType;
       rr:objectMap [
-         rr:template "http://geldt.com#{MentionType}";
+         rr:template "http://geldt.org/vocab/{MentionType}";
         ]
       ];
 
@@ -56,7 +56,7 @@
   rr:predicateObjectMap [
       rr:predicate geldt:mentionSource;
       rr:objectMap [
-         rr:template "http://geldt.com#{MentionSourceName}";
+         rr:template "http://geldt.org/vocab/{MentionSourceName}";
         ]
       ];
 
@@ -64,7 +64,7 @@
   rr:predicateObjectMap [
       rr:predicate geldt:mentionSource;
       rr:objectMap [
-         rr:template "http://geldt.com#{MentionSourceName}";
+         rml:reference "MentionSourceName";
         ]
       ];
 
@@ -72,7 +72,7 @@
   rr:predicateObjectMap [
       rr:predicate geldt:sentenceID;
       rr:objectMap [
-         rr:template "http://geldt.com#{SentenceID}";
+         rml:reference "SentenceID";
         ]
       ];
 
@@ -80,21 +80,21 @@
   rr:predicateObjectMap [
       rr:predicate geldt:actorCharOffset;
       rr:objectMap [
-         rr:template "http://geldt.com#{Actor1CharOffset}";
+         rml:reference "Actor1CharOffset";
         ]
       ];
 
   rr:predicateObjectMap [
       rr:predicate geldt:actorCharOffset;
       rr:objectMap [
-         rr:template "http://geldt.com#{Actor2CharOffset}";
+         rr:reference "Actor2CharOffset";
         ]
       ];
 
   rr:predicateObjectMap [
       rr:predicate geldt:actionCharOffset;
       rr:objectMap [
-         rr:template "http://geldt.com#{ActionCharOffset}";
+         rml:reference "ActionCharOffset";
         ]
       ];
 
@@ -102,7 +102,7 @@
   rr:predicateObjectMap [
       rr:predicate geldt:inRawText;
       rr:objectMap [
-         rr:template "http://geldt.com#{InRawText}";
+         rml:reference "InRawText";
         ]
       ];
 
@@ -110,35 +110,35 @@
    rr:predicateObjectMap [
        rr:predicate geldt:confidence;
        rr:objectMap [
-          rr:template "http://geldt.com#{Confidence}";
+          rml:reference "Confidence";
          ]
        ];
 
   rr:predicateObjectMap [
       rr:predicate geldt:mentionDocLen;
       rr:objectMap [
-         rr:template "http://geldt.com#{MentionDocLen}";
+         rml:reference "MentionDocLen";
         ]
       ];
 
    rr:predicateObjectMap [
         rr:predicate geldt:mentionDocTone;
         rr:objectMap [
-           rr:template "http://geldt.com#{MentionDocTone}";
+           rml:reference "MentionDocTone";
           ]
         ];
 
    rr:predicateObjectMap [
        rr:predicate geldt:mentionTranslationInfo;
        rr:objectMap [
-          rr:template "http://geldt.com#{MentionDocTranslationInfo}";
+         rml:reference "MentionDocTranslationInfo";
          ]
        ];
 
    rr:predicateObjectMap [
      rr:predicate geldt:mentionExtas;
      rr:objectMap [
-        rr:template "http://geldt.com#{Extras}";
+        rml:reference "Extras";
        ]
      ];
 .
