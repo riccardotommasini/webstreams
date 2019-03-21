@@ -1,0 +1,101 @@
+PREFIX gdelt: <http://vocab.org/transit/terms/>.
+PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
+PREFIX :   <https://www.geldt.org/stream#>
+
+
+### 1 The Following Query Shows all the events that has CHINA as its first {second} actor
+```
+REGISTER STREAM <chinaEvents>
+SELECT *
+FROM NAMED WINDOW <w> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM]	
+WHERE{
+ WINDOW <w> {   ?event  a gdelt:Event;
+            gdelt:hasActor1 ?actor1.
+    ?actor1 gdelt:actorName "CHINA"^^xsd:string 
+    }
+}
+```
+
+### 2 The Following Query COUNTs events that has JAPAN as its first {second} Actor
+```
+REGISTER STREAM <japanEvents>
+SELECT (count(distinct ?event) as ?eventsCount)
+FROM NAMED WINDOW <w> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM] 
+WHERE{
+   WINDOW <w> {  ?event  a gdelt:Event;
+            gdelt:hasActor1 ?actor1.
+    ?actor1 gdelt:actorName "JAPAN"^^xsd:string } 
+}
+```
+### 3 This Query Finds the whole number of events in the previous 5 Minutes
+```
+REGISTER STREAM <AllEvents>
+SELECT (count(distinct ?event) as ?eventsCount)
+FROM NAMED WINDOW <w> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM] 
+WHERE{
+    WINDOW <w> { ?event  a gdelt:Event. }
+}
+```
+### 4 Find the number of events per the first {second} actor
+```
+REGISTER STREAM <Actor1Activity>
+SELECT ?actor1 (count(distinct ?event) as ?eventsCount)
+FROM NAMED WINDOW <w> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM] 
+FROM NAMED <http://www.geldt.org/cameo>
+WHERE{
+    WINDOW <w> { ?event  a gdelt:Event;
+            gdelt:hasActor1 ?actor1 .}
+}
+GROUP BY ?actor1
+```
+### 5 Find the top ten event types with the number of event per each category during the last 5 Minutes
+```
+REGISTER STREAM <TopEventByType>
+SELECT ?eventType ?typeLabel  ?eventCodeDescription (count(distinct ?event) as ?eventsCount)
+FROM NAMED WINDOW <w> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM] 
+WHERE{
+    WINDOW <w> { ?event  a gdelt:Event;
+                         a ?eventType.
+    GRAPH <http://www.geldt.org/cameo> {
+        ?eventType rdfs:label ?typeLabel ;
+                   gdelt:hasDescription ?eventCodeDesc .}
+}
+GROUP BY ?eventType
+ORDER BY ?eventsCount
+LIMIT 10
+```
+
+### 6 Find all the events that of a given eventType ( e.g. Threats http://www.geldt.org/cameo#13 ) during the last 5 Minutes. Note: Take supertypes into account
+```SPARQL
+REGISTER STREAM <TopEventOfTypeT>
+SELECT *
+FROM NAMED WINDOW <w> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM] 
+FROM NAMED <http://www.geldt.org/cameo>
+WHERE{
+    WINDOW <w> {        ?event  a gdelt:Event; 
+                                a ?eventType . }
+    GRAPH <http://www.geldt.org/cameo> {
+        ?eventType gdelt:hasDescription ?eventCodeDesc .}
+}
+```
+
+### 7 Find the number of events, by type, occurring between CHINA and UNITED STATES during the last 5 Minutes
+
+```SPARQL
+REGISTER STREAM <TopEventOfTypeT>
+SELECT ?eventType ?eventCodeDescription (count(distinct ?event) as ?eventsCount)
+FROM NAMED WINDOW <w> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM] 
+FROM NAMED <http://www.geldt.org/cameo>
+WHERE{
+    WINDOW <w> { ?event  a gdelt:Event;
+            gdelt:hasEventCode ?eventType;
+            gdelt:hasActor1 <http://geldt.org/cameo/USA> ;
+            gdelt:hasActor2 <http://geldt.org/cameo/CHN> .
+    
+    GRAPH <http://www.geldt.org/cameo> {
+        ?eventType gdelt:hasDescription ?eventCodeDesc .}
+}
+GROUP BY ?eventCode
+ORDER BY ?eventsCount
+```
+

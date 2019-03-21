@@ -13,15 +13,18 @@
 @prefix frmt: <http://www.w3.org/ns/formats/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
+<> a vocals:StreamDescriptor , vsd:CatalogService ;
+	dcat:dataset <http://data.gdeltproject.org/gdeltv2/lastupdate.txt>  .
+
 <http://data.gdeltproject.org/gdeltv2/lastupdate.txt> a vocals:Stream ;
         dcat:title "GDELT-DATA Stream"^^xsd:string ;
-        dcat:publisher <www.geldtproject.org>;
+        dcat:publisher <www.geldtproject.org> ;
         dcat:description "GDELT DATA Stream"^^xsd:string ;
 
         vocals:lastUpdate "ti+1"^^xsd:dataTime ;
         vocals:expires "ti+2 "^^xsd:dataTime ;
         vocals:windowType vocals:logicalTumbling ;
-        vocals:windowSize " PT15M"^^xsd:duration .
+        vocals:windowSize " PT15M"^^xsd:duration ;
         vocals:hasAffluent :GDELTGKGCSVStream ;
         vocals:hasAffluent :GDELTEventCSVStream ;
         vocals:hasAffluent :GDELTMentionCSVStream .
