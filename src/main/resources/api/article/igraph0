@@ -28,7 +28,8 @@
 		   :sourceCountry  "United States" ^^xsd:string .
 
 
-<https://www.chron.com/news/article/The-Latest-Trump-heads-to-Vietnam-for-2nd-summit-13642991.php>  :socialImage "https://s.hdnux.com/photos/01/00/61/34/16979720/77/rawImage.jpg"^^xsd:string ;
+<https://www.chron.com/news/article/The-Latest-Trump-heads-to-Vietnam-for-2nd-summit-13642991.php>
+           :socialImage "https://s.hdnux.com/photos/01/00/61/34/16979720/77/rawImage.jpg"^^xsd:string ;
 		   dc:title     "The Latest : Trump heads to Vietnam for 2nd summit with Kim"^^xsd:string ;
 		   :url	        "" ^^xsd:string;
 		   :urlMobile	"https://www.chron.com/news/amp/The-Latest-Trump-heads-to-Vietnam-for-2nd-summit-13642991.php" ^^xsd:string;

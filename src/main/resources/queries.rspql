@@ -99,3 +99,477 @@ GROUP BY ?eventCode
 ORDER BY ?eventsCount
 ```
 
+
+### 8 Find the Conflicting ( using the attribute: QuadClass '4': 'Material Conflict' ) Actors during the last 15 minutes
+
+
+```SPARQL
+REGISTER STREAM <ConflictingActors>
+SELECT ?actor1Name ?actor2Name
+FROM NAMED WINDOW <w> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM]
+FROM NAMED <http://www.geldt.org/cameo>
+WHERE{
+    WINDOW <w> { ?event  a gdelt:Event;
+                         gdelt:hasQuadCalss "4"^^xsd:Integer
+                         gdelt:hasActor1 ?actor1;
+                         gdelt:hasActor2 ?actor2.
+GRAPH <http://www.geldt.org/cameo> {
+    ?actor1 rdfs:label ?actor1Name.
+    ?actor2 rdfs:label  ?actor2Name.
+    }
+}
+```
+
+
+### 9 Find the Goldstien scale 'a theoritical mesure of stability of countries depends on the type of the event' during the last 15 minutes
+
+
+```SPARQL
+REGISTER STREAM <GoldestienScaleEventCounts>
+SELECT ?goldestienScale (count(distinct ?event) as ?eventsCount)
+FROM NAMED WINDOW <w> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM]
+FROM NAMED <http://www.geldt.org/cameo>
+WHERE{
+    WINDOW <w> { ?event  a gdelt:Event;
+                     gdelt:hasGoldestienScale ?goldestienScale;
+             }
+ GROUP BY ?goldestienScale
+ ORDER BY ?eventsCount
+```
+
+### 10 Find the top 10 most mentioned events with the number of its source Articles during the last 15 minutes
+
+REGISTER STREAM <TopMentionedEvents>
+SELECT ?globalEventID ?sourcesNumber
+FROM NAMED WINDOW <w> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM]
+WHERE{
+    WINDOW <w> { ?event  a gdelt:Event;
+                         gdelt:hasGlobalEventID ?globalEventID;
+                         gdelt:hasSourcesNumber ?sourcesNumber.
+}
+ORDER BY ?sourcesNumber
+LIMIT 10
+
+
+### 11  Find the top 10 most negative events 'using the AvgTone' with their Average Tones during the last 15 minutes
+
+
+REGISTER STREAM <TopNegativeEvents>
+SELECT ?globalEventID ?eventAVGTone
+FROM NAMED WINDOW <w> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM]
+WHERE{
+    WINDOW <w> {  ?event  a  gdelt:Event;
+                             gdelt:hasGlobalEventID ?globalEventID;
+                             gdelt:hasAvgTone ?eventAVGTone.
+}
+ORDER BY ASC (?eventAVGTone)
+LIMIT 10
+
+
+### 12  Find the top 10 most Positive events 'using the AvgTone' with their Average Tones during the last 15 minutes
+
+REGISTER STREAM <TopPositiveEvents>
+SELECT ?globalEventID ?eventAVGTone
+FROM NAMED WINDOW <w> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM]
+WHERE{
+    WINDOW <w> {  ?event  a  gdelt:Event;
+                             gdelt:hasGlobalEventID ?globalEventID;
+                             gdelt:hasAvgTone ?eventAVGTone.
+}
+ORDER BY DESC (?eventAVGTone)
+LIMIT 10
+
+### 13 Find the first 20 events  that their actors Actor1 and Actor2 related only to countries
+       #'using Actor1GeoType and Actor2GeoType to be '1=Country' during the last 15 minutes
+
+REGISTER STREAM <CountryActors>
+SELECT ?globalEventID ?actor1CountryCode ?actor2CountryCode
+FROM NAMED WINDOW <w> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM]
+WHERE{
+    WINDOW <w> {   ?event  a gdelt:Event;
+                              gdelt:hasActor1 ?actor1;
+                              gdelt:hasActor2 ?actor2.
+
+                 GRAPH <http://www.geldt.org/cameo> {
+                      ?actor1 gdelt:actorName ?actor1Name;
+                              gdelt:actorGeoType "1"^^xsd:Integer;
+                              gdelt:actorCountryCode ?actor1CountryCode.
+                      ?actor2 gdelt:actorName ?actor2Name;
+                              gdelt:actorGeoType "1"^^xsd:Integer;
+                  gdelt:actorCountryCode ?actor2CountryCode.
+                  }
+}
+
+LIMIT 20
+
+
+### 14  Find the first 20 events  that their actors Actor1 (is United States) and Actor2 related only to countries
+        #'using Actor1GeoType and Actor2GeoType to be '1=Country' during the last 15 minutes
+
+
+REGISTER STREAM <USwithOtherCountryActors>
+SELECT ?globalEventID ?actor1CountryCode ?actor2CountryCode
+FROM NAMED WINDOW <w> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM]
+FROM NAMED <http://www.geldt.org/cameo>
+WHERE{
+    WINDOW <w> {   ?event  a gdelt:Event;
+                              gdelt:hasActor1 ?actor1;
+                              gdelt:hasActor2 ?actor2.
+
+                 GRAPH <http://www.geldt.org/cameo> {
+                      ?actor1 gdelt:actorName ?actor1Name;
+                              gdelt:actorGeoType "1"^^xsd:Integer;
+                              gdelt:actorCountryCode "US"^^xsd:string.
+                      ?actor2 gdelt:actorName ?actor2Name;
+                              gdelt:actorGeoType "1"^^xsd:Integer;
+                  gdelt:actorCountryCode ?actor2CountryCode.
+                  }
+}
+
+LIMIT 20
+
+
+
+### 15  Find the first 20 events  that their Actions only are in United States
+        #(using 'ActionGeo_Type=2 'US State')during the last 15 minutes
+
+
+ REGISTER STREAM <USStatesEvents>
+ SELECT ?globalEventID ?sourceURL
+ FROM NAMED WINDOW <w> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM]
+ WHERE{
+     WINDOW <w> {   ?event  a gdelt:Event;
+                                gdelt:hasGlobalEventID ?globalEventID;
+                                gdelt:hasSourceURL ?sourceURL;
+                                gdelt:hasAction ?action.
+                     ?action gdelt:hasActionGeoFullName ?actionGeoFullName;
+                             gdelt:hasActionGeoType "2"^^xsd:Integer.
+ }
+
+ LIMIT 20
+
+
+ ### 16 Find the first 20 events  that their Actions only are in a world state that IS NOT US
+        #(using 'ActionGeo_Type=5 ) during the last 15 minutes
+
+REGISTER STREAM <OutsideUSStatesEvents>
+SELECT ?globalEventID ?actionGeoFullname ?sourceURL
+FROM NAMED WINDOW <w> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM]
+WHERE{
+    WINDOW <w> {   ?event  a gdelt:Event;
+                               gdelt:hasGlobalEventID ?globalEventID;
+                               gdelt:hasSourceURL ?sourceURL;
+                               gdelt:hasAction ?action.
+                    ?action gdelt:hasActionGeoFullName ?actionGeoFullName;
+                            gdelt:hasActionGeoType "5"^^xsd:Integer.
+}
+
+LIMIT 20
+
+
+
+### #17 Find the first 20 events  that their Actions only are in a non US City
+    #(using 'ActionGeo_Type=4)during the last 15 minutes
+
+
+REGISTER STREAM <EventsOutsideUSCities>
+SELECT ?globalEventID ?actionGeoFullname ?sourceURL
+FROM NAMED WINDOW <w> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM]
+WHERE{
+    WINDOW <w> {   ?event      a gdelt:Event;
+                               gdelt:hasGlobalEventID ?globalEventID;
+                               gdelt:hasSourceURL ?sourceURL;
+                               gdelt:hasAction ?action.
+                    ?action gdelt:hasActionGeoFullName ?actionGeoFullName;
+                            gdelt:hasActionGeoType "4"^^xsd:Integer.
+}
+
+LIMIT 20
+
+
+### 18 get all other mentions of the event from the Mentions Table get Their URLs during the last 15 minutes
+
+REGISTER STREAM <EventMentions>
+SELECT ?globalEventID ?mentionIdentifier
+FROM NAMED WINDOW <w1> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM]
+FROM NAMED WINDOW <w2> ON :GDELTMentionsRDFStream [RANGE 5PTM STEP5PTM]
+WHERE{
+    WINDOW <w1> {   ?event  a gdelt:Event;
+                           gdelt:hasGlobalEventID ?globalEventID;
+                           gdelt:hasSourceURL ?sourceURL;
+                           }
+WINDOW <w2> {
+                   ?globalEventID gdelt:isMentionedIn ?mention.
+                   ?mention gdelt:hasMentionIdentifier ?mentionIdentifier.
+                   }
+}
+
+LIMIT 20
+
+
+
+ ###################################################GKG##################################################
+
+ #19 get latitude, longitude, Tone and DocumentIdentifier (sourceURL) of all documents related to the Theme of "REFUGEE" and specially from "Syria" as location the GDELT GKG
+
+
+ REGISTER STREAM <SyriaRefugeeGKG>
+ SELECT ?long ?lat ?toneVal ?documentSourceURL
+ FROM NAMED WINDOW <w> ON :GKGRDFStream [RANGE 5PTM STEP5PTM]
+ WHERE{
+     WINDOW <w> {   ?GKGDoc gdelt:hasDocIdentifier ?documentSourceURL;
+                                gdelt:hasTone  ?tone;
+                                gdelt:hasLocation ?loc;
+                                gdelt:hasThemes ?themes.
+
+
+                        ?tone gdelt:hasToneValue  ?toneVal.
+                        ?loc  gdelt:hasLat ?lat.
+                        ?loc  gdelt:hasLong ?long.
+                        ?loc  gdelt:hasLocationFullName "Syria"^^xsd:string.
+
+                    FILTER regex(?themes, "REFUGEE", "i").
+ }
+
+
+### 20  Get only the Non-English documents that are mentioning refugees and Syria
+
+
+
+ REGISTER STREAM <NonEnglishSyriaRefugeeGKG>
+ SELECT *
+ FROM NAMED WINDOW <w> ON :GKGRDFStream [RANGE 5PTM STEP5PTM]
+ WHERE{
+     WINDOW <w> {   ?GKGDoc gdelt:hasRecordID ?recordID;
+                                gdelt:hasLocation ?loc;
+                                gdelt:hasThemes ?themes.
+
+                         ?loc  gdelt:hasLocationFullName "Syria"^^xsd:string.
+
+                         FILTER regex(?themes, "REFUGEE", "i" )
+                         FILTER regex(?recordID, "T", "i" )
+ }
+
+
+
+ ### 21  Get only the English documents that are mentioning refugees and Syria
+
+  REGISTER STREAM <OnlyEnglishSyriaRefugeeGKG>
+  SELECT *
+  FROM NAMED WINDOW <w> ON :GKGRDFStream [RANGE 5PTM STEP5PTM]
+  WHERE{
+      WINDOW <w> {   ?GKGDoc gdelt:hasRecordID ?recordID;
+                                 gdelt:hasLocation ?loc;
+                                 gdelt:hasThemes ?themes.
+
+                          ?loc  gdelt:hasLocationFullName "Syria"^^xsd:string.
+
+                          FILTER regex(?themes, "REFUGEE", "i" )
+                          FILTER NOT EXISTS regex(?recordID, "T", "i" )
+  }
+
+
+  ### 22 Get All COUNTS during the past 15 minutes in all documents
+
+    REGISTER STREAM <CountsGKG>
+    SELECT ?GKGDocID ?countType ?countVal ?objectsCounted ?documentSourceURL
+    FROM NAMED WINDOW <w> ON :GKGRDFStream [RANGE 5PTM STEP5PTM]
+    WHERE{
+        WINDOW <w> {   ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+                                    gdelt:hasDocIdentifier  ?documentSourceURL;
+                                    gdelt:hasCounts ?count.
+
+                            ?count gdelt:hasCountType "KILL"^^xsd:string;
+                                   gdelt:hasCountVal ?countVal;
+                                   gdelt:hasCountedObjects ?objectsCounted.
+    }
+
+
+
+###23 Get number of KILLED people during the past 15 minutes in all documents
+
+    REGISTER STREAM <KILLEDPeopleGKG>
+    SELECT ?GKGDocID ?countType ?countVal ?objectsCounted ?documentSourceURL
+    FROM NAMED WINDOW <w> ON :GKGRDFStream [RANGE 5PTM STEP5PTM]
+    WHERE{
+        WINDOW <w> {   ?GKGDoc     gdelt:hasRecordID       ?GKGDocID;
+                                   gdelt:hasDocIdentifier  ?documentSourceURL;
+                                   gdelt:hasCounts ?count.
+
+                           ?count gdelt:hasCountType "KILL"^^xsd:string;
+                                  gdelt:hasCountVal ?countVal;
+                                  gdelt:hasCountedObjects ?objectsCounted.
+    }
+
+
+
+
+
+### 24 Get all KILLED people during the past 15 minutes whose numbers exceed 1000 (Disaster for example Earthquake) in all documents
+
+    REGISTER STREAM <OverKILLEDPeopleGKG>
+    SELECT ?GKGDocID ?countVal ?objectsCounted ?documentSourceURL
+    FROM NAMED WINDOW <w> ON :GKGRDFStream [RANGE 5PTM STEP5PTM]
+    WHERE{
+        WINDOW <w> {   ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+                                   gdelt:hasDocIdentifier  ?documentSourceURL;
+                                   gdelt:hasCounts ?count.
+
+                           ?count gdelt:hasCountType "KILL"^^xsd:string;
+                                  gdelt:hasCountVal ?countVal;
+                                  gdelt:hasCountedObjects ?objectsCounted.
+
+                       FILTER ( ?countVal >= 1000)
+    }
+
+
+### 25 Get number of KIDNAPed people during the past 15 minutes in all documnets
+
+    REGISTER STREAM <KIDNAPEDCountsGKG>
+    SELECT (sum(distinct ?countVal) as ?Total-Kidnaped)
+    FROM NAMED WINDOW <w> ON :GKGRDFStream [RANGE 5PTM STEP5PTM]
+    WHERE{
+        WINDOW <w> {   ?GKGDoc     gdelt:hasRecordID       ?GKGDocID;
+                                   gdelt:hasDocIdentifier  ?documentSourceURL;
+                                   gdelt:hasCounts ?count.
+
+                           ?count gdelt:hasCountType "KIDNAP"^^xsd:string;
+                                  gdelt:hasCountVal ?countVal;
+                                  gdelt:hasCountedObjects ?objectsCounted.
+    }
+
+
+### 26 Get total numbers of all counts during the past 15 minutes in all documents
+
+REGISTER STREAM <AllCountsGKG>
+    SELECT  ?countType (sum(distinct ?countVal) as ?TotalCount)
+    FROM NAMED WINDOW <w> ON :GKGRDFStream [RANGE 5PTM STEP5PTM]
+    WHERE{
+        WINDOW <w> {   ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+                                    gdelt:hasDocIdentifier  ?documentSourceURL;
+                                    gdelt:hasCounts ?count.
+
+                            ?count gdelt:hasCountType "KIDNAP"^^xsd:string;
+                                   gdelt:hasCountVal ?countVal;
+                        gdelt:hasCountedObjects ?objectsCounted.
+    }
+    GROUP BY (?countType)
+
+
+
+ ### 27 Get All 'THEMES' Related to All documents  during the past 15 minutes in all documents.
+
+REGISTER STREAM <ThemesGKG>
+    SELECT  ?GKGDocID ?themes
+    FROM NAMED WINDOW <w> ON :GKGRDFStream [RANGE 5PTM STEP5PTM]
+    WHERE{
+        WINDOW <w> {   ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+                       gdelt:hasThemes ?themes.
+    }
+
+### 28 Get All 'PERSONS' Related to All documents during the past 15 minutes in all documents.
+
+    REGISTER STREAM <PersonsGKG>
+        SELECT  ?GKGDocID ?themes
+        FROM NAMED WINDOW <w> ON :GKGRDFStream [RANGE 5PTM STEP5PTM]
+        WHERE{
+            WINDOW <w> {   ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+                           gdelt:hasPersons ?persons.
+        }
+
+
+### 29 Get All 'QOUTATIONS' Related to All documents during the past 15 minutes in all documents.
+
+REGISTER STREAM <QoutationsGKG>
+SELECT ?GKGDocID ?qoutations
+FROM NAMED WINDOW <w> ON :GKGRDFStream [RANGE 5PTM STEP5PTM]
+WHERE{
+            WINDOW <w> {
+
+    ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+            gdelt:hasPersons        ?qoutations.
+}
+
+
+### 30 Get EventIDs, Actors, Counts {Or any Other Stuff from GKG} for events occurring during the past 15 minutes in all documents
+
+
+REGISTER STREAM <MentionsEventsGKGStreamExample1>
+SELECT ?eventID ?actor1Name ?actor2Name ?countType ?countVal ?objectsCounted
+FROM NAMED WINDOW <w1> ON :GKGRDFStream [RANGE 5PTM STEP5PTM]
+FROM NAMED WINDOW <w2> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM]
+FROM NAMED WINDOW <w3> ON :GDELTMentionsRDFStream [RANGE 5PTM STEP5PTM]
+FROM NAMED <http://www.geldt.org/cameo>
+WHERE{
+            WINDOW <w2> {
+
+    ?event      a gdelt:Event;
+                  gdelt:hasEventCode ?eventCode;
+                  gdelt:hasActor1 ?actor1;
+                  gdelt:hasActor2 ?actor2;
+                  gdelt:hasMention ?mention;
+                  gdelt:hasGlobalEventID ?globalEventID.
+    }
+     WINDOW <w3> {
+       ?mention gdelt:hasMentionIdentifier ?mentionID;
+                gdelt:hasGKGDocID ?GKGdocID;
+                gdelt:hasGKGCounts ?count.
+    }
+
+    WINDOW <w3> {
+       ?count gdelt:hasCountType ?countType;
+                   gdelt:hasCountVal ?countVal;
+                   gdelt:hasCountedObjects ?objectsCounted.
+                   }
+
+GRAPH <http://www.geldt.org/cameo> {
+    ?actor1 rdfs:label ?actor1Name.
+    ?actor2 rdfs:label  ?actor2Name.
+    }
+
+    FILTER(?globalEventID=?mentionIdentifier && ?mentionIdentifier=GKGdocID)
+}
+
+
+### 31  Filter events to just those mentioned in articles that focus on certain themes ('GENERAL_GOVERNMENT')
+    #and related somehow to (IRAQ)  or groups.
+
+
+REGISTER STREAM <MentionsEventsGKGStreamExample1>
+SELECT ?eventID ?actor1Name ?actor2Name ?countType ?countVal ?objectsCounted
+FROM NAMED WINDOW <w1> ON :GKGRDFStream [RANGE 5PTM STEP5PTM]
+FROM NAMED WINDOW <w2> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM]
+FROM NAMED WINDOW <w3> ON :GDELTMentionsRDFStream [RANGE 5PTM STEP5PTM]
+FROM NAMED <http://www.geldt.org/cameo>
+WHERE{
+            WINDOW <w2> {
+
+    ?event      a gdelt:Event;
+                  gdelt:hasEventCode ?eventCode;
+                  gdelt:hasActor1 ?actor1;
+                  gdelt:hasActor2 ?actor2;
+                  gdelt:hasMention ?mention;
+                  gdelt:hasGlobalEventID ?globalEventID.
+    }
+     WINDOW <w3> {
+       ?mention gdelt:hasMentionIdentifier ?mentionID;
+                   gdelt:hasGKGDocID ?GKGdocID;
+                   gdelt:hasGKGTheme ?theme;
+                   gdelt:hasGKGLocation ?loc.
+       ?loc  gdelt:hasLocationFullName "Iraq"^^xsd:string.
+       FILTER regex(?theme, "GENERAL_GOVERNMENT", "i").
+    }
+
+    WINDOW <w3> {
+       ?count gdelt:hasCountType ?countType;
+                   gdelt:hasCountVal ?countVal;
+                   gdelt:hasCountedObjects ?objectsCounted.
+                   }
+
+GRAPH <http://www.geldt.org/cameo> {
+    ?actor1 rdfs:label ?actor1Name.
+    ?actor2 rdfs:label  ?actor2Name.
+    }
+
+    FILTER(?globalEventID=?mentionIdentifier && ?mentionIdentifier=GKGdocID)
+}
