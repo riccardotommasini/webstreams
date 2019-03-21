@@ -107,8 +107,7 @@ public class NewsWave extends AbstractWave {
             log.info(ze.getName());
 
             if (ze.getName().contains(export_name))
-//                handler = events;
-
+//              handler = events;
                 continue;
             else if (ze.getName().contains(mentions1))
                 handler = mentions;

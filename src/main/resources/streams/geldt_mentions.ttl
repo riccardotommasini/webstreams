@@ -6,12 +6,13 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
 @prefix carml: <http://carml.taxonic.com/carml/> .
+@prefix vocals: <http://w3id.org/rsp/vocals#> .
 
 <#GELDTMapping> a rr:TriplesMap ;
   rml:logicalSource [
     rml:source [
-       a carml:Stream ;
-       carml:streamName "GELDTStream" ;
+       a vocals:Stream ;
+       vocals:streamName "GELDTStream" ;
     ] ;
     rml:referenceFormulation ql:CSV
   ];
