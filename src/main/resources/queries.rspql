@@ -535,7 +535,7 @@ GRAPH <http://www.geldt.org/cameo> {
     #and related somehow to (IRAQ)  or groups.
 
 
-REGISTER STREAM <MentionsEventsGKGStreamExample1>
+REGISTER STREAM <MentionsEventsGKGStreamExample2>
 SELECT ?eventID ?actor1Name ?actor2Name ?countType ?countVal ?objectsCounted
 FROM NAMED WINDOW <w1> ON :GKGRDFStream [RANGE 5PTM STEP5PTM]
 FROM NAMED WINDOW <w2> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM]
