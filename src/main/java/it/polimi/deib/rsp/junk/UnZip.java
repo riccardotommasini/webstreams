@@ -1,6 +1,6 @@
 package it.polimi.deib.rsp.junk;
 
-import it.polimi.deib.rsp.rsp.GELDTArticleExample;
+import it.polimi.deib.rsp.rsp.api.GELDTArticleExample;
 
 import java.io.*;
 import java.net.URL;

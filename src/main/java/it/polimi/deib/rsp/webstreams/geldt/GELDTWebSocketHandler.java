@@ -26,14 +26,18 @@ import java.util.List;
 import java.util.Set;
 
 @WebSocket
-public class GELDTWebSocketHandler {
+public class GELDTWebSocketHandler implements Runnable {
 
     private final RmlMapper mapper;
     private final Set<TriplesMap> mapping;
+    private final String mappingfile;
     private String sender, msg;
     private List<Session> users = new ArrayList<>();
+    public int deleay;
 
-    public GELDTWebSocketHandler(String header, String mappingfile, char delimiter, Object... functions) {
+    public GELDTWebSocketHandler(String header, String mappingfile, char delimiter, int deleay, Object... functions) {
+        this.mappingfile = mappingfile;
+        this.deleay = deleay;
         this.mapper =
                 RmlMapper
                         .newBuilder()
@@ -51,7 +55,7 @@ public class GELDTWebSocketHandler {
     }
 
     @OnWebSocketConnect
-    public void onConnect(Session user) throws Exception {
+    public synchronized void onConnect(Session user) throws Exception {
         this.users.add(user);
     }
 
@@ -66,22 +70,7 @@ public class GELDTWebSocketHandler {
 
     public void bindInputStream(String geldtStream, ByteArrayInputStream byteArrayInputStream) {
         mapper.bindInputStream(geldtStream, byteArrayInputStream);
-
-
-        Set functionValueTriplesMaps = mapper.getTermMaps(mapping).filter((t) -> t.getFunctionValue() != null).map(TermMap::getFunctionValue).collect(ImmutableCollectors.toImmutableSet());
-        Set<TriplesMap> refObjectTriplesMaps = mapper.getAllTriplesMapsUsedInRefObjectMap(mapping);
-
-        mapping.stream()
-                .filter((tm) -> !functionValueTriplesMaps.contains(tm) && !refObjectTriplesMaps.contains(tm))
-                .flatMap(tm -> mapper.map(tm, refObjectTriplesMaps))
-                .map(this::toJSONLD)
-                .forEach(s -> users.stream()
-                        .filter(Session::isOpen)
-                        .map(Session::getRemote)
-                        .forEach(session -> send(s, session)));
-
-        mapper.clearSourceManager();
-
+        new Thread(this);
     }
 
     private String toJSONLD(Model model) {
@@ -103,9 +92,30 @@ public class GELDTWebSocketHandler {
 
     private void send(String s, RemoteEndpoint session) {
         try {
+            System.out.println("sending " + mappingfile);
+            Thread.sleep(deleay);
             session.sendString(s);
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+    }
+
+    @Override
+    public void run() {
+        Set functionValueTriplesMaps = mapper.getTermMaps(mapping).filter((t) -> t.getFunctionValue() != null).map(TermMap::getFunctionValue).collect(ImmutableCollectors.toImmutableSet());
+        Set<TriplesMap> refObjectTriplesMaps = mapper.getAllTriplesMapsUsedInRefObjectMap(mapping);
+
+        mapping.stream()
+                .filter((tm) -> !functionValueTriplesMaps.contains(tm) && !refObjectTriplesMaps.contains(tm))
+                .flatMap(tm -> mapper.map(tm, refObjectTriplesMaps))
+                .map(this::toJSONLD)
+                .forEach(s -> users.stream()
+                        .filter(Session::isOpen)
+                        .map(Session::getRemote)
+                        .forEach(session -> send(s, session)));
+
+        mapper.clearSourceManager();
     }
 }

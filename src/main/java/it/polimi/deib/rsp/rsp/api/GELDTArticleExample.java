@@ -1,5 +1,6 @@
-package it.polimi.deib.rsp.rsp;
+package it.polimi.deib.rsp.rsp.api;
 
+import it.polimi.deib.rsp.rsp.GELDTRSP;
 import it.polimi.jasper.engine.Jasper;
 import it.polimi.jasper.spe.operators.r2s.formatter.ResponseFormatterFactory;
 import it.polimi.jasper.streams.RegisteredEPLStream;
@@ -14,19 +15,20 @@ import java.net.URL;
 /**
  * Created by Riccardo on 03/08/16.
  */
-public class GELDTImageExample extends GELDTExample {
+public class GELDTArticleExample extends GELDTRSP {
+
 
     public static void main(String[] args) throws InterruptedException, IOException, ConfigurationException {
 
-        URL resource = GELDTImageExample.class.getResource("/geldt/csparqlGELDT.properties");
+        URL resource = GELDTArticleExample.class.getResource("/geldt/csparqlGELDT.properties");
         QueryConfiguration config = new QueryConfiguration(resource.getPath());
         EngineConfiguration ec = EngineConfiguration.loadConfig("/geldt/csparqlGELDT.properties");
 
         sr = new Jasper(0, ec);
 
-        String type = "image";
+        String type = "article";
 
-        GELDTGraphStream dt = new GELDTGraphStream(2, "Donald Trump", type);
+        GELDTGraphStream dt = new GELDTGraphStream(3, "Donald Trump", type);
 
         System.out.println(dt);
 
@@ -34,7 +36,7 @@ public class GELDTImageExample extends GELDTExample {
 
         dt.setWritable(dtr);
 
-        ContinuousQueryExecution cqe = sr.register(getQuery("OneStream", ".rspql", type), config);
+        ContinuousQueryExecution cqe = sr.register(getQuery("OneStream", ".rspql", type, "api"), config);
 
         new Thread(dt).start();
 
@@ -44,6 +46,5 @@ public class GELDTImageExample extends GELDTExample {
             cqe.add(ResponseFormatterFactory.getSelectResponseSysOutFormatter("CSV", true));
         }
     }
-
 
 }

@@ -1,5 +1,6 @@
-package it.polimi.deib.rsp.rsp;
+package it.polimi.deib.rsp.rsp.api;
 
+import it.polimi.deib.rsp.rsp.GELDTRSP;
 import it.polimi.jasper.engine.Jasper;
 import it.polimi.jasper.spe.operators.r2s.formatter.ResponseFormatterFactory;
 import it.polimi.jasper.streams.RegisteredEPLStream;
@@ -14,30 +15,34 @@ import java.net.URL;
 /**
  * Created by Riccardo on 03/08/16.
  */
-public class GELDTArticleExample extends GELDTExample {
+public class GELDTJoinExample extends GELDTRSP {
 
 
     public static void main(String[] args) throws InterruptedException, IOException, ConfigurationException {
 
-        URL resource = GELDTArticleExample.class.getResource("/geldt/csparqlGELDT.properties");
+        URL resource = GELDTJoinExample.class.getResource("/geldt/csparqlGELDT.properties");
         QueryConfiguration config = new QueryConfiguration(resource.getPath());
         EngineConfiguration ec = EngineConfiguration.loadConfig("/geldt/csparqlGELDT.properties");
 
         sr = new Jasper(0, ec);
 
-        String type = "article";
+        String type1 = "image";
+        GELDTGraphStream dti = new GELDTGraphStream(2, "Donald Trump", type1);
 
-        GELDTGraphStream dt = new GELDTGraphStream(3, "Donald Trump", type);
 
-        System.out.println(dt);
+        String type2 = "article";
+        GELDTGraphStream dta = new GELDTGraphStream(3, "Donald Trump", type2);
 
-        RegisteredEPLStream dtr = sr.register(dt);
 
-        dt.setWritable(dtr);
+        RegisteredEPLStream dtir = sr.register(dti);
+        RegisteredEPLStream dtar = sr.register(dta);
 
-        ContinuousQueryExecution cqe = sr.register(getQuery("OneStream", ".rspql", type), config);
+        dta.setWritable(dtar);
+        dti.setWritable(dtir);
 
-        new Thread(dt).start();
+        ContinuousQueryExecution cqe = sr.register(getQuery("TwoStreams", ".rspql", "join", "api"), config);
+
+        new Thread(dti).start();
 
         if (cqe.getContinuousQuery().isConstructType()) {
             cqe.add(ResponseFormatterFactory.getConstructResponseSysOutFormatter("JSON-LD", true));

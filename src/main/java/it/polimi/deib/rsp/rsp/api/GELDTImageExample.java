@@ -1,5 +1,6 @@
-package it.polimi.deib.rsp.rsp;
+package it.polimi.deib.rsp.rsp.api;
 
+import it.polimi.deib.rsp.rsp.GELDTRSP;
 import it.polimi.jasper.engine.Jasper;
 import it.polimi.jasper.spe.operators.r2s.formatter.ResponseFormatterFactory;
 import it.polimi.jasper.streams.RegisteredEPLStream;
@@ -14,34 +15,29 @@ import java.net.URL;
 /**
  * Created by Riccardo on 03/08/16.
  */
-public class GELDTJoinExample extends GELDTExample {
-
+public class GELDTImageExample extends GELDTRSP {
 
     public static void main(String[] args) throws InterruptedException, IOException, ConfigurationException {
 
-        URL resource = GELDTJoinExample.class.getResource("/geldt/csparqlGELDT.properties");
+        URL resource = GELDTImageExample.class.getResource("/geldt/csparqlGELDT.properties");
         QueryConfiguration config = new QueryConfiguration(resource.getPath());
         EngineConfiguration ec = EngineConfiguration.loadConfig("/geldt/csparqlGELDT.properties");
 
         sr = new Jasper(0, ec);
 
-        String type1 = "image";
-        GELDTGraphStream dti = new GELDTGraphStream(2, "Donald Trump", type1);
+        String type = "image";
 
+        GELDTGraphStream dt = new GELDTGraphStream(2, "Donald Trump", type);
 
-        String type2 = "article";
-        GELDTGraphStream dta = new GELDTGraphStream(3, "Donald Trump", type2);
+        System.out.println(dt);
 
+        RegisteredEPLStream dtr = sr.register(dt);
 
-        RegisteredEPLStream dtir = sr.register(dti);
-        RegisteredEPLStream dtar = sr.register(dta);
+        dt.setWritable(dtr);
 
-        dta.setWritable(dtar);
-        dti.setWritable(dtir);
+        ContinuousQueryExecution cqe = sr.register(getQuery("OneStream", ".rspql", type, "api"), config);
 
-        ContinuousQueryExecution cqe = sr.register(getQuery("TwoStreams", ".rspql", "join"), config);
-
-        new Thread(dti).start();
+        new Thread(dt).start();
 
         if (cqe.getContinuousQuery().isConstructType()) {
             cqe.add(ResponseFormatterFactory.getConstructResponseSysOutFormatter("JSON-LD", true));
@@ -49,5 +45,6 @@ public class GELDTJoinExample extends GELDTExample {
             cqe.add(ResponseFormatterFactory.getSelectResponseSysOutFormatter("CSV", true));
         }
     }
+
 
 }

@@ -1,6 +1,5 @@
 package it.polimi.deib.rsp.webstreams.wikimedia;
 
-import it.polimi.deib.rsp.webstreams.geldt.AbstractWave;
 import lombok.extern.log4j.Log4j;
 import spark.Service;
 
@@ -12,7 +11,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 
 @Log4j
-public class WikiWave extends AbstractWave {
+public class WikiWave {
 
     private static final String spec = "http://data.gdeltproject.org/gdeltv2/lastupdate.txt";
     private static final String header_export = "GLOBALEVENTID\tSQLDATE\tMonthYear\tYear\tFractionDate\tActor1Code\tActor1Name\tActor1CountryCode\tActor1KnownGroupCode\tActor1EthnicCode\tActor1Religion1Code\tActor1Religion2Code\tActor1Type1Code\tActor1Type2Code\tActor1Type3Code\tActor2Code\tActor2Name\tActor2CountryCode\tActor2KnownGroupCode\tActor2EthnicCode\tActor2Religion1Code\tActor2Religion2Code\tActor2Type1Code\tActor2Type2Code\tActor2Type3Code\tIsRootEvent\tEventCode\tEventBaseCode\tEventRootCode\tQuadClass\tGoldsteinScale\tNumMentions\tNumSources\tNumArticles\tAvgTone\tActor1Geo_Type\tActor1Geo_FullName\tActor1Geo_CountryCode\tActor1Geo_ADM1Code\tActor1Geo_ADM2Code\tActor1Geo_Lat\tActor1Geo_Long\tActor1Geo_FeatureID\tActor2Geo_Type\tActor2Geo_FullName\tActor2Geo_CountryCode\tActor2Geo_ADM1Code\tActor2Geo_ADM2Code\tActor2Geo_Lat\tActor2Geo_Long\tActor2Geo_FeatureID\tActionGeo_Type\tActionGeo_FullName\tActionGeo_CountryCode\tActionGeo_ADM1Code\tActionGeo_ADM2Code\tActionGeo_Lat\tActionGeo_Long\tActionGeo_FeatureID\tDATEADDED\tSOURCEURL";
@@ -21,7 +20,6 @@ public class WikiWave extends AbstractWave {
     private static final String sgraph = "sgraph";
 
     private static WikimediaWebSocketHandler handler;
-
 
     private static final int sgraph_port = 80;
     private static final int sgraph_thread = 10;
