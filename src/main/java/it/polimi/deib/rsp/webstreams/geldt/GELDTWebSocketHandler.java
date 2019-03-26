@@ -44,7 +44,7 @@ public class GELDTWebSocketHandler implements Runnable {
                         .setLogicalSourceResolver(Rdf.Ql.Csv, new MyCsvResolver(header.split("\t"), delimiter))
                         .addFunctions(functions)
                         .build();
-        String first = "/Users/riccardo/_Projects/web/geldt/src/main/resources/streams/geldt_" + mappingfile;
+        String first = "src/main/resources/streams/geldt_" + mappingfile;
 
         this.mapping =
                 RmlMappingLoader

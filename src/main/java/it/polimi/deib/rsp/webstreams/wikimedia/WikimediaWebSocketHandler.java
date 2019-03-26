@@ -41,7 +41,7 @@ public class WikimediaWebSocketHandler {
                         .setLogicalSourceResolver(Rdf.Ql.JsonPath, new JsonPathResolver())
                         .addFunctions(functions)
                         .build();
-        String first = "/Users/riccardo/_Projects/web/geldt/src/main/resources/streams/wikimedia_" + mappingfile;
+        String first = "src/main/resources/streams/wikimedia_" + mappingfile;
 
         this.mapping =
                 RmlMappingLoader
