@@ -31,37 +31,41 @@ public class GELDTWebSocketHandler implements Runnable {
     private final RmlMapper mapper;
     private final Set<TriplesMap> mapping;
     private final String mappingfile;
-    private String sender, msg;
-    private List<Session> users = new ArrayList<>();
-    public int deleay;
+    private Session connectedUser;
+    public int delay;
 
-    public GELDTWebSocketHandler(String header, String mappingfile, char delimiter, int deleay, Object... functions) {
+    public GELDTWebSocketHandler(String header, String mappingfile, char delimiter, int delay, Object... functions) {
         this.mappingfile = mappingfile;
-        this.deleay = deleay;
+        this.delay = delay;
         this.mapper =
                 RmlMapper
                         .newBuilder()
                         .setLogicalSourceResolver(Rdf.Ql.Csv, new MyCsvResolver(header.split("\t"), delimiter))
                         .addFunctions(functions)
                         .build();
-        String first = "src/main/resources/streams/geldt_" + mappingfile;
+
+        String mappingFilePath = "src/main/resources/streams/geldt_" + mappingfile;
 
         this.mapping =
                 RmlMappingLoader
                         .build()
                         .load(RDFFormat.TURTLE,
-                                Paths.get(first));
+                                Paths.get(mappingFilePath));
 
     }
 
+    /*
+        When a client connects, save it in connectedUser and start a new thread to
+        provide the stream.
+    */
     @OnWebSocketConnect
     public synchronized void onConnect(Session user) throws Exception {
-        this.users.add(user);
+        connectedUser = user;
+        new Thread(this).start();
     }
 
     @OnWebSocketClose
     public void onClose(Session user, int statusCode, String reason) {
-        this.users.remove(user);
     }
 
     @OnWebSocketMessage
@@ -70,7 +74,6 @@ public class GELDTWebSocketHandler implements Runnable {
 
     public void bindInputStream(String geldtStream, ByteArrayInputStream byteArrayInputStream) {
         mapper.bindInputStream(geldtStream, byteArrayInputStream);
-        new Thread(this);
     }
 
     private String toJSONLD(Model model) {
@@ -92,29 +95,37 @@ public class GELDTWebSocketHandler implements Runnable {
 
     private void send(String s, RemoteEndpoint session) {
         try {
-            System.out.println("sending " + mappingfile);
-            Thread.sleep(deleay);
+            System.out.println("INFO: Sending " + mappingfile);
+            Thread.sleep(delay);
             session.sendString(s);
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Connection closed.");
         }
     }
 
+    /*
+        The stream is built and provided to the client.
+        userSession is saved to let multiple threads <-> users to be connected simultaneously.
+    */
     @Override
     public void run() {
+
         Set functionValueTriplesMaps = mapper.getTermMaps(mapping).filter((t) -> t.getFunctionValue() != null).map(TermMap::getFunctionValue).collect(ImmutableCollectors.toImmutableSet());
         Set<TriplesMap> refObjectTriplesMaps = mapper.getAllTriplesMapsUsedInRefObjectMap(mapping);
+
+        // TODO: I don't like this.
+        List<Session> userSession = new ArrayList<>();
+        userSession.add(connectedUser);
 
         mapping.stream()
                 .filter((tm) -> !functionValueTriplesMaps.contains(tm) && !refObjectTriplesMaps.contains(tm))
                 .flatMap(tm -> mapper.map(tm, refObjectTriplesMaps))
                 .map(this::toJSONLD)
-                .forEach(s -> users.stream()
+                .forEach(s -> userSession.stream()
                         .filter(Session::isOpen)
-                        .map(Session::getRemote)
-                        .forEach(session -> send(s, session)));
+                        .forEach(session -> send(s, session.getRemote())));
 
         mapper.clearSourceManager();
     }

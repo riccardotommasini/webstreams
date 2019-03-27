@@ -41,13 +41,14 @@ public class WikimediaWebSocketHandler {
                         .setLogicalSourceResolver(Rdf.Ql.JsonPath, new JsonPathResolver())
                         .addFunctions(functions)
                         .build();
-        String first = "src/main/resources/streams/wikimedia_" + mappingfile;
+        
+        String mappingFilePath = "src/main/resources/streams/wikimedia_" + mappingfile;
 
         this.mapping =
                 RmlMappingLoader
                         .build()
                         .load(RDFFormat.TURTLE,
-                                Paths.get(first));
+                                Paths.get(mappingFilePath));
 
     }
 
