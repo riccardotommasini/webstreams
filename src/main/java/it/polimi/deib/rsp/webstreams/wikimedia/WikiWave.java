@@ -25,9 +25,9 @@ public class WikiWave {
 
     private static WikimediaWebSocketHandler handler;
 
-    private static final int sgraph_port = 8081;
+    private static int sgraph_port;
     private static final int sgraph_thread = 10;
-    private static final int stream_port = 8080;
+    private static int stream_port;
     private static final int stream_thread = 20;
 
     public static final String stream_name = "WikimediaChanges";
@@ -38,9 +38,13 @@ public class WikiWave {
 
 
     private static Client client = ClientBuilder.newClient();
-    private static String wikipedia_stream_address = "https://stream.wikimedia.org/v2/stream/recentchange";
+    private static String wikipedia_stream_address;
 
-    public static void main(String[] args) {
+    public static void startWikimedia(int endpointport, int streamport, String wikipediastreamaddress) {
+
+        sgraph_port = endpointport;
+        stream_port = streamport;
+        wikipedia_stream_address = wikipediastreamaddress;
 
         Object[] functions = new Object[]{};
 

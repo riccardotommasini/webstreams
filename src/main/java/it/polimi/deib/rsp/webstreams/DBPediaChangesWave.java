@@ -20,10 +20,10 @@ public class DBPediaChangesWave {
     public static String removed = ".removed.nt.gz";
 
 
-    public static void main(String[] args) throws IOException {
+    public static void startDBPediaChanges(String DBPedialastchangesurl) throws IOException {
 
 
-        URL url = new URL("http://live.dbpedia.org/changesets/lastPublishedFile.txt");
+        URL url = new URL(DBPedialastchangesurl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
 

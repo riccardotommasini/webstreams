@@ -2,6 +2,7 @@ package it.polimi.deib.rsp.webstreams.geldt;
 
 import it.polimi.deib.rsp.webstreams.geldt.functions.*;
 import lombok.extern.log4j.Log4j;
+import org.apache.jena.base.Sys;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.ValueFactory;
@@ -29,12 +30,14 @@ import java.util.zip.ZipInputStream;
 @Log4j
 public class NewsWave {
 
-    private static final String geldt_lastUpdate_url = "http://data.gdeltproject.org/gdeltv2/lastupdate.txt";
+    private static String geldt_lastUpdate_url = "http://data.gdeltproject.org/gdeltv2/lastupdate.txt";
+
     private static final String header_export = "GLOBALEVENTID\tSQLDATE\tMonthYear\tYear\tFractionDate\tActor1Code\tActor1Name\tActor1CountryCode\tActor1KnownGroupCode\tActor1EthnicCode\tActor1Religion1Code\tActor1Religion2Code\tActor1Type1Code\tActor1Type2Code\tActor1Type3Code\tActor2Code\tActor2Name\tActor2CountryCode\tActor2KnownGroupCode\tActor2EthnicCode\tActor2Religion1Code\tActor2Religion2Code\tActor2Type1Code\tActor2Type2Code\tActor2Type3Code\tIsRootEvent\tEventCode\tEventBaseCode\tEventRootCode\tQuadClass\tGoldsteinScale\tNumMentions\tNumSources\tNumArticles\tAvgTone\tActor1Geo_Type\tActor1Geo_FullName\tActor1Geo_CountryCode\tActor1Geo_ADM1Code\tActor1Geo_ADM2Code\tActor1Geo_Lat\tActor1Geo_Long\tActor1Geo_FeatureID\tActor2Geo_Type\tActor2Geo_FullName\tActor2Geo_CountryCode\tActor2Geo_ADM1Code\tActor2Geo_ADM2Code\tActor2Geo_Lat\tActor2Geo_Long\tActor2Geo_FeatureID\tActionGeo_Type\tActionGeo_FullName\tActionGeo_CountryCode\tActionGeo_ADM1Code\tActionGeo_ADM2Code\tActionGeo_Lat\tActionGeo_Long\tActionGeo_FeatureID\tDATEADDED\tSOURCEURL";
     private static final String mapping_export = "events.ttl";
-    private static final String header_mentions = "GLOBALEVENTID\tEventTimeDate\tMentionTimeDate\tMentionType\tMentionSourceName\tMentionIdentifier\tSentenceID\tActor1CharOffset\tActor2CharOffset\tActionCharOffset\tInRawText\tConfidence\tMentionDocLen\tMentionDocTone\tMentionDocTranslationInfo\tExtras";
 
+    private static final String header_mentions = "GLOBALEVENTID\tEventTimeDate\tMentionTimeDate\tMentionType\tMentionSourceName\tMentionIdentifier\tSentenceID\tActor1CharOffset\tActor2CharOffset\tActionCharOffset\tInRawText\tConfidence\tMentionDocLen\tMentionDocTone\tMentionDocTranslationInfo\tExtras";
     private static final String mapping_mentions = "mentions.ttl";
+
     private static final String header_gkg = "GKGRECORDID\tDATE\tSourceCollectionIdentifier\tSourceCommonName\tDocumentIdentifier\tCounts\tV2Counts\tThemes\tV2Themes\tLocations\tV2Locations\tPersons\tV2Persons\tOrganizations\tV2Organizations\tV2Tone\tDates\tGCAM\tSharingImage\tRelatedImages\tSocialImageEmbeds\tSocialVideoEmbeds\tQuotations\tAllNames\tAmounts\tTranslationInfo\tExtras";
     private static final String mapping_gkg = "gkg.ttl";
 
@@ -48,9 +51,9 @@ public class NewsWave {
     // GELDT "export" CSV will be offered as "events" stream
     private static final String export_name = "export";
 
-    private static final int sgraph_port = 8081;
+    private static int sgraph_port;
     private static final int sgraph_thread = 10;
-    private static final int stream_port = 8080;
+    private static int stream_port;
     private static final int stream_thread = 20;
 
     private static final String get_method = "GET";
@@ -75,7 +78,11 @@ public class NewsWave {
     private static IRI p = factory.createIRI(" http://www.w3.org/TR/vocab-dcat/accessURL");
 
 
-    public static void main(String[] args) throws IOException {
+    public static void startGeldt(int endpointport, int streamport, String geldtlastUpdateurl) {
+
+        sgraph_port = endpointport;
+        stream_port = streamport;
+        geldt_lastUpdate_url = geldtlastUpdateurl;
 
         Object[] functions = new Object[]{new DBPediaPeopleLookup(),
                 new DBPediaPeopleLookup("http://xmlns.com/foaf/0.1/Person,Wikidata:Q5,Wikidata:Q24229398,Wikidata:Q215627,DUL:NaturalPerson,DUL:Agent,Schema:Person,DBpedia:Person,DBpedia:Agent".split(",")),
@@ -84,10 +91,11 @@ public class NewsWave {
                 new GenericSplitFunction(semicolon, prefix),
                 new ThemeV2SplitFunction(semicolon, prefix)};
 
-        ignite(functions);
-
-        retrieveDataAndSetStreams();
-
+        try {
+            ignite(functions);
+            retrieveDataAndSetStreams();
+        } catch (IOException e) {
+        }
     }
 
     private static void ignite(Object[] functions) throws IOException {
