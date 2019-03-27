@@ -20,6 +20,7 @@ import org.eclipse.rdf4j.rio.Rio;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringWriter;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -42,13 +43,13 @@ public class WikimediaWebSocketHandler {
                         .addFunctions(functions)
                         .build();
         
-        String mappingFilePath = "src/main/resources/streams/wikimedia_" + mappingfile;
+        InputStream mappingFileStream = WikimediaWebSocketHandler.class.getResourceAsStream("/streams/wikimedia_" + mappingfile);
 
         this.mapping =
                 RmlMappingLoader
                         .build()
                         .load(RDFFormat.TURTLE,
-                                Paths.get(mappingFilePath));
+                                mappingFileStream);
 
     }
 

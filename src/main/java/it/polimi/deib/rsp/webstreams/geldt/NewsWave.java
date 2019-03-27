@@ -143,7 +143,9 @@ public class NewsWave {
     }
 
     private static void retrieveDataAndSetStreams() throws IOException {
-        URL downloadDestination = NewsWave.class.getResource("/csv/");
+        //TODO: Try to force it to download CSV in CSV folder: easy when run in IntelliJ, but try it
+        // while running the jar...
+        String downloadDestination = "./";
 
         URL downloadUrl = new URL(geldt_lastUpdate_url);
         HttpURLConnection connection = (HttpURLConnection) downloadUrl.openConnection();
@@ -209,7 +211,7 @@ public class NewsWave {
     }
 
 
-    private static ByteArrayOutputStream getByteArrayOutputStream(URL dest, ZipInputStream zis, ZipEntry ze) throws IOException {
+    private static ByteArrayOutputStream getByteArrayOutputStream(String dest, ZipInputStream zis, ZipEntry ze) throws IOException {
 
         ByteArrayOutputStream dos = new ByteArrayOutputStream();
 
@@ -218,7 +220,7 @@ public class NewsWave {
 
         while (ze != null) {
             int len;
-            File f = new File(dest.getPath() + File.separator + ze.getName());
+            File f = new File(dest + ze.getName());
             FileOutputStream fos = new FileOutputStream(f);
             log.info("Saving file at [" + f.getAbsolutePath() + "]");
             while ((len = zis.read(buffer)) > 0) {
