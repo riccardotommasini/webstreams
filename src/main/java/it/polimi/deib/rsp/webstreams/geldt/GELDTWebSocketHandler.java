@@ -34,6 +34,7 @@ public class GELDTWebSocketHandler implements Runnable {
     private final String mappingfile;
     private Session connectedUser;
     public int delay;
+    List<Session> userSession = new ArrayList<>();
 
     public GELDTWebSocketHandler(String header, String mappingfile, char delimiter, int delay, Object... functions) {
         this.mappingfile = mappingfile;
@@ -45,7 +46,7 @@ public class GELDTWebSocketHandler implements Runnable {
                         .addFunctions(functions)
                         .build();
 
-        InputStream mappingFileStream = GELDTWebSocketHandler.class.getResourceAsStream("/streams/geldt_" + mappingfile);
+        InputStream mappingFileStream = GELDTWebSocketHandler.class.getResourceAsStream("/streams/mapping/geldt_" + mappingfile);
 
         this.mapping =
                 RmlMappingLoader
@@ -61,12 +62,12 @@ public class GELDTWebSocketHandler implements Runnable {
     */
     @OnWebSocketConnect
     public synchronized void onConnect(Session user) throws Exception {
-        connectedUser = user;
-        new Thread(this).start();
+        userSession.add(user);
     }
 
     @OnWebSocketClose
     public void onClose(Session user, int statusCode, String reason) {
+        userSession.remove(user);
     }
 
     @OnWebSocketMessage
@@ -75,6 +76,20 @@ public class GELDTWebSocketHandler implements Runnable {
 
     public void bindInputStream(String geldtStream, ByteArrayInputStream byteArrayInputStream) {
         mapper.bindInputStream(geldtStream, byteArrayInputStream);
+        Set functionValueTriplesMaps = mapper.getTermMaps(mapping).filter((t) -> t.getFunctionValue() != null).map(TermMap::getFunctionValue).collect(ImmutableCollectors.toImmutableSet());
+        Set<TriplesMap> refObjectTriplesMaps = mapper.getAllTriplesMapsUsedInRefObjectMap(mapping);
+
+        // TODO: I don't like this.
+
+        mapping.stream()
+                .filter((tm) -> !functionValueTriplesMaps.contains(tm) && !refObjectTriplesMaps.contains(tm))
+                .flatMap(tm -> mapper.map(tm, refObjectTriplesMaps))
+                .map(this::toJSONLD)
+                .forEach(s -> userSession.stream()
+                        .filter(Session::isOpen)
+                        .forEach(session -> send(s, session.getRemote())));
+
+        mapper.clearSourceManager();
     }
 
     private String toJSONLD(Model model) {
