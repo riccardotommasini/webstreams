@@ -16,7 +16,7 @@ public class Main {
 
         Properties properties = propertiesReader.getProperties();
 
-        int endpointport = Integer.parseInt(properties.getProperty("endpointport"));
+        int sgraphport = Integer.parseInt(properties.getProperty("sgraphport"));
         int streamport = Integer.parseInt(properties.getProperty("streamport"));
 
         String streamToCreate = properties.getProperty("streamToCreate");
@@ -27,11 +27,11 @@ public class Main {
 
         switch (streamToCreate) {
             case "geldt": {
-                NewsWave.startGeldt(endpointport, streamport, geldtLastUpdateUrl);
+                NewsWave.startGeldt(sgraphport, streamport, geldtLastUpdateUrl);
                 break;
             }
             case "wikimedia": {
-                WikiWave.startWikimedia(endpointport, streamport, wikimediaStreamUrl);
+                WikiWave.startWikimedia(sgraphport, streamport, wikimediaStreamUrl);
                 break;
             }
             case "dbpedia": {

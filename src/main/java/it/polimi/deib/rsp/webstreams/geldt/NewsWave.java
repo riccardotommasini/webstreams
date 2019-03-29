@@ -78,9 +78,9 @@ public class NewsWave {
     private static IRI p = factory.createIRI(" http://www.w3.org/TR/vocab-dcat/accessURL");
 
 
-    public static void startGeldt(int endpointport, int streamport, String geldtlastUpdateurl) {
+    public static void startGeldt(int sgraphport, int streamport, String geldtlastUpdateurl) {
 
-        sgraph_port = endpointport;
+        sgraph_port = sgraphport;
         stream_port = streamport;
         geldt_lastUpdate_url = geldtlastUpdateurl;
 

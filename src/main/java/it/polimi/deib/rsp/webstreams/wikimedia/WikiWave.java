@@ -40,9 +40,9 @@ public class WikiWave {
     private static Client client = ClientBuilder.newClient();
     private static String wikipedia_stream_address;
 
-    public static void startWikimedia(int endpointport, int streamport, String wikipediastreamaddress) {
+    public static void startWikimedia(int sgraphport, int streamport, String wikipediastreamaddress) {
 
-        sgraph_port = endpointport;
+        sgraph_port = sgraphport;
         stream_port = streamport;
         wikipedia_stream_address = wikipediastreamaddress;
 
