@@ -25,13 +25,23 @@ public class Main {
         String wikimediaStreamUrl = properties.getProperty("wikimediaStreamUrl");
         String DBPediaLastUpdateUrl = properties.getProperty("DBPediaLastUpdateUrl");
 
+        String streamHeader = properties.getProperty("stream_header");
+        String streamMappingPath = properties.getProperty("stream_mapping_path");
+        String streamSGraphPath = properties.getProperty("stream_sgraph_path");
+
         switch (streamToCreate) {
-            case "geldt": {
-                NewsWave.startGeldt(sgraphport, streamport, geldtLastUpdateUrl);
+            case "geldt_mentions":
+            case "geldt_events":
+            case "geldt_gkg" : {
+
+                String[] stream_name_parts = streamToCreate.split("_");
+                String stream_name_suffix = stream_name_parts[1];
+
+                NewsWave.startGeldt(sgraphport, streamport, geldtLastUpdateUrl, stream_name_suffix, streamHeader, streamMappingPath, streamSGraphPath);
                 break;
             }
             case "wikimedia": {
-                WikiWave.startWikimedia(sgraphport, streamport, wikimediaStreamUrl);
+                WikiWave.startWikimedia(sgraphport, streamport, wikimediaStreamUrl, streamMappingPath);
                 break;
             }
             case "dbpedia": {

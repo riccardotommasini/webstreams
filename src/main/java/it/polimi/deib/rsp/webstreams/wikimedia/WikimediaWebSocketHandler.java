@@ -35,7 +35,7 @@ public class WikimediaWebSocketHandler {
     private String sender, msg;
     private List<Session> users = new ArrayList<>();
 
-    public WikimediaWebSocketHandler(String mappingfile, Object... functions) {
+    public WikimediaWebSocketHandler(String mappingfile_path, Object... functions) {
         this.mapper =
                 RmlMapper
                         .newBuilder()
@@ -43,7 +43,7 @@ public class WikimediaWebSocketHandler {
                         .addFunctions(functions)
                         .build();
         
-        InputStream mappingFileStream = WikimediaWebSocketHandler.class.getResourceAsStream("/streams/wikimedia_" + mappingfile);
+        InputStream mappingFileStream = WikimediaWebSocketHandler.class.getResourceAsStream(mappingfile_path);
 
         this.mapping =
                 RmlMappingLoader

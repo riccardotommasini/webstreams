@@ -19,7 +19,7 @@ import java.io.File;
 @Log4j
 public class WikiWave {
 
-    private static final String mapping_export = "recentchanges.ttl";
+    private static String mapping_file_path;
     private static final String recentchanges_stream_name = "recentchanges";
     private static final String sgraph = "sgraph";
 
@@ -40,11 +40,12 @@ public class WikiWave {
     private static Client client = ClientBuilder.newClient();
     private static String wikipedia_stream_address;
 
-    public static void startWikimedia(int sgraphport, int streamport, String wikipediastreamaddress) {
+    public static void startWikimedia(int sgraphport, int streamport, String wikipediastreamaddress, String mappingFilePath) {
 
         sgraph_port = sgraphport;
         stream_port = streamport;
         wikipedia_stream_address = wikipediastreamaddress;
+        mapping_file_path = mappingFilePath;
 
         Object[] functions = new Object[]{};
 
@@ -63,7 +64,7 @@ public class WikiWave {
             //TODO
         });
 
-        webSocketService.webSocket(File.separator + recentchanges_stream_name, handler = new WikimediaWebSocketHandler(mapping_export));
+        webSocketService.webSocket(File.separator + recentchanges_stream_name, handler = new WikimediaWebSocketHandler(mapping_file_path));
 
         endPointService.init();
         webSocketService.init();

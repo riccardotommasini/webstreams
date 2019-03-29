@@ -21,7 +21,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -31,13 +30,12 @@ public class GELDTWebSocketHandler implements Runnable {
 
     private final RmlMapper mapper;
     private final Set<TriplesMap> mapping;
-    private final String mappingfile;
-    private Session connectedUser;
+    private final String mappingfile_path;
     public int delay;
     List<Session> userSession = new ArrayList<>();
 
-    public GELDTWebSocketHandler(String header, String mappingfile, char delimiter, int delay, Object... functions) {
-        this.mappingfile = mappingfile;
+    public GELDTWebSocketHandler(String header, String mappingfilepath, char delimiter, int delay, Object... functions) {
+        this.mappingfile_path = mappingfilepath;
         this.delay = delay;
         this.mapper =
                 RmlMapper
@@ -46,7 +44,7 @@ public class GELDTWebSocketHandler implements Runnable {
                         .addFunctions(functions)
                         .build();
 
-        InputStream mappingFileStream = GELDTWebSocketHandler.class.getResourceAsStream("/streams/mapping/geldt_" + mappingfile);
+        InputStream mappingFileStream = GELDTWebSocketHandler.class.getResourceAsStream(mappingfile_path);
 
         this.mapping =
                 RmlMappingLoader
@@ -75,11 +73,17 @@ public class GELDTWebSocketHandler implements Runnable {
     }
 
     public void bindInputStream(String geldtStream, ByteArrayInputStream byteArrayInputStream) {
+
+        System.out.println("Stream will start in 5 seconds...");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         mapper.bindInputStream(geldtStream, byteArrayInputStream);
         Set functionValueTriplesMaps = mapper.getTermMaps(mapping).filter((t) -> t.getFunctionValue() != null).map(TermMap::getFunctionValue).collect(ImmutableCollectors.toImmutableSet());
         Set<TriplesMap> refObjectTriplesMaps = mapper.getAllTriplesMapsUsedInRefObjectMap(mapping);
-
-        // TODO: I don't like this.
 
         mapping.stream()
                 .filter((tm) -> !functionValueTriplesMaps.contains(tm) && !refObjectTriplesMaps.contains(tm))
@@ -111,7 +115,7 @@ public class GELDTWebSocketHandler implements Runnable {
 
     private void send(String s, RemoteEndpoint session) {
         try {
-            System.out.println("INFO: Sending " + mappingfile);
+            System.out.println("INFO: Sending " + mappingfile_path);
             Thread.sleep(delay);
             session.sendString(s);
         } catch (InterruptedException e) {
@@ -121,28 +125,8 @@ public class GELDTWebSocketHandler implements Runnable {
         }
     }
 
-    /*
-        The stream is built and provided to the client.
-        userSession is saved to let multiple threads <-> users to be connected simultaneously.
-    */
     @Override
     public void run() {
 
-        Set functionValueTriplesMaps = mapper.getTermMaps(mapping).filter((t) -> t.getFunctionValue() != null).map(TermMap::getFunctionValue).collect(ImmutableCollectors.toImmutableSet());
-        Set<TriplesMap> refObjectTriplesMaps = mapper.getAllTriplesMapsUsedInRefObjectMap(mapping);
-
-        // TODO: I don't like this.
-        List<Session> userSession = new ArrayList<>();
-        userSession.add(connectedUser);
-
-        mapping.stream()
-                .filter((tm) -> !functionValueTriplesMaps.contains(tm) && !refObjectTriplesMaps.contains(tm))
-                .flatMap(tm -> mapper.map(tm, refObjectTriplesMaps))
-                .map(this::toJSONLD)
-                .forEach(s -> userSession.stream()
-                        .filter(Session::isOpen)
-                        .forEach(session -> send(s, session.getRemote())));
-
-        mapper.clearSourceManager();
     }
 }

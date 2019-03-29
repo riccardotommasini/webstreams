@@ -2,7 +2,6 @@ package it.polimi.deib.rsp.webstreams.geldt;
 
 import it.polimi.deib.rsp.webstreams.geldt.functions.*;
 import lombok.extern.log4j.Log4j;
-import org.apache.jena.base.Sys;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.ValueFactory;
@@ -30,26 +29,15 @@ import java.util.zip.ZipInputStream;
 @Log4j
 public class NewsWave {
 
-    private static String geldt_lastUpdate_url = "http://data.gdeltproject.org/gdeltv2/lastupdate.txt";
+    private static String source_url;
 
-    private static final String header_export = "GLOBALEVENTID\tSQLDATE\tMonthYear\tYear\tFractionDate\tActor1Code\tActor1Name\tActor1CountryCode\tActor1KnownGroupCode\tActor1EthnicCode\tActor1Religion1Code\tActor1Religion2Code\tActor1Type1Code\tActor1Type2Code\tActor1Type3Code\tActor2Code\tActor2Name\tActor2CountryCode\tActor2KnownGroupCode\tActor2EthnicCode\tActor2Religion1Code\tActor2Religion2Code\tActor2Type1Code\tActor2Type2Code\tActor2Type3Code\tIsRootEvent\tEventCode\tEventBaseCode\tEventRootCode\tQuadClass\tGoldsteinScale\tNumMentions\tNumSources\tNumArticles\tAvgTone\tActor1Geo_Type\tActor1Geo_FullName\tActor1Geo_CountryCode\tActor1Geo_ADM1Code\tActor1Geo_ADM2Code\tActor1Geo_Lat\tActor1Geo_Long\tActor1Geo_FeatureID\tActor2Geo_Type\tActor2Geo_FullName\tActor2Geo_CountryCode\tActor2Geo_ADM1Code\tActor2Geo_ADM2Code\tActor2Geo_Lat\tActor2Geo_Long\tActor2Geo_FeatureID\tActionGeo_Type\tActionGeo_FullName\tActionGeo_CountryCode\tActionGeo_ADM1Code\tActionGeo_ADM2Code\tActionGeo_Lat\tActionGeo_Long\tActionGeo_FeatureID\tDATEADDED\tSOURCEURL";
-    private static final String mapping_export = "events.ttl";
-
-    private static final String header_mentions = "GLOBALEVENTID\tEventTimeDate\tMentionTimeDate\tMentionType\tMentionSourceName\tMentionIdentifier\tSentenceID\tActor1CharOffset\tActor2CharOffset\tActionCharOffset\tInRawText\tConfidence\tMentionDocLen\tMentionDocTone\tMentionDocTranslationInfo\tExtras";
-    private static final String mapping_mentions = "mentions.ttl";
-
-    private static final String header_gkg = "GKGRECORDID\tDATE\tSourceCollectionIdentifier\tSourceCommonName\tDocumentIdentifier\tCounts\tV2Counts\tThemes\tV2Themes\tLocations\tV2Locations\tPersons\tV2Persons\tOrganizations\tV2Organizations\tV2Tone\tDates\tGCAM\tSharingImage\tRelatedImages\tSocialImageEmbeds\tSocialVideoEmbeds\tQuotations\tAllNames\tAmounts\tTranslationInfo\tExtras";
-    private static final String mapping_gkg = "gkg.ttl";
+    private static String stream_header;
+    private static String stream_mapping_path;
+    private static String stream_sgraph_path;
 
     private static GELDTWebSocketHandler webSocketHandler;
 
-    // Names of all the streams
-    private static final String gkg_stream_name = "gkg";
-    private static final String mentions_stream_name = "mentions";
-    private static final String events_stream_name = "events";
-
-    // GELDT "export" CSV will be offered as "events" stream
-    private static final String export_name = "export";
+    private static String stream_name;
 
     private static int sgraph_port;
     private static final int sgraph_thread = 10;
@@ -57,13 +45,9 @@ public class NewsWave {
     private static final int stream_thread = 20;
 
     private static final String get_method = "GET";
-    public static final String stream_name = "GELDTStream";
+    public static final String GELDT_stream_name = "GELDTStream";
     public static final String prefix = "http://geldt.org/gkg/";
     public static final String semicolon = ";";
-
-    private static GELDTWebSocketHandler mentions;
-    private static GELDTWebSocketHandler events;
-    private static GELDTWebSocketHandler gkg;
 
     private static Service endPointService;
     private static Service webSocketService;
@@ -71,18 +55,22 @@ public class NewsWave {
     private static Model geldt;
     private static ValueFactory factory = SimpleValueFactory.getInstance();
 
-    private static IRI sGDELTEventCSVStreamEndpoint = factory.createIRI("https://www.geldt.org/stream#GDELTEventCSVStreamEndpoint");
-    private static IRI sGDELTGKGCSVStreamEndpoint = factory.createIRI("https://www.geldt.org/stream#GDELTGKGCSVStreamEndpoint");
-    private static IRI sGDELTMentionCSVStreamEndpoint = factory.createIRI("https://www.geldt.org/stream#GDELTMentionCSVStreamEndpoint");
+    private static IRI sGDELTStreamCSVEndpoint;
     private static IRI s;
     private static IRI p = factory.createIRI(" http://www.w3.org/TR/vocab-dcat/accessURL");
 
 
-    public static void startGeldt(int sgraphport, int streamport, String geldtlastUpdateurl) {
+    public static void startGeldt(int sgraphport, int streamport, String geldtlastUpdateurl, String streamName, String header, String mappingPath, String sgraphPath) {
 
         sgraph_port = sgraphport;
         stream_port = streamport;
-        geldt_lastUpdate_url = geldtlastUpdateurl;
+        source_url = geldtlastUpdateurl;
+        stream_name = streamName;
+        stream_header = header;
+        stream_mapping_path = mappingPath;
+        stream_sgraph_path = sgraphPath;
+
+        sGDELTStreamCSVEndpoint = factory.createIRI("https://www.gdelt.org/stream#GDELT" + stream_name + "CSVStreamEndpoint");
 
         Object[] functions = new Object[]{new DBPediaPeopleLookup(),
                 new DBPediaPeopleLookup("http://xmlns.com/foaf/0.1/Person,Wikidata:Q5,Wikidata:Q24229398,Wikidata:Q215627,DUL:NaturalPerson,DUL:Agent,Schema:Person,DBpedia:Person,DBpedia:Agent".split(",")),
@@ -114,21 +102,11 @@ public class NewsWave {
 //        //TODO stream descriptor for three rdf streams
         endPointService.get(File.separator + "geldt" + File.separator + "rsp", (req, res) -> toJsonLD(Rio.parse(NewsWave.class.getResourceAsStream("/streams/sgraphs/rsp.ttl"), "", RDFFormat.TURTLE), res));
 
-//
 //        //TODO detailed description of the event stream
-        endPointService.get(File.separator + events_stream_name, (req, res) -> toJsonLD(Rio.parse(NewsWave.class.getResourceAsStream("/streams/sgraphs//" + events_stream_name + ".ttl"), "", RDFFormat.TURTLE), res));
-//
-//        //TODO detailed description of the mention stream
-        endPointService.get(File.separator + mentions_stream_name, (req, res) -> toJsonLD(Rio.parse(NewsWave.class.getResourceAsStream("/streams/sgraphs//" + mentions_stream_name + ".ttl"), "", RDFFormat.TURTLE), res));
-//
-//        //TODO detailed description of the gkg stream
-        endPointService.get(File.separator + gkg_stream_name, (req, res) -> toJsonLD(Rio.parse(NewsWave.class.getResourceAsStream("/streams/sgraphs//" + gkg_stream_name + ".ttl"), "", RDFFormat.TURTLE), res));
-//
-        webSocketService.webSocket(File.separator + events_stream_name, events = new GELDTWebSocketHandler(header_export, mapping_export, '\t', 1000));
 
-        webSocketService.webSocket(File.separator + mentions_stream_name, mentions = new GELDTWebSocketHandler(header_mentions, mapping_mentions, '\t', 2000));
-
-        webSocketService.webSocket(File.separator + gkg_stream_name, gkg = new GELDTWebSocketHandler(header_gkg, mapping_gkg, '\t', 2000, functions));
+        endPointService.get(File.separator + stream_name, (req, res) -> toJsonLD(Rio.parse(NewsWave.class.getResourceAsStream(stream_sgraph_path), "", RDFFormat.TURTLE), res));
+//
+        webSocketService.webSocket(File.separator + stream_name, webSocketHandler = new GELDTWebSocketHandler(stream_header, stream_mapping_path, '\t', 2000, functions));
 
         endPointService.init();
         webSocketService.init();
@@ -143,11 +121,10 @@ public class NewsWave {
     }
 
     private static void retrieveDataAndSetStreams() throws IOException {
-        //TODO: Try to force it to download CSV in CSV folder: easy when run in IntelliJ, but try it
-        // while running the jar...
+
         String downloadDestination = "./";
 
-        URL downloadUrl = new URL(geldt_lastUpdate_url);
+        URL downloadUrl = new URL(source_url);
         HttpURLConnection connection = (HttpURLConnection) downloadUrl.openConnection();
         connection.setRequestMethod(get_method);
 
@@ -160,15 +137,18 @@ public class NewsWave {
         }
 
         /*
-        The txt file downloaded from GELDT server is in the form:
+            The txt file downloaded from GELDT server is in the form:
 
-        <numbers> <string> http://data.gdeltproject.org/gdeltv2/<timestamp>.events_stream_name.CSV.zip
-        <numbers> <string> http://data.gdeltproject.org/gdeltv2/<timestamp>.mentions.CSV.zip
-        <numbers> <string> http://data.gdeltproject.org/gdeltv2/<timestamp>.gkg.CSV.zip
+            <numbers> <string> http://data.gdeltproject.org/gdeltv2/<timestamp>.events_stream_name.CSV.zip
+            <numbers> <string> http://data.gdeltproject.org/gdeltv2/<timestamp>.mentions.CSV.zip
+            <numbers> <string> http://data.gdeltproject.org/gdeltv2/<timestamp>.gkg.CSV.zip
 
-        We are interested in the urls because they point to the CSV related to the three streams:
-        events, mentions and gkg.
+            We are interested in the urls because they point to the CSV related to the three streams:
+            events, mentions and gkg.
         */
+
+        // TODO: Handle this particular case.
+        if (stream_name.equals("events")) stream_name="export";
 
         String line;
         while ((line = br.readLine()) != null) {
@@ -186,27 +166,18 @@ public class NewsWave {
 
             log.info(ze.getName());
 
-            if (ze.getName().contains(export_name)) {
-                webSocketHandler = events;
-                s = sGDELTEventCSVStreamEndpoint;
+            if (ze.getName().contains(stream_name)) {
 
-            } else if (ze.getName().contains(mentions_stream_name)) {
-                webSocketHandler = mentions;
-                s = sGDELTMentionCSVStreamEndpoint;
+                System.out.println("Data for stream found!");
+                s = sGDELTStreamCSVEndpoint;
+                geldt.add(factory.createStatement(s, p, o));
+                ByteArrayOutputStream dos = getByteArrayOutputStream(downloadDestination, zis, ze);
 
-            } else if (ze.getName().contains(gkg_stream_name)) {
-                webSocketHandler = gkg;
-                s = sGDELTGKGCSVStreamEndpoint;
+                if (dos!=null) {
+                    webSocketHandler.bindInputStream(GELDT_stream_name, new ByteArrayInputStream(dos.toByteArray()));
+                }
             }
 
-            // The statement that shows which stream has been created and his access point is added
-            geldt.add(factory.createStatement(s, p, o));
-
-            // The stream is created and bound to the WebSocket
-            ByteArrayOutputStream dos = getByteArrayOutputStream(downloadDestination, zis, ze);
-
-            if (dos != null)
-                webSocketHandler.bindInputStream(stream_name, new ByteArrayInputStream(dos.toByteArray()));
         }
     }
 
