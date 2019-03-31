@@ -24,8 +24,6 @@ import java.util.zip.ZipInputStream;
     The webSockets will offer those stream in RDF.
 */
 
-//TODO: set it to download the data in loop, for example every 15 minutes.
-
 @Log4j
 public class NewsWave {
 
@@ -58,6 +56,8 @@ public class NewsWave {
     private static IRI sGDELTStreamCSVEndpoint;
     private static IRI s;
     private static IRI p = factory.createIRI(" http://www.w3.org/TR/vocab-dcat/accessURL");
+
+    private static int polling_delay = 300000;
 
 
     public static void startGeldt(int sgraphport, int streamport, String geldtlastUpdateurl, String streamName, String header, String mappingPath, String sgraphPath) {
@@ -120,64 +120,75 @@ public class NewsWave {
         return output.toString();
     }
 
+    /*
+        The txt file downloaded from GELDT server is in the form:
+
+        <numbers> <string> http://data.gdeltproject.org/gdeltv2/<timestamp>.events_stream_name.CSV.zip
+        <numbers> <string> http://data.gdeltproject.org/gdeltv2/<timestamp>.mentions.CSV.zip
+        <numbers> <string> http://data.gdeltproject.org/gdeltv2/<timestamp>.gkg.CSV.zip
+
+        We are interested in the urls because they point to the CSV related to the three streams:
+        events, mentions and gkg.
+    */
     private static void retrieveDataAndSetStreams() throws IOException {
 
+        String oldLine = "";
         String downloadDestination = "./";
 
-        URL downloadUrl = new URL(source_url);
-        HttpURLConnection connection = (HttpURLConnection) downloadUrl.openConnection();
-        connection.setRequestMethod(get_method);
+        while(true) {
 
-        // Download the txt file from GELDT servers
-        BufferedReader br;
-        if (200 <= connection.getResponseCode() && connection.getResponseCode() <= 299) {
-            br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        } else {
-            br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
-        }
+            URL downloadUrl = new URL(source_url);
+            HttpURLConnection connection = (HttpURLConnection) downloadUrl.openConnection();
+            connection.setRequestMethod(get_method);
 
-        /*
-            The txt file downloaded from GELDT server is in the form:
-
-            <numbers> <string> http://data.gdeltproject.org/gdeltv2/<timestamp>.events_stream_name.CSV.zip
-            <numbers> <string> http://data.gdeltproject.org/gdeltv2/<timestamp>.mentions.CSV.zip
-            <numbers> <string> http://data.gdeltproject.org/gdeltv2/<timestamp>.gkg.CSV.zip
-
-            We are interested in the urls because they point to the CSV related to the three streams:
-            events, mentions and gkg.
-        */
-
-        // TODO: Handle this particular case.
-        if (stream_name.equals("events")) stream_name="export";
-
-        String line;
-        while ((line = br.readLine()) != null) {
-            String todownload_address = line.split(" ")[2];
-
-            IRI o = factory.createIRI(todownload_address);
-
-            URL todownload_url = new URL(todownload_address);
-            HttpURLConnection connection1 = (HttpURLConnection) todownload_url.openConnection();
-            connection1.setRequestMethod(get_method);
-
-            ZipInputStream zis = new ZipInputStream(connection1.getInputStream());
-
-            ZipEntry ze = zis.getNextEntry();
-
-            log.info(ze.getName());
-
-            if (ze.getName().contains(stream_name)) {
-
-                System.out.println("Data for stream found!");
-                s = sGDELTStreamCSVEndpoint;
-                geldt.add(factory.createStatement(s, p, o));
-                ByteArrayOutputStream dos = getByteArrayOutputStream(downloadDestination, zis, ze);
-
-                if (dos!=null) {
-                    webSocketHandler.bindInputStream(GELDT_stream_name, new ByteArrayInputStream(dos.toByteArray()));
-                }
+            // Download the txt file from GELDT servers
+            BufferedReader br;
+            if (200 <= connection.getResponseCode() && connection.getResponseCode() <= 299) {
+                br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            } else {
+                br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
             }
 
+            // TODO: Handle this particular case.
+            if (stream_name.equals("events")) stream_name = "export";
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                String todownload_address = line.split(" ")[2];
+
+                if ((todownload_address.contains(stream_name)) && !(todownload_address.equals(oldLine))) {
+
+                    oldLine = todownload_address;
+                    IRI o = factory.createIRI(todownload_address);
+
+                    URL todownload_url = new URL(todownload_address);
+                    HttpURLConnection connection1 = (HttpURLConnection) todownload_url.openConnection();
+                    connection1.setRequestMethod(get_method);
+
+                    ZipInputStream zis = new ZipInputStream(connection1.getInputStream());
+
+                    ZipEntry ze = zis.getNextEntry();
+
+                    log.info(ze.getName());
+
+                    System.out.println("Data for stream found!");
+                    s = sGDELTStreamCSVEndpoint;
+                    geldt.add(factory.createStatement(s, p, o));
+                    ByteArrayOutputStream dos = getByteArrayOutputStream(downloadDestination, zis, ze);
+
+                    if (dos != null) {
+                        webSocketHandler.bindInputStream(GELDT_stream_name, new ByteArrayInputStream(dos.toByteArray()));
+                    }
+
+                } else if (todownload_address.equals(oldLine)) System.out.println("Already downloaded this.");
+            }
+
+            // Check for new content every 10 seconds
+            try {
+                Thread.sleep(polling_delay);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
