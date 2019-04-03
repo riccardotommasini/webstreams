@@ -1,4 +1,4 @@
-package it.polimi.deib.rsp.webstreams.wikimedia;
+package it.polimi.deib.rsp.webstreams.wes;
 
 import lombok.extern.log4j.Log4j;
 import spark.Service;
@@ -76,7 +76,7 @@ public class WikiWave {
         SseEventSource source = SseEventSource.target(target).build();
         source.register(payload -> handler.bindInputStream(stream_name, new ByteArrayInputStream(payload.readData().getBytes())),   // Consumer<InboundSseEvent>
                 Throwable::printStackTrace,         // Consumer<Throwable>
-                () -> System.out.println("INFO: No more events"));
+                () -> System.out.println("INFO: No more queries"));
         source.open();
     }
 
