@@ -1,8 +1,0 @@
-### 3 This Query Finds the whole number of events in the previous 5 Minutes
-
-REGISTER STREAM <AllEvents>
-SELECT (count(distinct ?event) as ?eventsCount)
-FROM NAMED WINDOW <w> ON :GDELTEventRDFStream [RANGE 5PTM STEP5PTM]
-WHERE{
-    WINDOW <w> { ?event  a gdelt:Event. }
-}
