@@ -95,7 +95,6 @@
 
     <dependencies>
 
-
         <dependency>
             <groupId>com.github.jsonld-java</groupId>
             <artifactId>jsonld-java</artifactId>

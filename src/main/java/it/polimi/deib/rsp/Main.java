@@ -1,11 +1,9 @@
 package it.polimi.deib.rsp;
 
-import it.polimi.deib.rsp.webstreams.DBPediaChangesWave;
-import it.polimi.deib.rsp.webstreams.geldt.NewsWave;
-import it.polimi.deib.rsp.webstreams.wikimedia.WikiWave;
+import it.polimi.deib.rsp.webstreams.dbl.DBPediaChangesWave;
+import it.polimi.deib.rsp.webstreams.gdelt.NewsWave;
+import it.polimi.deib.rsp.webstreams.wes.WikiWave;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Properties;
 
 public class Main {
@@ -32,7 +30,7 @@ public class Main {
         switch (streamToCreate) {
             case "geldt_mentions":
             case "geldt_events":
-            case "geldt_gkg" : {
+            case "geldt_gkg": {
 
                 String[] stream_name_parts = streamToCreate.split("_");
                 String stream_name_suffix = stream_name_parts[1];
@@ -45,11 +43,7 @@ public class Main {
                 break;
             }
             case "dbpedia": {
-                try {
-                    DBPediaChangesWave.startDBPediaChanges(DBPediaLastUpdateUrl);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                new DBPediaChangesWave(DBPediaLastUpdateUrl).run();
                 break;
             }
         }
