@@ -1,4 +1,4 @@
-package it.polimi.deib.rsp.webstreams.geldt.functions;
+package it.polimi.deib.rsp.webstreams.gdelt.functions;
 
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;

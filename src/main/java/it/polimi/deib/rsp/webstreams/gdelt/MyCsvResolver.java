@@ -1,4 +1,4 @@
-package it.polimi.deib.rsp.webstreams.geldt;
+package it.polimi.deib.rsp.webstreams.gdelt;
 
 import com.taxonic.carml.logical_source_resolver.CsvResolver;
 import com.taxonic.carml.model.LogicalSource;

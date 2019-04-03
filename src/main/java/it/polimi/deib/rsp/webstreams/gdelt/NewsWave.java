@@ -1,6 +1,6 @@
-package it.polimi.deib.rsp.webstreams.geldt;
+package it.polimi.deib.rsp.webstreams.gdelt;
 
-import it.polimi.deib.rsp.webstreams.geldt.functions.*;
+import it.polimi.deib.rsp.webstreams.gdelt.functions.*;
 import lombok.extern.log4j.Log4j;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
@@ -19,7 +19,7 @@ import java.util.zip.ZipInputStream;
 
 /*
     This class starts a WebSocket from which the streams for GELDT can be retrieved.
-    First, the SPARK endpoint is created; then, the data downloaded and the three streams (events, mentions and gkg)
+    First, the SPARK endpoint is created; then, the data downloaded and the three streams (queries, mentions and gkg)
     are bounded to the webSockets.
     The webSockets will offer those stream in RDF.
 */
@@ -128,7 +128,7 @@ public class NewsWave {
         <numbers> <string> http://data.gdeltproject.org/gdeltv2/<timestamp>.gkg.CSV.zip
 
         We are interested in the urls because they point to the CSV related to the three streams:
-        events, mentions and gkg.
+        queries, mentions and gkg.
     */
     private static void retrieveDataAndSetStreams() throws IOException {
 
@@ -150,7 +150,7 @@ public class NewsWave {
             }
 
             // TODO: Handle this particular case.
-            if (stream_name.equals("events")) stream_name = "export";
+            if (stream_name.equals("rsp/queries")) stream_name = "export";
 
             String line;
             while ((line = br.readLine()) != null) {

@@ -1,4 +1,4 @@
-package it.polimi.deib.rsp.webstreams.geldt.functions;
+package it.polimi.deib.rsp.webstreams.gdelt.functions;
 
 import com.taxonic.carml.engine.function.FnoFunction;
 import com.taxonic.carml.engine.function.FnoParam;
