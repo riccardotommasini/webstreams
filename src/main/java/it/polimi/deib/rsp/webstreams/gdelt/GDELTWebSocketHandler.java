@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Set;
 
 @WebSocket
-public class GELDTWebSocketHandler implements Runnable {
+public class GDELTWebSocketHandler implements Runnable {
 
     private final RmlMapper mapper;
     private final Set<TriplesMap> mapping;
@@ -34,7 +34,7 @@ public class GELDTWebSocketHandler implements Runnable {
     public int delay;
     List<Session> userSession = new ArrayList<>();
 
-    public GELDTWebSocketHandler(String header, String mappingfilepath, char delimiter, int delay, Object... functions) {
+    public GDELTWebSocketHandler(String header, String mappingfilepath, char delimiter, int delay, Object... functions) {
         this.mappingfile_path = mappingfilepath;
         this.delay = delay;
         this.mapper =
@@ -44,7 +44,7 @@ public class GELDTWebSocketHandler implements Runnable {
                         .addFunctions(functions)
                         .build();
 
-        InputStream mappingFileStream = GELDTWebSocketHandler.class.getResourceAsStream(mappingfile_path);
+        InputStream mappingFileStream = GDELTWebSocketHandler.class.getResourceAsStream(mappingfile_path);
 
         this.mapping =
                 RmlMappingLoader
@@ -72,7 +72,7 @@ public class GELDTWebSocketHandler implements Runnable {
     public void onMessage(Session user, String message) {
     }
 
-    public void bindInputStream(String geldtStream, ByteArrayInputStream byteArrayInputStream) {
+    public void bindInputStream(String gdeltStream, ByteArrayInputStream byteArrayInputStream) {
 
         System.out.println("Stream will start in 5 seconds...");
         try {
@@ -81,7 +81,7 @@ public class GELDTWebSocketHandler implements Runnable {
             e.printStackTrace();
         }
 
-        mapper.bindInputStream(geldtStream, byteArrayInputStream);
+        mapper.bindInputStream(gdeltStream, byteArrayInputStream);
         Set functionValueTriplesMaps = mapper.getTermMaps(mapping).filter((t) -> t.getFunctionValue() != null).map(TermMap::getFunctionValue).collect(ImmutableCollectors.toImmutableSet());
         Set<TriplesMap> refObjectTriplesMaps = mapper.getAllTriplesMapsUsedInRefObjectMap(mapping);
 
@@ -104,9 +104,9 @@ public class GELDTWebSocketHandler implements Runnable {
         //rdfWriter.getWriterConfig().set(JSONLDSettings.OPTIMIZE, true);
         //rdfWriter.getWriterConfig().set(BasicWriterSettings.PRETTY_PRINT, true);
 
-        model.setNamespace("geldt", "http://geldt.org/vocab/");
-        model.setNamespace("gkg", "http://geldt.org/gkg/");
-        model.setNamespace("geldti", "http://geldt.org/instance/");
+        model.setNamespace("gdelt", "http://gdelt.org/vocab/");
+        model.setNamespace("gkg", "http://gdelt.org/gkg/");
+        model.setNamespace("gdelti", "http://gdelt.org/instance/");
         model.setNamespace("rdfs", "http://www.w3.org/TR/rdf-schema/");
         Rio.write(model, rdfWriter);
 

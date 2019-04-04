@@ -1,4 +1,4 @@
-@prefix : <https://www.geldt.org/stream#> .
+@prefix : <https://www.gdelt.org/stream#> .
 @prefix dcat: <http://www.w3.org/ns/dcat> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -13,7 +13,7 @@
 @prefix frmt: <http://www.w3.org/ns/formats/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
-<http://localhost/geldt/rsp> a vsd:CatalogService ;
+<http://localhost/gdelt/rsp> a vsd:CatalogService ;
 	dcat:dataset <http://localhost/mentions>  ;
 	dcat:dataset <http://localhost/events>  ;
 	dcat:dataset <http://localhost/gkg>  .

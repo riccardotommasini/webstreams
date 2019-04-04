@@ -1,10 +1,10 @@
 {
   "@context": {
-    "geldt": "https://www.gdeltproject.org/ontology#",
+    "gdelt": "https://www.gdeltproject.org/ontology#",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
-    "imageurl": {"@type":"@id", "@id": "geldt:imageURL"} ,
-    "sourcearticleurl": "geldt:sourceArticleURL",
-    "imagecollage" : "geldt:imageCollage"
+    "imageurl": {"@type":"@id", "@id": "gdelt:imageURL"} ,
+    "sourcearticleurl": "gdelt:sourceArticleURL",
+    "imagecollage" : "gdelt:imageCollage"
   },
 
     "imagecollage": [

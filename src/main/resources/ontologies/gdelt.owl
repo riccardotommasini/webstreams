@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
-<rdf:RDF xmlns="http://geldt.org/vocab/"
-     xml:base="http://geldt.org/vocab/"
+<rdf:RDF xmlns="http://gdelt.org/vocab/"
+     xml:base="http://gdelt.org/vocab/"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:lumify="http://www.limify.com#"
-     xmlns:geldt="http://geldt.org/vocab/">
-    <owl:Ontology rdf:about="http://geldt.org/vocab/"/>
+     xmlns:gdelt="http://gdelt.org/vocab/">
+    <owl:Ontology rdf:about="http://gdelt.org/vocab/"/>
     
 
 
@@ -24,77 +24,77 @@
     
 
 
-    <!-- http://geldt.org/vocab/actor1 -->
+    <!-- http://gdelt.org/vocab/actor1 -->
 
-    <owl:ObjectProperty rdf:about="http://geldt.org/vocab/actor1">
-        <rdfs:domain rdf:resource="http://geldt.org/cameo/Event"/>
-        <rdfs:range rdf:resource="http://geldt.org/cameo/Actor"/>
+    <owl:ObjectProperty rdf:about="http://gdelt.org/vocab/actor1">
+        <rdfs:domain rdf:resource="http://gdelt.org/cameo/Event"/>
+        <rdfs:range rdf:resource="http://gdelt.org/cameo/Actor"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://geldt.org/vocab/actor2 -->
+    <!-- http://gdelt.org/vocab/actor2 -->
 
-    <owl:ObjectProperty rdf:about="http://geldt.org/vocab/actor2">
-        <rdfs:domain rdf:resource="http://geldt.org/cameo/Event"/>
-        <rdfs:range rdf:resource="http://geldt.org/cameo/Actor"/>
+    <owl:ObjectProperty rdf:about="http://gdelt.org/vocab/actor2">
+        <rdfs:domain rdf:resource="http://gdelt.org/cameo/Event"/>
+        <rdfs:range rdf:resource="http://gdelt.org/cameo/Actor"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://geldt.org/vocab/hasTopArticle -->
+    <!-- http://gdelt.org/vocab/hasTopArticle -->
 
-    <owl:ObjectProperty rdf:about="http://geldt.org/vocab/hasTopArticle">
-        <rdfs:range rdf:resource="http://geldt.org/vocab/TopArticle"/>
+    <owl:ObjectProperty rdf:about="http://gdelt.org/vocab/hasTopArticle">
+        <rdfs:range rdf:resource="http://gdelt.org/vocab/TopArticle"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://geldt.org/vocab/includeArticles -->
+    <!-- http://gdelt.org/vocab/includeArticles -->
 
-    <owl:ObjectProperty rdf:about="http://geldt.org/vocab/includeArticles">
-        <rdfs:range rdf:resource="http://geldt.org/vocab/Article"/>
+    <owl:ObjectProperty rdf:about="http://gdelt.org/vocab/includeArticles">
+        <rdfs:range rdf:resource="http://gdelt.org/vocab/Article"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://geldt.org/vocab/includeTopArticles -->
+    <!-- http://gdelt.org/vocab/includeTopArticles -->
 
-    <owl:ObjectProperty rdf:about="http://geldt.org/vocab/includeTopArticles">
-        <rdfs:range rdf:resource="http://geldt.org/vocab/TopArticle"/>
+    <owl:ObjectProperty rdf:about="http://gdelt.org/vocab/includeTopArticles">
+        <rdfs:range rdf:resource="http://gdelt.org/vocab/TopArticle"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://geldt.org/vocab/partOf -->
+    <!-- http://gdelt.org/vocab/partOf -->
 
-    <owl:ObjectProperty rdf:about="http://geldt.org/vocab/partOf">
-        <rdfs:range rdf:resource="http://geldt.org/vocab/Timeline"/>
+    <owl:ObjectProperty rdf:about="http://gdelt.org/vocab/partOf">
+        <rdfs:range rdf:resource="http://gdelt.org/vocab/Timeline"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://geldt.org/vocab/socialImage -->
+    <!-- http://gdelt.org/vocab/socialImage -->
 
-    <owl:ObjectProperty rdf:about="http://geldt.org/vocab/socialImage">
-        <rdfs:domain rdf:resource="http://geldt.org/vocab/Article"/>
-        <rdfs:range rdf:resource="http://geldt.org/vocab/Image"/>
+    <owl:ObjectProperty rdf:about="http://gdelt.org/vocab/socialImage">
+        <rdfs:domain rdf:resource="http://gdelt.org/vocab/Article"/>
+        <rdfs:range rdf:resource="http://gdelt.org/vocab/Image"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://geldt.org/vocab/sourceArticleURL -->
+    <!-- http://gdelt.org/vocab/sourceArticleURL -->
 
-    <owl:ObjectProperty rdf:about="http://geldt.org/vocab/sourceArticleURL">
-        <rdfs:domain rdf:resource="http://geldt.org/vocab/Image"/>
-        <rdfs:range rdf:resource="http://geldt.org/vocab/Article"/>
+    <owl:ObjectProperty rdf:about="http://gdelt.org/vocab/sourceArticleURL">
+        <rdfs:domain rdf:resource="http://gdelt.org/vocab/Image"/>
+        <rdfs:range rdf:resource="http://gdelt.org/vocab/Article"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://geldt.org/vocab/tonebinPartOf -->
+    <!-- http://gdelt.org/vocab/tonebinPartOf -->
 
-    <owl:ObjectProperty rdf:about="http://geldt.org/vocab/tonebinPartOf"/>
+    <owl:ObjectProperty rdf:about="http://gdelt.org/vocab/tonebinPartOf"/>
     
 
 
@@ -110,30 +110,30 @@
     
 
 
-    <!-- http://geldt.org/vocab/actorName -->
+    <!-- http://gdelt.org/vocab/actorName -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/actorName">
-        <rdfs:domain rdf:resource="http://geldt.org/cameo/Actor"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/actorName">
+        <rdfs:domain rdf:resource="http://gdelt.org/cameo/Actor"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:label xml:lang="en">Name</rdfs:label>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/avgTone -->
+    <!-- http://gdelt.org/vocab/avgTone -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/avgTone">
-        <rdfs:domain rdf:resource="http://geldt.org/cameo/Event"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/avgTone">
+        <rdfs:domain rdf:resource="http://gdelt.org/cameo/Event"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
         <rdfs:label xml:lang="en">Average Tone</rdfs:label>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/countryCode -->
+    <!-- http://gdelt.org/vocab/countryCode -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/countryCode">
-        <rdfs:domain rdf:resource="http://geldt.org/cameo/Actor"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/countryCode">
+        <rdfs:domain rdf:resource="http://gdelt.org/cameo/Actor"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <lumify:possibleValues xml:lang="en"> {  
    &quot;WSB&quot;:&quot;West Bank&quot;,
@@ -403,10 +403,10 @@
     
 
 
-    <!-- http://geldt.org/vocab/dateOfOccurrence -->
+    <!-- http://gdelt.org/vocab/dateOfOccurrence -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/dateOfOccurrence">
-        <rdfs:domain rdf:resource="http://geldt.org/cameo/Event"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/dateOfOccurrence">
+        <rdfs:domain rdf:resource="http://gdelt.org/cameo/Event"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
         <lumify:displayType xml:lang="en">dateOnly</lumify:displayType>
         <rdfs:label xml:lang="en">Date Of Occurence</rdfs:label>
@@ -414,10 +414,10 @@
     
 
 
-    <!-- http://geldt.org/vocab/eventBaseCode -->
+    <!-- http://gdelt.org/vocab/eventBaseCode -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/eventBaseCode">
-        <rdfs:domain rdf:resource="http://geldt.org/cameo/Event"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/eventBaseCode">
+        <rdfs:domain rdf:resource="http://gdelt.org/cameo/Event"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <lumify:possibleValues xml:lang="en">{  
    &quot;010&quot;:&quot;Make statement&quot;,
@@ -572,49 +572,49 @@
     
 
 
-    <!-- http://geldt.org/vocab/geoLocation -->
+    <!-- http://gdelt.org/vocab/geoLocation -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/geoLocation">
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/geoLocation">
         <lumify:displayType xml:lang="en">geoLocation</lumify:displayType>
         <rdfs:label xml:lang="en">Geolocation</rdfs:label>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/globalEventId -->
+    <!-- http://gdelt.org/vocab/globalEventId -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/globalEventId">
-        <rdfs:domain rdf:resource="http://geldt.org/cameo/Event"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/globalEventId">
+        <rdfs:domain rdf:resource="http://gdelt.org/cameo/Event"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:label xml:lang="en">Global Event ID</rdfs:label>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/goldsteinScale -->
+    <!-- http://gdelt.org/vocab/goldsteinScale -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/goldsteinScale">
-        <rdfs:domain rdf:resource="http://geldt.org/cameo/Event"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/goldsteinScale">
+        <rdfs:domain rdf:resource="http://gdelt.org/cameo/Event"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
         <rdfs:label xml:lang="en">Goldstein Scale</rdfs:label>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/isRootEvent -->
+    <!-- http://gdelt.org/vocab/isRootEvent -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/isRootEvent">
-        <rdfs:domain rdf:resource="http://geldt.org/cameo/Event"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/isRootEvent">
+        <rdfs:domain rdf:resource="http://gdelt.org/cameo/Event"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
         <rdfs:label xml:lang="en">Is Root Event</rdfs:label>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/knownGroupCode -->
+    <!-- http://gdelt.org/vocab/knownGroupCode -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/knownGroupCode">
-        <rdfs:domain rdf:resource="http://geldt.org/cameo/Actor"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/knownGroupCode">
+        <rdfs:domain rdf:resource="http://gdelt.org/cameo/Actor"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <lumify:possibleValues xml:lang="en">{  
    &quot;AAM&quot;:&quot;Al Aqsa Martyrs Brigade&quot;,
@@ -738,40 +738,40 @@
     
 
 
-    <!-- http://geldt.org/vocab/numArticles -->
+    <!-- http://gdelt.org/vocab/numArticles -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/numArticles">
-        <rdfs:domain rdf:resource="http://geldt.org/cameo/Event"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/numArticles">
+        <rdfs:domain rdf:resource="http://gdelt.org/cameo/Event"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
         <rdfs:label xml:lang="en">Number of Articles</rdfs:label>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/numMentions -->
+    <!-- http://gdelt.org/vocab/numMentions -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/numMentions">
-        <rdfs:domain rdf:resource="http://geldt.org/cameo/Event"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/numMentions">
+        <rdfs:domain rdf:resource="http://gdelt.org/cameo/Event"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
         <rdfs:label xml:lang="en">Number of Mentions</rdfs:label>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/numSources -->
+    <!-- http://gdelt.org/vocab/numSources -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/numSources">
-        <rdfs:domain rdf:resource="http://geldt.org/cameo/Event"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/numSources">
+        <rdfs:domain rdf:resource="http://gdelt.org/cameo/Event"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
         <rdfs:label xml:lang="en">Number of Sources</rdfs:label>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/quadClass -->
+    <!-- http://gdelt.org/vocab/quadClass -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/quadClass">
-        <rdfs:domain rdf:resource="http://geldt.org/cameo/Event"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/quadClass">
+        <rdfs:domain rdf:resource="http://gdelt.org/cameo/Event"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
         <lumify:possibleValues xml:lang="en">{  
    &quot;1&quot;:&quot;Verbal Cooperation&quot;,
@@ -784,10 +784,10 @@
     
 
 
-    <!-- http://geldt.org/vocab/religionCode -->
+    <!-- http://gdelt.org/vocab/religionCode -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/religionCode">
-        <rdfs:domain rdf:resource="http://geldt.org/cameo/Actor"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/religionCode">
+        <rdfs:domain rdf:resource="http://gdelt.org/cameo/Actor"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <lumify:possibleValues xml:lang="en">{  
    &quot;ADR&quot;:&quot;African Diasporic Religion&quot;,
@@ -827,10 +827,10 @@
     
 
 
-    <!-- http://geldt.org/vocab/rootCode -->
+    <!-- http://gdelt.org/vocab/rootCode -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/rootCode">
-        <rdfs:domain rdf:resource="http://geldt.org/cameo/Event"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/rootCode">
+        <rdfs:domain rdf:resource="http://gdelt.org/cameo/Event"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <lumify:possibleValues xml:lang="en">{  
    &quot;01&quot;:&quot;MAKE PUBLIC STATEMENT&quot;,
@@ -859,20 +859,20 @@
     
 
 
-    <!-- http://geldt.org/vocab/sourceUrl -->
+    <!-- http://gdelt.org/vocab/sourceUrl -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/sourceUrl">
-        <rdfs:domain rdf:resource="http://geldt.org/cameo/Event"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/sourceUrl">
+        <rdfs:domain rdf:resource="http://gdelt.org/cameo/Event"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:label xml:lang="en">Source URL</rdfs:label>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/typeCode -->
+    <!-- http://gdelt.org/vocab/typeCode -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/typeCode">
-        <rdfs:domain rdf:resource="http://geldt.org/cameo/Actor"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/typeCode">
+        <rdfs:domain rdf:resource="http://gdelt.org/cameo/Actor"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <lumify:possibleValues xml:lang="en">{  
    &quot;COP&quot;:&quot;Police forces&quot;,
@@ -922,294 +922,294 @@
     
 
 
-    <!-- http://geldt.org/vocab/EnglishlanguagecoverageAvg -->
+    <!-- http://gdelt.org/vocab/EnglishlanguagecoverageAvg -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/EnglishlanguagecoverageAvg">
-        <rdfs:subPropertyOf rdf:resource="http://geldt.org/vocab/languageCoverage"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/EnglishlanguagecoverageAvg">
+        <rdfs:subPropertyOf rdf:resource="http://gdelt.org/vocab/languageCoverage"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/FrenchLanguageCoverageAvg -->
+    <!-- http://gdelt.org/vocab/FrenchLanguageCoverageAvg -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/FrenchLanguageCoverageAvg">
-        <rdfs:subPropertyOf rdf:resource="http://geldt.org/vocab/languageCoverage"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/FrenchLanguageCoverageAvg">
+        <rdfs:subPropertyOf rdf:resource="http://gdelt.org/vocab/languageCoverage"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/TimeLineDateTime -->
+    <!-- http://gdelt.org/vocab/TimeLineDateTime -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/TimeLineDateTime">
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/TimeLineDateTime">
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/articleLanguage -->
+    <!-- http://gdelt.org/vocab/articleLanguage -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/articleLanguage">
-        <rdfs:domain rdf:resource="http://geldt.org/vocab/Article"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/articleLanguage">
+        <rdfs:domain rdf:resource="http://gdelt.org/vocab/Article"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/articleMobileURL -->
+    <!-- http://gdelt.org/vocab/articleMobileURL -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/articleMobileURL">
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/articleMobileURL">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://geldt.org/vocab/Article"/>
+        <rdfs:domain rdf:resource="http://gdelt.org/vocab/Article"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/articlePublicationDate -->
+    <!-- http://gdelt.org/vocab/articlePublicationDate -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/articlePublicationDate">
-        <rdfs:domain rdf:resource="http://geldt.org/vocab/Article"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/articlePublicationDate">
+        <rdfs:domain rdf:resource="http://gdelt.org/vocab/Article"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/articleSourceCountry -->
+    <!-- http://gdelt.org/vocab/articleSourceCountry -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/articleSourceCountry">
-        <rdfs:domain rdf:resource="http://geldt.org/vocab/Article"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/articleSourceCountry">
+        <rdfs:domain rdf:resource="http://gdelt.org/vocab/Article"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/articleSourceImage -->
+    <!-- http://gdelt.org/vocab/articleSourceImage -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/articleSourceImage">
-        <rdfs:domain rdf:resource="http://geldt.org/vocab/Article"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/articleSourceImage">
+        <rdfs:domain rdf:resource="http://gdelt.org/vocab/Article"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/articleTitle -->
+    <!-- http://gdelt.org/vocab/articleTitle -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/articleTitle">
-        <rdfs:domain rdf:resource="http://geldt.org/vocab/Article"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/articleTitle">
+        <rdfs:domain rdf:resource="http://gdelt.org/vocab/Article"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/articleURL -->
+    <!-- http://gdelt.org/vocab/articleURL -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/articleURL">
-        <rdfs:domain rdf:resource="http://geldt.org/vocab/Article"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/articleURL">
+        <rdfs:domain rdf:resource="http://gdelt.org/vocab/Article"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/countryCoverageAvg -->
+    <!-- http://gdelt.org/vocab/countryCoverageAvg -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/countryCoverageAvg">
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/countryCoverageAvg">
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/coverageVolumeIntensity -->
+    <!-- http://gdelt.org/vocab/coverageVolumeIntensity -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/coverageVolumeIntensity">
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/coverageVolumeIntensity">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/dateAdded -->
+    <!-- http://gdelt.org/vocab/dateAdded -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/dateAdded"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/dateAdded"/>
     
 
 
-    <!-- http://geldt.org/vocab/description -->
+    <!-- http://gdelt.org/vocab/description -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/description">
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/description">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/domainOutlet -->
+    <!-- http://gdelt.org/vocab/domainOutlet -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/domainOutlet">
-        <rdfs:domain rdf:resource="http://geldt.org/vocab/Article"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/domainOutlet">
+        <rdfs:domain rdf:resource="http://gdelt.org/vocab/Article"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/eventDate -->
+    <!-- http://gdelt.org/vocab/eventDate -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/eventDate"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/eventDate"/>
     
 
 
-    <!-- http://geldt.org/vocab/eventMonthYear -->
+    <!-- http://gdelt.org/vocab/eventMonthYear -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/eventMonthYear"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/eventMonthYear"/>
     
 
 
-    <!-- http://geldt.org/vocab/eventSourceURL -->
+    <!-- http://gdelt.org/vocab/eventSourceURL -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/eventSourceURL"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/eventSourceURL"/>
     
 
 
-    <!-- http://geldt.org/vocab/eventYear -->
+    <!-- http://gdelt.org/vocab/eventYear -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/eventYear"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/eventYear"/>
     
 
 
-    <!-- http://geldt.org/vocab/imageSourceArticle -->
+    <!-- http://gdelt.org/vocab/imageSourceArticle -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/imageSourceArticle">
-        <rdfs:domain rdf:resource="http://geldt.org/vocab/Image"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/imageSourceArticle">
+        <rdfs:domain rdf:resource="http://gdelt.org/vocab/Image"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/imageURL -->
+    <!-- http://gdelt.org/vocab/imageURL -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/imageURL">
-        <rdfs:domain rdf:resource="http://geldt.org/vocab/Image"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/imageURL">
+        <rdfs:domain rdf:resource="http://gdelt.org/vocab/Image"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/imageWebCount -->
+    <!-- http://gdelt.org/vocab/imageWebCount -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/imageWebCount">
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/imageWebCount">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://geldt.org/vocab/Image"/>
+        <rdfs:domain rdf:resource="http://gdelt.org/vocab/Image"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/imageWebURLs -->
+    <!-- http://gdelt.org/vocab/imageWebURLs -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/imageWebURLs">
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/imageWebURLs">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://geldt.org/vocab/Image"/>
+        <rdfs:domain rdf:resource="http://gdelt.org/vocab/Image"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/isRootEvent -->
+    <!-- http://gdelt.org/vocab/isRootEvent -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/isRootEvent"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/isRootEvent"/>
     
 
 
-    <!-- http://geldt.org/vocab/languageCoverage -->
+    <!-- http://gdelt.org/vocab/languageCoverage -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/languageCoverage"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/languageCoverage"/>
     
 
 
-    <!-- http://geldt.org/vocab/languageName -->
+    <!-- http://gdelt.org/vocab/languageName -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/languageName"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/languageName"/>
     
 
 
-    <!-- http://geldt.org/vocab/modified -->
+    <!-- http://gdelt.org/vocab/modified -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/modified">
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/modified">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/query -->
+    <!-- http://gdelt.org/vocab/query -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/query">
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/query">
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/series -->
+    <!-- http://gdelt.org/vocab/series -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/series">
-        <rdfs:domain rdf:resource="http://geldt.org/vocab/Timeline"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/series">
+        <rdfs:domain rdf:resource="http://gdelt.org/vocab/Timeline"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/sourceArticleURL -->
+    <!-- http://gdelt.org/vocab/sourceArticleURL -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/sourceArticleURL"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/sourceArticleURL"/>
     
 
 
-    <!-- http://geldt.org/vocab/sourceCountryName -->
+    <!-- http://gdelt.org/vocab/sourceCountryName -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/sourceCountryName"/>
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/sourceCountryName"/>
     
 
 
-    <!-- http://geldt.org/vocab/timeresolution -->
+    <!-- http://gdelt.org/vocab/timeresolution -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/timeresolution">
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/timeresolution">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://geldt.org/vocab/Timeline"/>
+        <rdfs:domain rdf:resource="http://gdelt.org/vocab/Timeline"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/toneAverage -->
+    <!-- http://gdelt.org/vocab/toneAverage -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/toneAverage">
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/toneAverage">
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/tonebinvalue -->
+    <!-- http://gdelt.org/vocab/tonebinvalue -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/tonebinvalue">
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/tonebinvalue">
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/wordcount -->
+    <!-- http://gdelt.org/vocab/wordcount -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/wordcount">
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/wordcount">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://geldt.org/vocab/WordCloud"/>
+        <rdfs:domain rdf:resource="http://gdelt.org/vocab/WordCloud"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://geldt.org/vocab/wordlabel -->
+    <!-- http://gdelt.org/vocab/wordlabel -->
 
-    <owl:DatatypeProperty rdf:about="http://geldt.org/vocab/wordlabel">
+    <owl:DatatypeProperty rdf:about="http://gdelt.org/vocab/wordlabel">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain rdf:resource="http://geldt.org/vocab/WordCloud"/>
+        <rdfs:domain rdf:resource="http://gdelt.org/vocab/WordCloud"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
@@ -1226,49 +1226,49 @@
     
 
 
-    <!-- http://geldt.org/cameo/Actor -->
+    <!-- http://gdelt.org/cameo/Actor -->
 
-    <owl:Class rdf:about="http://geldt.org/cameo/Actor"/>
+    <owl:Class rdf:about="http://gdelt.org/cameo/Actor"/>
     
 
 
-    <!-- http://geldt.org/cameo/Event -->
+    <!-- http://gdelt.org/cameo/Event -->
 
-    <owl:Class rdf:about="http://geldt.org/cameo/Event"/>
+    <owl:Class rdf:about="http://gdelt.org/cameo/Event"/>
     
 
 
-    <!-- http://geldt.org/vocab/Article -->
+    <!-- http://gdelt.org/vocab/Article -->
 
-    <owl:Class rdf:about="http://geldt.org/vocab/Article">
+    <owl:Class rdf:about="http://gdelt.org/vocab/Article">
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://geldt.org/vocab/includeArticles"/>
-                <owl:someValuesFrom rdf:resource="http://geldt.org/vocab/Article"/>
+                <owl:onProperty rdf:resource="http://gdelt.org/vocab/includeArticles"/>
+                <owl:someValuesFrom rdf:resource="http://gdelt.org/vocab/Article"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
     
 
 
-    <!-- http://geldt.org/vocab/Container -->
+    <!-- http://gdelt.org/vocab/Container -->
 
-    <owl:Class rdf:about="http://geldt.org/vocab/Container"/>
+    <owl:Class rdf:about="http://gdelt.org/vocab/Container"/>
     
 
 
-    <!-- http://geldt.org/vocab/Event -->
+    <!-- http://gdelt.org/vocab/Event -->
 
-    <owl:Class rdf:about="http://geldt.org/vocab/Event"/>
+    <owl:Class rdf:about="http://gdelt.org/vocab/Event"/>
     
 
 
-    <!-- http://geldt.org/vocab/Image -->
+    <!-- http://gdelt.org/vocab/Image -->
 
-    <owl:Class rdf:about="http://geldt.org/vocab/Image">
+    <owl:Class rdf:about="http://gdelt.org/vocab/Image">
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://geldt.org/vocab/imageWebURLs"/>
+                <owl:onProperty rdf:resource="http://gdelt.org/vocab/imageWebURLs"/>
                 <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">6</owl:qualifiedCardinality>
                 <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
             </owl:Restriction>
@@ -1277,32 +1277,32 @@
     
 
 
-    <!-- http://geldt.org/vocab/Timeline -->
+    <!-- http://gdelt.org/vocab/Timeline -->
 
-    <owl:Class rdf:about="http://geldt.org/vocab/Timeline">
-        <rdfs:subClassOf rdf:resource="http://geldt.org/vocab/Container"/>
+    <owl:Class rdf:about="http://gdelt.org/vocab/Timeline">
+        <rdfs:subClassOf rdf:resource="http://gdelt.org/vocab/Container"/>
     </owl:Class>
     
 
 
-    <!-- http://geldt.org/vocab/TopArticle -->
+    <!-- http://gdelt.org/vocab/TopArticle -->
 
-    <owl:Class rdf:about="http://geldt.org/vocab/TopArticle">
-        <rdfs:subClassOf rdf:resource="http://geldt.org/vocab/Article"/>
+    <owl:Class rdf:about="http://gdelt.org/vocab/TopArticle">
+        <rdfs:subClassOf rdf:resource="http://gdelt.org/vocab/Article"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://geldt.org/vocab/includeTopArticles"/>
-                <owl:someValuesFrom rdf:resource="http://geldt.org/vocab/TopArticle"/>
+                <owl:onProperty rdf:resource="http://gdelt.org/vocab/includeTopArticles"/>
+                <owl:someValuesFrom rdf:resource="http://gdelt.org/vocab/TopArticle"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
     
 
 
-    <!-- http://geldt.org/vocab/WordCloud -->
+    <!-- http://gdelt.org/vocab/WordCloud -->
 
-    <owl:Class rdf:about="http://geldt.org/vocab/WordCloud">
-        <rdfs:subClassOf rdf:resource="http://geldt.org/vocab/Container"/>
+    <owl:Class rdf:about="http://gdelt.org/vocab/WordCloud">
+        <rdfs:subClassOf rdf:resource="http://gdelt.org/vocab/Container"/>
     </owl:Class>
 </rdf:RDF>
 

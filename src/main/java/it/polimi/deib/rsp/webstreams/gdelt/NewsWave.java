@@ -18,7 +18,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 /*
-    This class starts a WebSocket from which the streams for GELDT can be retrieved.
+    This class starts a WebSocket from which the streams for GDELT can be retrieved.
     First, the SPARK endpoint is created; then, the data downloaded and the three streams (queries, mentions and gkg)
     are bounded to the webSockets.
     The webSockets will offer those stream in RDF.
@@ -33,7 +33,7 @@ public class NewsWave {
     private static String stream_mapping_path;
     private static String stream_sgraph_path;
 
-    private static GELDTWebSocketHandler webSocketHandler;
+    private static GDELTWebSocketHandler webSocketHandler;
 
     private static String stream_name;
 
@@ -43,14 +43,14 @@ public class NewsWave {
     private static final int stream_thread = 20;
 
     private static final String get_method = "GET";
-    public static final String GELDT_stream_name = "GELDTStream";
-    public static final String prefix = "http://geldt.org/gkg/";
+    public static final String GDELT_stream_name = "GDELTStream";
+    public static final String prefix = "http://gdelt.org/gkg/";
     public static final String semicolon = ";";
 
     private static Service endPointService;
     private static Service webSocketService;
 
-    private static Model geldt;
+    private static Model gdelt;
     private static ValueFactory factory = SimpleValueFactory.getInstance();
 
     private static IRI sGDELTStreamCSVEndpoint;
@@ -60,11 +60,11 @@ public class NewsWave {
     private static int polling_delay = 300000;
 
 
-    public static void startGeldt(int sgraphport, int streamport, String geldtlastUpdateurl, String streamName, String header, String mappingPath, String sgraphPath) {
+    public static void startGdelt(int sgraphport, int streamport, String gdeltlastUpdateurl, String streamName, String header, String mappingPath, String sgraphPath) {
 
         sgraph_port = sgraphport;
         stream_port = streamport;
-        source_url = geldtlastUpdateurl;
+        source_url = gdeltlastUpdateurl;
         stream_name = streamName;
         stream_header = header;
         stream_mapping_path = mappingPath;
@@ -93,20 +93,20 @@ public class NewsWave {
         endPointService = Service.ignite().port(sgraph_port).threadPool(sgraph_thread);
         webSocketService = Service.ignite().port(stream_port).threadPool(stream_thread);
 
-        geldt = Rio.parse(NewsWave.class.getResourceAsStream("/streams/sgraphs/geldt.ttl"), "", RDFFormat.TURTLE);
+        gdelt = Rio.parse(NewsWave.class.getResourceAsStream("/streams/sgraphs/gdelt.ttl"), "", RDFFormat.TURTLE);
 
         //TODO Stream descriptor for three raw streams
-        endPointService.get(File.separator + "geldt", (req, res) ->
-                toJsonLD(geldt, res));
+        endPointService.get(File.separator + "gdelt", (req, res) ->
+                toJsonLD(gdelt, res));
 
 //        //TODO stream descriptor for three rdf streams
-        endPointService.get(File.separator + "geldt" + File.separator + "rsp", (req, res) -> toJsonLD(Rio.parse(NewsWave.class.getResourceAsStream("/streams/sgraphs/rsp.ttl"), "", RDFFormat.TURTLE), res));
+        endPointService.get(File.separator + "gdelt" + File.separator + "rsp", (req, res) -> toJsonLD(Rio.parse(NewsWave.class.getResourceAsStream("/streams/sgraphs/rsp.ttl"), "", RDFFormat.TURTLE), res));
 
 //        //TODO detailed description of the event stream
 
         endPointService.get(File.separator + stream_name, (req, res) -> toJsonLD(Rio.parse(NewsWave.class.getResourceAsStream(stream_sgraph_path), "", RDFFormat.TURTLE), res));
 //
-        webSocketService.webSocket(File.separator + stream_name, webSocketHandler = new GELDTWebSocketHandler(stream_header, stream_mapping_path, '\t', 2000, functions));
+        webSocketService.webSocket(File.separator + stream_name, webSocketHandler = new GDELTWebSocketHandler(stream_header, stream_mapping_path, '\t', 2000, functions));
 
         endPointService.init();
         webSocketService.init();
@@ -121,7 +121,7 @@ public class NewsWave {
     }
 
     /*
-        The txt file downloaded from GELDT server is in the form:
+        The txt file downloaded from GDELT server is in the form:
 
         <numbers> <string> http://data.gdeltproject.org/gdeltv2/<timestamp>.events_stream_name.CSV.zip
         <numbers> <string> http://data.gdeltproject.org/gdeltv2/<timestamp>.mentions.CSV.zip
@@ -141,7 +141,7 @@ public class NewsWave {
             HttpURLConnection connection = (HttpURLConnection) downloadUrl.openConnection();
             connection.setRequestMethod(get_method);
 
-            // Download the txt file from GELDT servers
+            // Download the txt file from GDELT servers
             BufferedReader br;
             if (200 <= connection.getResponseCode() && connection.getResponseCode() <= 299) {
                 br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -150,7 +150,7 @@ public class NewsWave {
             }
 
             // TODO: Handle this particular case.
-            if (stream_name.equals("rsp/queries")) stream_name = "export";
+            if (stream_name.equals("events")) stream_name = "export";
 
             String line;
             while ((line = br.readLine()) != null) {
@@ -173,11 +173,11 @@ public class NewsWave {
 
                     System.out.println("Data for stream found!");
                     s = sGDELTStreamCSVEndpoint;
-                    geldt.add(factory.createStatement(s, p, o));
+                    gdelt.add(factory.createStatement(s, p, o));
                     ByteArrayOutputStream dos = getByteArrayOutputStream(downloadDestination, zis, ze);
 
                     if (dos != null) {
-                        webSocketHandler.bindInputStream(GELDT_stream_name, new ByteArrayInputStream(dos.toByteArray()));
+                        webSocketHandler.bindInputStream(GDELT_stream_name, new ByteArrayInputStream(dos.toByteArray()));
                     }
 
                 } else if (todownload_address.equals(oldLine)) System.out.println("Already downloaded this.");

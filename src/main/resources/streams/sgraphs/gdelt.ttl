@@ -1,4 +1,4 @@
-@prefix : <https://www.geldt.org/stream#> .
+@prefix : <https://www.gdelt.org/stream#> .
 @prefix dcat: <http://www.w3.org/ns/dcat> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -13,12 +13,12 @@
 @prefix frmt: <http://www.w3.org/ns/formats/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
-<http://localhost/geldt> a vsd:CatalogService ;
+<http://localhost/gdelt> a vsd:CatalogService ;
 	dcat:dataset <http://data.gdeltproject.org/gdeltv2/lastupdate.txt>  .
 
 <http://data.gdeltproject.org/gdeltv2/lastupdate.txt> a vocals:Stream ;
         dcat:title "GDELT-DATA Stream"^^xsd:string ;
-        dcat:publisher <http://www.geldtproject.org> ;
+        dcat:publisher <http://www.gdeltproject.org> ;
         dcat:description "GDELT DATA Stream"^^xsd:string ;
         vocals:windowType vocals:logicalTumbling ;
         vocals:windowSize "PT15M"^^xsd:duration ;
