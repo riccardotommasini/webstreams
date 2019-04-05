@@ -14,6 +14,7 @@ public class Main {
 
         Properties properties = propertiesReader.getProperties();
 
+        String host = properties.getProperty("host");
         int sgraphport = Integer.parseInt(properties.getProperty("sgraphport"));
         int streamport = Integer.parseInt(properties.getProperty("streamport"));
 
@@ -35,7 +36,7 @@ public class Main {
                 String[] stream_name_parts = streamToCreate.split("_");
                 String stream_name_suffix = stream_name_parts[1];
 
-                NewsWave.startGdelt(sgraphport, streamport, gdeltLastUpdateUrl, stream_name_suffix, streamHeader, streamMappingPath, streamSGraphPath);
+                NewsWave.startGdelt(host, sgraphport, streamport, gdeltLastUpdateUrl, stream_name_suffix, streamHeader, streamMappingPath, streamSGraphPath);
                 break;
             }
             case "wikimedia": {

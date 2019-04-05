@@ -2,6 +2,7 @@ package it.polimi.deib.rsp.webstreams.gdelt;
 
 import it.polimi.deib.rsp.webstreams.gdelt.functions.*;
 import lombok.extern.log4j.Log4j;
+import org.apache.commons.io.IOUtils;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.ValueFactory;
@@ -37,6 +38,7 @@ public class NewsWave {
 
     private static String stream_name;
 
+    private static String host_address;
     private static int sgraph_port;
     private static final int sgraph_thread = 10;
     private static int stream_port;
@@ -60,8 +62,9 @@ public class NewsWave {
     private static int polling_delay = 300000;
 
 
-    public static void startGdelt(int sgraphport, int streamport, String gdeltlastUpdateurl, String streamName, String header, String mappingPath, String sgraphPath) {
+    public static void startGdelt(String host, int sgraphport, int streamport, String gdeltlastUpdateurl, String streamName, String header, String mappingPath, String sgraphPath) {
 
+        host_address = host;
         sgraph_port = sgraphport;
         stream_port = streamport;
         source_url = gdeltlastUpdateurl;
@@ -93,18 +96,19 @@ public class NewsWave {
         endPointService = Service.ignite().port(sgraph_port).threadPool(sgraph_thread);
         webSocketService = Service.ignite().port(stream_port).threadPool(stream_thread);
 
-        gdelt = Rio.parse(NewsWave.class.getResourceAsStream("/streams/sgraphs/gdelt.ttl"), "", RDFFormat.TURTLE);
+        gdelt = Rio.parse(getCorrectSGRAPHHost("/streams/sgraphs/gdelt.ttl"), "", RDFFormat.TURTLE);
+        //gdelt = Rio.parse(NewsWave.class.getResourceAsStream("/streams/sgraphs/gdelt.ttl"), "", RDFFormat.TURTLE);
 
         //TODO Stream descriptor for three raw streams
         endPointService.get(File.separator + "gdelt", (req, res) ->
                 toJsonLD(gdelt, res));
 
 //        //TODO stream descriptor for three rdf streams
-        endPointService.get(File.separator + "gdelt" + File.separator + "rsp", (req, res) -> toJsonLD(Rio.parse(NewsWave.class.getResourceAsStream("/streams/sgraphs/rsp.ttl"), "", RDFFormat.TURTLE), res));
+        endPointService.get(File.separator + "gdelt" + File.separator + "rsp", (req, res) -> toJsonLD(Rio.parse(getCorrectSGRAPHHost("/streams/sgraphs/rsp.ttl"), "", RDFFormat.TURTLE), res));
 
 //        //TODO detailed description of the event stream
 
-        endPointService.get(File.separator + stream_name, (req, res) -> toJsonLD(Rio.parse(NewsWave.class.getResourceAsStream(stream_sgraph_path), "", RDFFormat.TURTLE), res));
+        endPointService.get(File.separator + stream_name, (req, res) -> toJsonLD(Rio.parse(getCorrectSGRAPHHost(stream_sgraph_path), "", RDFFormat.TURTLE), res));
 //
         webSocketService.webSocket(File.separator + stream_name, webSocketHandler = new GDELTWebSocketHandler(stream_header, stream_mapping_path, '\t', 2000, functions));
 
@@ -219,5 +223,17 @@ public class NewsWave {
         //close last ZipEntry
         zis.closeEntry();
         return dos;
+    }
+
+    private static InputStream getCorrectSGRAPHHost(String path) {
+        InputStream is = NewsWave.class.getResourceAsStream(path);
+        String string = "";
+        try {
+            string = IOUtils.toString(is, "UTF-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        string = string.replace("localhost", host_address);
+        return new ByteArrayInputStream( string.getBytes() );
     }
 }
