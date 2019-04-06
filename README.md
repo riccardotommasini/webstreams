@@ -1,5 +1,8 @@
  # Web Streams
  
+ [![DOI](https://zenodo.org/badge/173600663.svg)](https://zenodo.org/badge/latestdoi/173600663)
+
+
  # Intro
 
 This guide will show how to run this software in order to produce some RDF streams locally on a device, created from data coming from the Web.
