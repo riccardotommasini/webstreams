@@ -1,1 +1,826 @@
-todo
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.wikimediaonto.org#"
+     xml:base="http://www.wikimediaonto.org"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.wikimediaonto.org"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.wikimediaonto.org#PageTitle -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#PageTitle">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#LinksChange"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageCreate"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageDelete"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageMove"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageProperitiesChange"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageUnDelete"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#RevisionCreate"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#comment -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#comment">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#EventStream"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#domain -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#domain">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#EventStream"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#eventID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#eventID">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#EventStream"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#isExternalLink -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#isExternalLink">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#AddedLink"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#RemovedLink"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#length -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#length">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#EventStream"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#link -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#link">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#AddedLink"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#RemovedLink"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#minorChange -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#minorChange">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#EventStream"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#pageID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#pageID">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageCreate"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageDelete"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageMove"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageProperitiesChange"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageUnDelete"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#RevisionCreate"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#page_is_redirect -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#page_is_redirect">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#LinksChange"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageCreate"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageDelete"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageMove"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageProperitiesChange"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageUnDelete"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#RevisionCreate"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#page_namespace -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#page_namespace">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#LinksChange"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageCreate"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageDelete"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageMove"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageProperitiesChange"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageUnDelete"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#RevisionCreate"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#parsedcomment -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#parsedcomment">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#EventStream"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#partition -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#partition">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#EventStream"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#patrolled -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#patrolled">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#EventStream"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#rev_content_changed -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#rev_content_changed">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#RevisionCreate"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#rev_content_format -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#rev_content_format">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#RevisionCreate"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#rev_content_model -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#rev_content_model">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#RevisionCreate"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#rev_count -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#rev_count">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageDelete"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#rev_id -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#rev_id">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#LinksChange"/>
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#PageProperitiesChange"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#rev_len -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#rev_len">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#RevisionCreate"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#rev_minor_edit -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#rev_minor_edit">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#RevisionCreate"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#rev_parent_id -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#rev_parent_id">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#RevisionCreate"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#rev_sha1 -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#rev_sha1">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#RevisionCreate"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#rev_timestamp -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#rev_timestamp">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#RevisionCreate"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#server_script_path -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#server_script_path">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#EventStream"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#server_url -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#server_url">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#EventStream"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#servername -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#servername">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#EventStream"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#timeStamp -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#timeStamp">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#EventStream"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#title -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#title">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#EventStream"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#topic -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#topic">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#EventStream"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.wikimediaonto.org#user_bot -->
+
+    <owl:DatatypeProperty rdf:about="http://www.wikimediaonto.org#user_bot">
+        <rdfs:domain rdf:resource="http://www.wikimediaonto.org#EventStream"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.wikimediaonto.org#AddedLink -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#AddedLink">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#LinksChange"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#AddedProperity -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#AddedProperity">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#PageProperitiesChange"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#Bot -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#Bot">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#user"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#ChangePerformer -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#ChangePerformer">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#PageProperitiesChange"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#CreatePerformer -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#CreatePerformer">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#PageCreate"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#DeletePerformer -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#DeletePerformer">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#PageDelete"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#EventChangeType -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#EventChangeType">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#RecentChange"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#EventStream -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#EventStream"/>
+    
+
+
+    <!-- http://www.wikimediaonto.org#EventStreamType -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#EventStreamType">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#EventStream"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#EventType -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#EventType">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#RecentChange"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#LinkChangePerfomer -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#LinkChangePerfomer">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#LinksChange"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#LinksChange -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#LinksChange">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#EventStreamType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#MovePerformer -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#MovePerformer">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#PageMove"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#NewRedirectPage -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#NewRedirectPage">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#PageMove"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#NormalUser -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#NormalUser">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#user"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#Page -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#Page">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#RecentChange"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#PageChangeEvent -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#PageChangeEvent">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#RecentChange"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#PageCreate -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#PageCreate">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#EventStreamType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#PageDelete -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#PageDelete">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#EventStreamType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#PageMove -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#PageMove">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#EventStreamType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#PageProperitiesChange -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#PageProperitiesChange">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#EventStreamType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#PageUnDelete -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#PageUnDelete">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#EventStreamType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#PriorStatebeforeMove -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#PriorStatebeforeMove">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#PageMove"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#PriorStatebeforeundelete -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#PriorStatebeforeundelete">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#PageUnDelete"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#Project -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#Project">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#RecentChange"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#RecentChange -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#RecentChange">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#EventStreamType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#RemovedLink -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#RemovedLink">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#LinksChange"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#RemovedProperity -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#RemovedProperity">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#PageProperitiesChange"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#RevisionCreate -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#RevisionCreate">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#EventStreamType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#RevisionPerformer -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#RevisionPerformer">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#RevisionCreate"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#Time -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#Time">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#RecentChange"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#UndeletePerformer -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#UndeletePerformer">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#PageUnDelete"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#major -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#major">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#EventChangeType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#minor -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#minor">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#EventChangeType"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.wikimediaonto.org#user -->
+
+    <owl:Class rdf:about="http://www.wikimediaonto.org#user">
+        <rdfs:subClassOf rdf:resource="http://www.wikimediaonto.org#RecentChange"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.wikimediaonto.org#Bot -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#Bot"/>
+    
+
+
+    <!-- http://www.wikimediaonto.org#Edoderoobot -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#Edoderoobot">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#Bot"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#Ferdows -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#Ferdows">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#NormalUser"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#GeneDBot -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#GeneDBot">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#Bot"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#Marokko -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#Marokko">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#NormalUser"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#MediaWiki -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#MediaWiki">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#Project"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#Meta-Wiki -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#Meta-Wiki">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#Project"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#NormalUser -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#NormalUser"/>
+    
+
+
+    <!-- http://www.wikimediaonto.org#Special_Olympics -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#Special_Olympics">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#Page"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#Wekipedia -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#Wekipedia">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#Project"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#WikiBooks -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#WikiBooks">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#Project"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#WikiData -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#WikiData">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#Project"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#WikiNews -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#WikiNews">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#Project"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#WikiQoutes -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#WikiQoutes">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#Project"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#WikiSource -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#WikiSource">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#Project"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#categorize -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#categorize">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#EventType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#edit -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#edit">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#EventType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#link_change -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#link_change">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#PageChangeEvent"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#log -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#log">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#EventType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#move -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#move">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#PageChangeEvent"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#new -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#new">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#EventType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#pagedelete -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#pagedelete">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#PageChangeEvent"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#properties_change -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#properties_change">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#PageChangeEvent"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.wikimediaonto.org#restricions_change -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#restricions_change"/>
+    
+
+
+    <!-- http://www.wikimediaonto.org#undelete -->
+
+    <owl:NamedIndividual rdf:about="http://www.wikimediaonto.org#undelete">
+        <rdf:type rdf:resource="http://www.wikimediaonto.org#PageChangeEvent"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
