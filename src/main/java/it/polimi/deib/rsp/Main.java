@@ -8,6 +8,24 @@ import java.util.Properties;
 
 public class Main {
 
+    /*
+     * Code of A "Cookbook for Publishing Streaming Linked Data"
+     *
+     * In these comments the various Steps described in the paper are
+     * highlighted, to show where they have place in practical.
+     *
+     * Here they are summarised:
+     *
+     * Step (0): Identify Relevant Web Streams
+     * Step (1): Model the Streams
+     * Step (2): Name Things with (HTTP) URIs
+     * Step (3): Annotate the Stream Content
+     * Step (4): Describe the Stream
+     * Step (5): Converting Data to RDF Streams
+     * Step (6): Publish the Stream
+     *
+     */
+
     public static void main(String[] args) {
 
         PropertiesReader propertiesReader = new PropertiesReader();
@@ -27,6 +45,13 @@ public class Main {
         String streamHeader = properties.getProperty("stream_header");
         String streamMappingPath = properties.getProperty("stream_mapping_path");
         String streamSGraphPath = properties.getProperty("stream_sgraph_path");
+
+
+        /*
+         * Step(0): These are the streams we chose to work with.
+         * Motivations are explained in the paper.
+         *
+         */
 
         switch (streamToCreate) {
             case "gdelt_mentions":

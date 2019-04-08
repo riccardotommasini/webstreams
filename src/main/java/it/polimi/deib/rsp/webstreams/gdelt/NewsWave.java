@@ -49,7 +49,7 @@ public class NewsWave {
     public static final String prefix = "http://gdelt.org/gkg/";
     public static final String semicolon = ";";
 
-    private static Service endPointService;
+    private static Service sGRAPHService;
     private static Service webSocketService;
 
     private static Model gdelt;
@@ -89,30 +89,36 @@ public class NewsWave {
         }
     }
 
+    /*
+     * Steps (5) and (6): WebSockets for RDF streams and access point for
+     * SGRAPHS are here set up.
+     *
+     */
+
     private static void ignite(Object[] functions) throws IOException {
 
         // TODO: are two services really needed?
 
-        endPointService = Service.ignite().port(sgraph_port).threadPool(sgraph_thread);
+        sGRAPHService = Service.ignite().port(sgraph_port).threadPool(sgraph_thread);
         webSocketService = Service.ignite().port(stream_port).threadPool(stream_thread);
 
         gdelt = Rio.parse(getCorrectSGRAPHHost("/streams/sgraphs/gdelt.ttl"), "", RDFFormat.TURTLE);
         //gdelt = Rio.parse(NewsWave.class.getResourceAsStream("/streams/sgraphs/gdelt.ttl"), "", RDFFormat.TURTLE);
 
         //TODO Stream descriptor for three raw streams
-        endPointService.get(File.separator + "gdelt", (req, res) ->
+        sGRAPHService.get(File.separator + "gdelt", (req, res) ->
                 toJsonLD(gdelt, res));
 
 //        //TODO stream descriptor for three rdf streams
-        endPointService.get(File.separator + "gdelt" + File.separator + "rsp", (req, res) -> toJsonLD(Rio.parse(getCorrectSGRAPHHost("/streams/sgraphs/rsp.ttl"), "", RDFFormat.TURTLE), res));
+        sGRAPHService.get(File.separator + "gdelt" + File.separator + "rsp", (req, res) -> toJsonLD(Rio.parse(getCorrectSGRAPHHost("/streams/sgraphs/rsp.ttl"), "", RDFFormat.TURTLE), res));
 
 //        //TODO detailed description of the event stream
 
-        endPointService.get(File.separator + stream_name, (req, res) -> toJsonLD(Rio.parse(getCorrectSGRAPHHost(stream_sgraph_path), "", RDFFormat.TURTLE), res));
+        sGRAPHService.get(File.separator + stream_name, (req, res) -> toJsonLD(Rio.parse(getCorrectSGRAPHHost(stream_sgraph_path), "", RDFFormat.TURTLE), res));
 //
         webSocketService.webSocket(File.separator + stream_name, webSocketHandler = new GDELTWebSocketHandler(stream_header, stream_mapping_path, '\t', 2000, functions));
 
-        endPointService.init();
+        sGRAPHService.init();
         webSocketService.init();
 
     }
@@ -124,10 +130,19 @@ public class NewsWave {
         return output.toString();
     }
 
+
+    /*
+     * Step (1): resources have been chosen for this stream.
+     * TSV data will be downloaded from GDELT server, considering the frequency
+     * with which they are pushed.
+     *
+     */
+
+
     /*
         The txt file downloaded from GDELT server is in the form:
 
-        <numbers> <string> http://data.gdeltproject.org/gdeltv2/<timestamp>.events_stream_name.CSV.zip
+        <numbers> <string> http://data.gdeltproject.org/gdeltv2/<timestamp>.export.CSV.zip
         <numbers> <string> http://data.gdeltproject.org/gdeltv2/<timestamp>.mentions.CSV.zip
         <numbers> <string> http://data.gdeltproject.org/gdeltv2/<timestamp>.gkg.CSV.zip
 
@@ -187,7 +202,7 @@ public class NewsWave {
                 } else if (todownload_address.equals(oldLine)) System.out.println("Already downloaded this.");
             }
 
-            // Check for new content every 10 seconds
+            // Check for new content every <polling_delay> milliseconds.
             try {
                 Thread.sleep(polling_delay);
             } catch (InterruptedException e) {
