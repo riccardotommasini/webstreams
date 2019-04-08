@@ -25,6 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/*
+    JavaSpark class of WebSocket which will publish the RDF Stream.
+*/
+
 @WebSocket
 public class GDELTWebSocketHandler implements Runnable {
 
@@ -33,6 +37,12 @@ public class GDELTWebSocketHandler implements Runnable {
     private final String mappingfile_path;
     public int delay;
     List<Session> userSession = new ArrayList<>();
+
+    /*
+     * Step (3): The mapping is here configured.
+     * The mapping file is loaded in the RML.
+     *
+     */
 
     public GDELTWebSocketHandler(String header, String mappingfilepath, char delimiter, int delay, Object... functions) {
         this.mappingfile_path = mappingfilepath;
@@ -54,10 +64,6 @@ public class GDELTWebSocketHandler implements Runnable {
 
     }
 
-    /*
-        When a client connects, save it in connectedUser and start a new thread to
-        provide the stream.
-    */
     @OnWebSocketConnect
     public synchronized void onConnect(Session user) throws Exception {
         userSession.add(user);
@@ -71,6 +77,10 @@ public class GDELTWebSocketHandler implements Runnable {
     @OnWebSocketMessage
     public void onMessage(Session user, String message) {
     }
+
+    /*
+     * Step (5): Here the data is converted in RDF stream before being pushed.
+     */
 
     public void bindInputStream(String gdeltStream, ByteArrayInputStream byteArrayInputStream) {
 

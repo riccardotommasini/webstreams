@@ -26,6 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/*
+    JavaSpark class of WebSocket which will publish the RDF Stream.
+*/
+
 @WebSocket
 public class WikimediaWebSocketHandler {
 
@@ -35,6 +39,13 @@ public class WikimediaWebSocketHandler {
     private List<Session> users = new ArrayList<>();
 
     public WikimediaWebSocketHandler(String mappingfile_path, Object... functions) {
+
+        /*
+         * Step (3): The mapping is here configured.
+         * The mapping file is loaded in the RML.
+         *
+         */
+
         this.mapper =
                 RmlMapper
                         .newBuilder()
@@ -65,6 +76,10 @@ public class WikimediaWebSocketHandler {
     @OnWebSocketMessage
     public void onMessage(Session user, String message) {
     }
+
+    /*
+     * Step (5): Here the data is converted in RDF stream before being pushed.
+     */
 
     public void bindInputStream(String gdeltStream, ByteArrayInputStream byteArrayInputStream) {
         mapper.bindInputStream(gdeltStream, byteArrayInputStream);

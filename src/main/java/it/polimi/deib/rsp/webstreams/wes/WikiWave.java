@@ -33,7 +33,7 @@ public class WikiWave {
     public static final String stream_name = "WikimediaChanges";
     public static final String prefix = "http://wikimedia.streams.org/";
 
-    private static Service endPointService;
+    private static Service sGRAPHService;
     private static Service webSocketService;
 
 
@@ -56,22 +56,37 @@ public class WikiWave {
     }
 
     private static void ignite(Object[] functions) {
-        endPointService = Service.ignite().port(sgraph_port).threadPool(sgraph_thread);
+
+        /*
+         * Steps (5) and (6): WebSockets for RDF streams and access point for
+         * SGRAPHS are here set up.
+         *
+         */
+
+        sGRAPHService = Service.ignite().port(sgraph_port).threadPool(sgraph_thread);
         webSocketService = Service.ignite().port(stream_port).threadPool(stream_thread);
 
-        endPointService.get(File.separator + sgraph, (req, res) -> {
+        sGRAPHService.get(File.separator + sgraph, (req, res) -> {
             return "";
             //TODO
         });
 
         webSocketService.webSocket(File.separator + recentchanges_stream_name, handler = new WikimediaWebSocketHandler(mapping_file_path));
 
-        endPointService.init();
+        sGRAPHService.init();
         webSocketService.init();
 
     }
 
     private static void retrieveDataAndSetStreams() {
+
+        /*
+         * Step (1): resources have been chosen for this stream.
+         * In this case, a stream is already published on the web.
+         * We have to gather this and convert it into RDF, which will be pushed.
+         *
+         */
+
         WebTarget target = client.target(wikipedia_stream_address);
         SseEventSource source = SseEventSource.target(target).build();
         source.register(payload -> handler.bindInputStream(stream_name, new ByteArrayInputStream(payload.readData().getBytes())),   // Consumer<InboundSseEvent>
