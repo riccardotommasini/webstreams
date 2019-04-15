@@ -9,5 +9,5 @@ timestamp extraction has to be done in JSON
 
 - url should be used as @id
 - collection have to be explained
-- the GELDT ontology might need to include 
+- the GDELT ontology might need to include 
   also the container types to type the igraph

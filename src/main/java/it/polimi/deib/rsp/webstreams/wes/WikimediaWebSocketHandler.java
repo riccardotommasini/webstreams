@@ -26,6 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/*
+    JavaSpark class of WebSocket which will publish the RDF Stream.
+*/
+
 @WebSocket
 public class WikimediaWebSocketHandler {
 
@@ -35,6 +39,13 @@ public class WikimediaWebSocketHandler {
     private List<Session> users = new ArrayList<>();
 
     public WikimediaWebSocketHandler(String mappingfile_path, Object... functions) {
+
+        /*
+         * Step (3): The mapping is here configured.
+         * The mapping file is loaded in the RML.
+         *
+         */
+
         this.mapper =
                 RmlMapper
                         .newBuilder()
@@ -66,8 +77,12 @@ public class WikimediaWebSocketHandler {
     public void onMessage(Session user, String message) {
     }
 
-    public void bindInputStream(String geldtStream, ByteArrayInputStream byteArrayInputStream) {
-        mapper.bindInputStream(geldtStream, byteArrayInputStream);
+    /*
+     * Step (5): Here the data is converted in RDF stream before being pushed.
+     */
+
+    public void bindInputStream(String gdeltStream, ByteArrayInputStream byteArrayInputStream) {
+        mapper.bindInputStream(gdeltStream, byteArrayInputStream);
         Set functionValueTriplesMaps = mapper.getTermMaps(mapping).filter((t) -> t.getFunctionValue() != null).map(TermMap::getFunctionValue).collect(ImmutableCollectors.toImmutableSet());
         Set<TriplesMap> refObjectTriplesMaps = mapper.getAllTriplesMapsUsedInRefObjectMap(mapping);
 
@@ -92,9 +107,9 @@ public class WikimediaWebSocketHandler {
         //rdfWriter.getWriterConfig().set(JSONLDSettings.OPTIMIZE, true);
         //rdfWriter.getWriterConfig().set(BasicWriterSettings.PRETTY_PRINT, true);
 
-        model.setNamespace("geldt", "http://geldt.org/vocab/");
-        model.setNamespace("gkg", "http://geldt.org/gkg/");
-        model.setNamespace("geldti", "http://geldt.org/instance/");
+        model.setNamespace("gdelt", "http://gdelt.org/vocab/");
+        model.setNamespace("gkg", "http://gdelt.org/gkg/");
+        model.setNamespace("gdelti", "http://gdelt.org/instance/");
         model.setNamespace("rdfs", "http://www.w3.org/TR/rdf-schema/");
         Rio.write(model, rdfWriter);
 
