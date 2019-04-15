@@ -53,6 +53,8 @@ public class Main {
          *
          */
 
+        System.out.println("INFO: Attempting to launch " + streamToCreate);
+
         switch (streamToCreate) {
             case "gdelt_mentions":
             case "gdelt_events":

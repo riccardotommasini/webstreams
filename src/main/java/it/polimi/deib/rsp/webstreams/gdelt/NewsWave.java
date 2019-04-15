@@ -168,6 +168,8 @@ public class NewsWave {
                 br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
             }
 
+            log.info("Looking for " + stream_name.toUpperCase() + " on GDELT servers...");
+
             // TODO: Handle this particular case.
             if (stream_name.equals("events")) stream_name = "export";
 
@@ -188,9 +190,8 @@ public class NewsWave {
 
                     ZipEntry ze = zis.getNextEntry();
 
-                    log.info(ze.getName());
+                    log.info("Data for stream found! Filename: " + ze.getName());
 
-                    System.out.println("Data for stream found!");
                     s = sGDELTStreamCSVEndpoint;
                     gdelt.add(factory.createStatement(s, p, o));
                     ByteArrayOutputStream dos = getByteArrayOutputStream(downloadDestination, zis, ze);

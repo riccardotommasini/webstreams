@@ -84,9 +84,9 @@ public class GDELTWebSocketHandler implements Runnable {
 
     public void bindInputStream(String gdeltStream, ByteArrayInputStream byteArrayInputStream) {
 
-        System.out.println("Stream will start in 5 seconds...");
+        System.out.println("INFO: Stream will start in 10 seconds...");
         try {
-            Thread.sleep(5000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

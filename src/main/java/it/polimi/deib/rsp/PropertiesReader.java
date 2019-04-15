@@ -28,7 +28,7 @@ public class PropertiesReader {
             FileInputStream userPropertiesFile = new FileInputStream("./user.properties");
             properties.load(userPropertiesFile);
         } catch (IOException | NullPointerException e) {
-            System.out.println("User's properties not found; loading defaults...");
+            System.out.println("INFO: User's properties not found; loading defaults...");
         }
 
         return properties;
