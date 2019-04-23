@@ -4,8 +4,10 @@ WORKDIR /usr/src/webstreams
 
 MAINTAINER rictomm@gmail.com
 
+ARG stream
+
 ADD ./webstreams.jar ./webstreams.jar 
-ADD ./user.properties ./user.properties
+ADD ./props/$stream.properties ./user.properties
 ADD start.sh ./start.sh
 
 RUN chmod u+x start.sh
