@@ -69,8 +69,8 @@ where stream can be:
 For instance
 
 ```
-docker pull streamreasoning/webstreams/gkg:latest
-docker run -p 8080:8080 -p 8081:8081 streamreasoning/webstreams/gkg:latest
+docker pull streamreasoning/webstreams_gkg:latest
+docker run -p 8080:8080 -p 8081:8081 streamreasoning/webstreams_gkg:latest
 
 ```
 
