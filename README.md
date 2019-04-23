@@ -53,7 +53,7 @@ Default values will be used for fields not specified in user.properties.
 Prebuilt Docker images running each of the published streams with default configuration hare available on Docker Hub 
 
 ```
-docker pull streamreasoning/webstreams/{stream}:latest
+docker pull streamreasoning/webstreams_{stream}:latest
 
 ```
 
