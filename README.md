@@ -63,8 +63,14 @@ where stream can be:
 - dbl for DBPedia Live
 - GDELT
     + gdelt_events for EVENT
+     - sgraph URL at [http://localhost:8081/events](http://localhost:8081/events)
+     - websocket URL at ws://localhost:8080/events
     + gdelt_mentions for MENTIONS
+     - sgraph URL at [http://localhost:8081/mentions](http://localhost:8081/mentions)
+     - websocket URL at ws://localhost:8080/mentions
     + gdelt_gkg for Global Knowledge Graph
+     - sgraph URL at [http://localhost:8081/gkg](http://localhost:8081/gkg)
+     - websocket URL at ws://localhost:8080/gkg
 
 For instance
 
