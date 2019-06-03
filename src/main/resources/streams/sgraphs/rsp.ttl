@@ -14,6 +14,6 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 
 <http://localhost/gdelt/rsp> a vsd:CatalogService ;
-	dcat:dataset <http://localhost/mentions>  ;
-	dcat:dataset <http://localhost/events>  ;
-	dcat:dataset <http://localhost/gkg>  .
+	dcat:dataset <http://localhost:8081/mentions>  ;
+	dcat:dataset <http://localhost:8081/events>  ;
+	dcat:dataset <http://localhost:8081/gkg>  .
