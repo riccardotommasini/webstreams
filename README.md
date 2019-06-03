@@ -62,9 +62,9 @@ where stream can be:
 - wes for Wikimedia Event Stream 
 - dbl for DBPedia Live
 - GDELT
-    + events for EVENT
-    + mentions for MENTIONS
-    + gkg for Global Knowledge Graph
+    + gdelt_events for EVENT
+    + gdelt_mentions for MENTIONS
+    + gdelt_gkg for Global Knowledge Graph
 
 For instance
 
