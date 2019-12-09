@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>http://localhost:4000/cookies/2017/01/05/gingernut-cookies/</loc>
+<lastmod>2017-01-05T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/cakes/2017/01/06/lemon-cake/</loc>
+<lastmod>2017-01-06T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/cupcakes/cakes/2017/01/07/chocolate-cupcakes/</loc>
+<lastmod>2017-01-07T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/about/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/contact-success/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/contact/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/recipes/</loc>
+</url>
+</urlset>

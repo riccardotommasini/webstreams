@@ -1,0 +1,220 @@
+html, body { padding: 0; margin: 0; line-height: 1.8em; }
+
+body, input, textarea { font-family: 'Fira Sans', sans-serif; color: #222; -webkit-font-smoothing: antialiased; }
+
+h1 { font-size: 1.8em; margin: 0; padding: 0; line-height: 1.3em; }
+
+h2 { font-size: 1.4em; }
+
+time { color: #999; }
+
+header { text-align: center; padding: 80px 0 60px 0; }
+
+img { max-width: 100%; }
+
+ol li + li { margin: 20px 0 0 0; }
+
+footer { color: #999; text-align: center; padding: 20px 0; font-size: .8em; }
+
+hr { border: 0; border-top: 1px solid #eee; }
+
+a { text-decoration: none; color: #007eff; }
+
+.container { max-width: 1100px; margin: 0 auto; }
+
+.main-content { padding: 0 30px 50px 30px; }
+
+@media (min-width: 900px) { .main-content { display: flex; } }
+
+@media (min-width: 900px) { .content { flex: 1; } }
+
+.post h1 a { color: #000; text-decoration: none; }
+
+.post h1 a:hover { text-decoration: underline; }
+
+.post time { padding: 0 0 20px 0; display: block; }
+
+.post .recipe-overview { padding: 0; margin: 0; }
+
+.post .recipe-overview svg { position: relative; top: 6px; }
+
+.post .recipe-overview span { margin: 0 18px 0 3px; }
+
+.post .recipe-overview li { list-style: none; padding: 0; margin: 0; }
+
+@media (min-width: 900px) { .post .recipe-overview li { display: inline-block; } }
+
+@media (min-width: 900px) { .post .recipe-contents { display: flex; } }
+
+.post .recipe-contents ul { padding: 0; }
+
+.post .recipe-contents ul li { list-style-type: none; }
+
+.post .recipe-contents ul li:before { content: '\00bb'; color: #ff4e4e; padding-right: 0.5em; }
+
+.post .recipe-contents ol { padding: 0; }
+
+.post .recipe-contents ol li { counter-increment: step-counter; list-style-type: none; position: relative; margin-left: 34px; }
+
+.post .recipe-contents ol li:before { content: counter(step-counter); margin-right: 0px; background-color: #ff4e4e; color: white; /* padding: 1px 7px; */ font-size: .7em; position: absolute; left: -34px; top: -2px; width: 25px; text-align: center; }
+
+.post .recipe-contents .ingredients { width: 250px; padding: 0 43px 0 0; }
+
+@media (min-width: 900px) { .post .recipe-contents .directions { flex: 1; } }
+
+.post + .post { margin: 65px 0 50px 0; }
+
+.sharing { margin: 50px 0 0 0; text-align: center; font-size: 0; }
+
+.sharing a { text-decoration: none; text-align: center; position: relative; width: 56px; display: inline-block; height: 44px; line-height: 0; padding: 0; margin: 0; display: inline-flex; align-items: center; justify-content: center; }
+
+.sharing a:hover:before { width: 100%; height: 100%; position: absolute; top: 0; left: 0; background: rgba(0, 0, 0, 0.25); content: ""; }
+
+.sharing a svg { fill: #fff; }
+
+.sharing a.email { background-color: #ff9d09; }
+
+.sharing a.facebook { background-color: #3b5998; }
+
+.sharing a.twitter { background-color: #55acee; }
+
+.sharing a.google-plus { background-color: #db4437; }
+
+.sharing a.youtube { background-color: #cd201f; }
+
+.sharing a.instagram { background-color: #f167f5; }
+
+.sharing a.linkedin { background-color: #0077b5; }
+
+.sharing a.pinterest { background-color: #C92228; }
+
+.sharing a.pinterest-icon:hover svg { fill: #bd081c; }
+
+.pagination { text-align: center; margin: 50px 0 0 0; }
+
+.take-me { float: right; }
+
+.take-me .button { padding-top: 10px; padding-bottom: 10px; }
+
+.cta { text-align: center; padding: 50px 0 0 0; }
+
+.button, input[type="submit"] { background: #fff; cursor: pointer; border: 1px solid #666; color: #000; text-decoration: none; padding: 5px 10px; display: inline-flex; align-items: flex-end; margin: 0; font-size: .8em; }
+
+.button:hover, input[type="submit"]:hover { background: #000; color: #fff; }
+
+.button:focus, input[type="submit"]:focus { outline: none; }
+
+.button { border-color: #000; }
+
+.button a { color: #000; }
+
+.button a:hover { color: #fff; }
+
+input[type="submit"] { margin-top: 10px; padding-top: 10px; padding-bottom: 10px; }
+
+input[type="text"], input[type="email"], textarea { display: block; width: 100%; font-size: 1.1em; padding: 10px; box-sizing: border-box; border: 1px solid #666; resize: none; }
+
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus { outline: 2px solid #333; }
+
+textarea { height: 150px; }
+
+label { margin: 20px 0 5px 0; display: block; }
+
+::-webkit-input-placeholder { /* Chrome */ color: #999; }
+
+:-ms-input-placeholder { /* IE 10+ */ color: #999; }
+
+::-moz-placeholder { /* Firefox 19+ */ color: #999; opacity: 1; }
+
+:-moz-placeholder { /* Firefox 4 - 18 */ color: #999; opacity: 1; }
+
+legend { display: none; }
+
+.contain { border: 0; background: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; justify-content: space-between; }
+
+.contain .split { flex: 0 0 380px; }
+
+select { width: 100%; padding: 20px; height: 43px; background: #fff; border-color: rgba(0, 0, 0, 0); font-size: 1em; outline: 1px solid #000; }
+
+select:focus { outline: 2px solid #333; }
+
+nav { position: fixed; width: 100%; display: flex; justify-content: center; background: rgba(255, 255, 255, 0.9); z-index: 999; }
+
+nav a { display: inline-block; text-decoration: none; padding: 20px 15px; color: #444; text-transform: uppercase; letter-spacing: 1px; font-size: .9em; }
+
+nav a.active { color: #888; }
+
+nav a:hover { color: #000; }
+
+.sidebar { width: 250px; padding: 70px 0 0 0; margin: 0 auto; }
+
+@media (min-width: 900px) { .sidebar { margin: 0; padding: 0 0 0 70px; } }
+
+.sidebar .author { text-align: center; }
+
+.sidebar .author p { padding: 0; margin: 0; }
+
+.sidebar .author img { width: 200px; border-radius: 200px; margin: 0 0 10px 0; }
+
+.sidebar .social-icons { display: flex; justify-content: center; margin: 10px 0 0 0; }
+
+.sidebar .social-icons a { padding: 3px; text-decoration: none; }
+
+.sidebar .social-icons a:hover svg { fill: #000; }
+
+.sidebar .social-icons svg { width: 25px; height: 25px; fill: #999; }
+
+@media (min-width: 900px) { .sidebar.push { padding-top: 72px; } }
+
+.recipes { display: flex; flex-wrap: wrap; }
+
+.recipes .recipe { flex: 1 0 300px; height: 200px; display: inline-block; background-position: center; background-size: cover; margin: 5px 7px; }
+
+.recipes .recipe a { width: 100%; height: 100%; display: block; background: rgba(0, 0, 0, 0.2); color: #fff; text-decoration: none; text-align: center; vertical-align: text-bottom; position: relative; transition: all 0.2s ease; font-size: 1.1em; font-weight: 700; }
+
+.recipes .recipe a span { position: absolute; bottom: 5px; width: 100%; left: 0; text-shadow: 1px 1px 1px #000; }
+
+.recipes .recipe a:hover { background: none; }
+
+.editor-link { display: none; margin-top: 0; border: 0; border-radius: 2px; box-sizing: border-box; text-decoration: none; margin: 0; cursor: pointer; background-color: #f7e064; color: #333; box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.2); }
+
+.editor-link:hover { background-color: #f4d525; color: #333; }
+
+.cms-editor-active .editor-link { display: block; }
+
+.cms-editor-active .editor-link { display: inline-block; margin: 0 auto 20px auto; padding: 10px 20px; }
+
+.cms-editor-active nav .editor-link { display: inline; margin: 0; padding: 20px 15px; }
+
+/**
+* @license lyradesigns.com v1
+* Updated: Dec 17, 2014
+* Add pin buttons to images
+* Copyright (c) 2014 Jonas Goslow - LYRA
+* Released under the MIT license
+* https://github.com/timmywil/jquery.panzoom/blob/master/MIT-License.txt
+
+Customize these however you like.
+
+*/
+.imgPinWrap { position: relative; display: inline-block; }
+
+.imgPinWrap .pin { opacity: 0; position: absolute; display: block; -webkit-transition: all .25s ease-in-out; -moz-transition: all .25s ease-in-out; -o-transition: all .25s ease-in-out; transition: all .25s ease-in-out; }
+
+.imgPinWrap .pin img { display: block; }
+
+.imgPinWrap .pin:hover { box-shadow: 0 0 5px #fff; }
+
+.imgPinWrap:hover .pin { opacity: 1; }
+
+.imgPinWrap .left { left: 15px; }
+
+.imgPinWrap .right { right: 15px; }
+
+.imgPinWrap .bottom { bottom: 15px; }
+
+.imgPinWrap .top { top: 15px; }
+
+.imgPinWrap .center { left: 50%; top: 50%; }
+
+/*# sourceMappingURL=screen.css.map */

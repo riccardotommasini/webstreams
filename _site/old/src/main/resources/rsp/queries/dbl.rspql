@@ -1,0 +1,12 @@
+PREFIX dbl: <http://live.dbpedia.org/changesets/>
+
+REGISTER RSTREAM <entitiesInMin> AS
+SELECT (COUNT (?entity) AS ?count) ?entity
+FROM NAMED WINDOW <wa> ON dbl:added [RANGE PT1M STEP PT10S]
+FROM NAMED WINDOW <wr> ON dbl:removed [RANGE PT1M STEP PT10S]
+WHERE {
+    WINDOW ?w { ?entity ?p ?o . }
+}
+GROUP BY ?entity
+ORDER BY DESC(?count)
+LIMIT 20

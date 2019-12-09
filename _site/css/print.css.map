@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"file": "print.css",
+	"sources": [
+		"print.scss"
+	],
+	"sourcesContent": [
+		"a {\n\ttext-decoration: none;\n\tcolor: #000;\n}\n\nh1 {\n\tfont-size: 2em;\n\tmargin: 0 0 10px 0;\n}\n\nbody {\n\tfont-family: 'Fira Sans', sans-serif;\n\tfont-size: .8em;\n}\n\n.sidebar, .sharing, footer, .recipe-body, nav, img, time, .take-me, .cta {\n\tdisplay: none;\n}\n\n.recipe-overview {\n\tpadding: 0;\n\tmargin: 0 0 30px 0;\n\n\tsvg {\n\t\tposition: relative;\n\t\ttop: 6px;\n\t}\n\n\tspan {\n\t\tmargin: 0 18px 0 3px;\n\t}\n\n\tli {\n\t\tpadding: 0;\n\t\tmargin: 0;\n\t\tdisplay: inline-block;\n\t}\n}\n\n.recipe-contents {\n\tdisplay: flex;\n\n\t.ingredients {\n\t\twidth: 200px;\n\t\tpadding: 0 43px 0 0;\n\t}\n\n\t.directions {\n\t\tflex: 1;\n\t}\n}\n\nul, ol {\n\tpadding-left: 17px;\n\tmargin: 0;\n}\n\nol li {\n\tmargin: 10px 0 0 0;\n}\n\n\n"
+	],
+	"names": [],
+	"mappings": "AAAA,AAAA,CAAC,CAAC,EACD,eAAe,EAAE,IAAI,EACrB,KAAK,EAAE,IAAI,GACX;;AAED,AAAA,EAAE,CAAC,EACF,SAAS,EAAE,GAAG,EACd,MAAM,EAAE,UAAU,GAClB;;AAED,AAAA,IAAI,CAAC,EACJ,WAAW,EAAE,uBAAuB,EACpC,SAAS,EAAE,IAAI,GACf;;AAED,AAAA,QAAQ,EAAE,QAAQ,EAAE,MAAM,EAAE,YAAY,EAAE,GAAG,EAAE,GAAG,EAAE,IAAI,EAAE,QAAQ,EAAE,IAAI,CAAC,EACxE,OAAO,EAAE,IAAI,GACb;;AAED,AAAA,gBAAgB,CAAC,EAChB,OAAO,EAAE,CAAC,EACV,MAAM,EAAE,UAAU,GAgBlB;;AAlBD,AAIC,gBAJe,CAIf,GAAG,CAAC,EACH,QAAQ,EAAE,QAAQ,EAClB,GAAG,EAAE,GAAG,GACR;;AAPF,AASC,gBATe,CASf,IAAI,CAAC,EACJ,MAAM,EAAE,YAAY,GACpB;;AAXF,AAaC,gBAbe,CAaf,EAAE,CAAC,EACF,OAAO,EAAE,CAAC,EACV,MAAM,EAAE,CAAC,EACT,OAAO,EAAE,YAAY,GACrB;;AAGF,AAAA,gBAAgB,CAAC,EAChB,OAAO,EAAE,IAAI,GAUb;;AAXD,AAGC,gBAHe,CAGf,YAAY,CAAC,EACZ,KAAK,EAAE,KAAK,EACZ,OAAO,EAAE,UAAU,GACnB;;AANF,AAQC,gBARe,CAQf,WAAW,CAAC,EACX,IAAI,EAAE,CAAC,GACP;;AAGF,AAAA,EAAE,EAAE,EAAE,CAAC,EACN,YAAY,EAAE,IAAI,EAClB,MAAM,EAAE,CAAC,GACT;;AAED,AAAA,EAAE,CAAC,EAAE,CAAC,EACL,MAAM,EAAE,UAAU,GAClB"
+}

@@ -1,0 +1,494 @@
+@prefix gdelt: <http://vocab.org/transit/terms/>.
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#>
+
+#1 The Following Query Shows all the events that has CHINA as its first {second} actor
+
+SELECT *
+WHERE{
+    ?event  a gdelt:Event;
+            gdelt:hasActor1 ?actor1.
+    ?actor1 gdelt:actorName "CHINA"^^xsd:string
+}
+
+
+
+#2 The Following Query Shows COUNT of events that has JAPAN as its first {second} Actor
+
+
+SELECT (count(distinct ?event) as ?eventsCount)
+WHERE{
+    ?event  a gdelt:Event;
+            gdelt:hasActor1 ?actor1.
+    ?actor1 gdelt:actorName "JAPAN"^^xsd:string
+}
+
+
+
+
+#3 This Query Finds the whole number of events in the previous 15 Minutes
+
+
+SELECT (count(distinct ?event) as ?eventsCount)
+WHERE{
+    ?event  a gdelt:Event.
+}
+
+
+#4  Find the number of events per the first {second} actor
+
+
+SELECT ?actor1  (count(distinct ?event) as ?eventsCount)
+WHERE{
+    ?event  a gdelt:Event;
+            gdelt:hasActor1 ?actor1.
+}
+GROUP BY ?actor1
+ORDER BY ?eventsCount
+
+
+#5 Find the top ten event categories with the number of event per each category during the last 15 Minutes
+    #Note: the EventCode Descriptions are found in a sperate CSV file with the name of 'EventCodes.csv'
+        #020   Appeal, not specified below       76
+        #020   USE UNCONVENTIONAL MASS VIOLENCE       76
+        #043   Host a visit       62
+        #042   Make a visit       61
+        #010   Make statement, not specified below       57
+
+
+
+SELECT ?eventCode ?eventCodeDescription (count(distinct ?event) as ?eventsCount)
+WHERE{
+    ?event  a gdelt:Event;
+            gdelt:hasEventCode ?eventCode.
+    ?eventCode gdelt:hasDescription ?eventCodeDesc.
+}
+GROUP BY ?eventCode
+ORDER BY ?eventsCount
+LIMIT 10
+
+#6 Find all the events that under the category of (Threats) during the last 15 Minutes
+
+SELECT *
+WHERE{
+    ?event  a gdelt:Event;
+            gdelt:hasEventCode ?eventCode.
+    ?eventCode gdelt:hasDescription ?eventCodeDesc;
+               gdelt:hasRootCodeValue "13"^^xsd:Integer.
+}
+
+
+#7 Find the count of  (CHINA/UNITED STATES)  events  per category of events during the last 15 Minutes
+
+SELECT ?eventCode ?eventCodeDescription (count(distinct ?event) as ?eventsCount)
+WHERE{
+    ?event  a gdelt:Event;
+            gdelt:hasEventCode ?eventCode;
+            gdelt:hasActor1 ?actor1;
+            gdelt:hasActor2 ?actor2.
+    ?actor1 gdelt:actorName "CHINA"^^xsd:string.
+    ?actor2 gdelt:actorName "UNITED STATES"^^xsd:string.
+
+    ?eventCode gdelt:hasDescription ?eventCodeDesc.
+}
+GROUP BY ?eventCode
+ORDER BY ?eventsCount
+
+
+#8 Find the Conflicting ( using the attribute: QuadClass '4': 'Material Conflict' ) Actors during the last 15 minutes
+
+
+SELECT ?actor1Name ?actor2Name
+WHERE{
+    ?event  a gdelt:Event;
+            gdelt:hasQuadCalss "4"^^xsd:Integer
+            gdelt:hasActor1 ?actor1;
+            gdelt:hasActor2 ?actor2.
+    ?actor1 gdelt:actorName ?actor1Name.
+    ?actor2 gdelt:actorName ?actor2Name.
+}
+
+
+#9 Find the Goldstien scale 'a theoritical mesure of stability of countries depends on the type of the event' during the last 15 minutes
+
+
+SELECT ?goldestienScale (count(distinct ?event) as ?eventsCount)
+WHERE{
+    ?event  a gdelt:Event;
+            gdelt:hasGoldestienScale ?goldestienScale;
+}
+GROUP BY ?goldestienScale
+ORDER BY ?eventsCount
+
+
+
+#10 Find the top 10 most mentioned events with the number of its source Articles during the last 15 minutes
+
+
+SELECT ?globalEventID ?sourcesNumber
+WHERE{
+    ?event  a gdelt:Event;
+            gdelt:hasGlobalEventID ?globalEventID;
+            gdelt:hasSourcesNumber ?sourcesNumber.
+}
+ORDER BY ?sourcesNumber
+LIMIT 10
+
+
+#11 Find the top 10 most negative events 'using the AvgTone' with their Average Tones during the last 15 minutes
+
+
+
+SELECT ?globalEventID ?eventAVGTone
+WHERE{
+    ?event  a gdelt:Event;
+            gdelt:hasGlobalEventID ?globalEventID;
+            gdelt:hasAvgTone ?eventAVGTone.
+}
+ORDER BY ASC (?eventAVGTone)
+LIMIT 10
+
+
+#12  Find the top 10 most Positive events 'using the AvgTone' with their Average Tones during the last 15 minutes
+
+SELECT ?globalEventID ?eventAVGTone
+WHERE{
+    ?event  a gdelt:Event;
+            gdelt:hasGlobalEventID ?globalEventID;
+            gdelt:hasAvgTone ?eventAVGTone.
+}
+ORDER BY DESC (?eventAVGTone)
+LIMIT 10
+
+#13 Find the first 20 events  that their actors Actor1 and Actor2 related only to countries
+    #'using Actor1GeoType and Actor2GeoType to be '1=Country' during the last 15 minutes
+
+SELECT ?globalEventID ?actor1CountryCode ?actor2CountryCode
+WHERE{
+    ?event  a gdelt:Event;
+            gdelt:hasActor1 ?actor1;
+            gdelt:hasActor2 ?actor2.
+
+    ?actor1 gdelt:actorName ?actor1Name;
+            gdelt:actorGeoType "1"^^xsd:Integer;
+            gdelt:actorCountryCode ?actor1CountryCode.
+    ?actor2 gdelt:actorName ?actor2Name;
+            gdelt:actorGeoType "1"^^xsd:Integer;
+            gdelt:actorCountryCode ?actor2CountryCode.
+}
+LIMIT 20
+
+
+#14 Find the first 20 events  that their actors Actor1 (is United States) and Actor2 related only to countries
+    #'using Actor1GeoType and Actor2GeoType to be '1=Country' during the last 15 minutes
+
+
+SELECT ?globalEventID ?actor1CountryCode ?actor2CountryCode
+WHERE{
+    ?event  a gdelt:Event;
+            gdelt:hasGlobalEventID ?globalEventID;
+            gdelt:hasActor1 ?actor1;
+            gdelt:hasActor2 ?actor2.
+
+    ?actor1 gdelt:actorName ?actor1Name;
+            gdelt:actorGeoType "1"^^xsd:Integer;
+            gdelt:actorCountryCode "US"^^xsd:string.
+    ?actor2 gdelt:actorName ?actor2Name;
+            gdelt:actorGeoType "1"^^xsd:Integer;
+            gdelt:actorCountryCode ?actor2CountryCode.
+}
+LIMIT 20
+
+
+#15 Find the first 20 events  that their Actions only are in United States
+    #(using 'ActionGeo_Type=2 'US State')during the last 15 minutes
+
+
+SELECT ?globalEventID  ?sourceURL
+WHERE{
+    ?event  a gdelt:Event;
+            gdelt:hasGlobalEventID ?globalEventID;
+            gdelt:hasSourceURL ?sourceURL;
+            gdelt:hasAction ?action.
+    ?action gdelt:hasActionGeoFullName ?actionGeoFullName;
+            gdelt:hasActionGeoType "2"^^xsd:Integer.
+}
+LIMIT 20
+
+
+#16 Find the first 20 events  that their Actions only are in a world state that IS NOT US
+    #(using 'ActionGeo_Type=5 ) during the last 15 minutes
+
+
+SELECT ?globalEventID   ?actionGeoFullname  ?sourceURL
+WHERE{
+    ?event  a gdelt:Event;
+            gdelt:hasGlobalEventID ?globalEventID;
+            gdelt:hasSourceURL ?sourceURL;
+            gdelt:hasAction ?action.
+    ?action gdelt:hasActionGeoFullName ?actionGeoFullName;
+            gdelt:hasActionGeoType "5"^^xsd:Integer.
+}
+LIMIT 20
+
+
+#17 Find the first 20 events  that their Actions only are in a non US City
+    #(using 'ActionGeo_Type=4)during the last 15 minutes
+
+ SELECT ?globalEventID   ?actionGeoFullname  ?sourceURL
+ WHERE{
+     ?event  a gdelt:Event;
+             gdelt:hasGlobalEventID ?globalEventID;
+             gdelt:hasSourceURL ?sourceURL;
+             gdelt:hasAction ?action.
+     ?action gdelt:hasActionGeoFullName ?actionGeoFullName;
+             gdelt:hasActionGeoType "4"^^xsd:Integer.
+ }
+ LIMIT 20
+
+
+#18 get all other mentions of the event from the Mentions Table get Their URLs during the last 15 minutes
+
+
+ SELECT ?globalEventID   ?mentionIdentifier
+ WHERE{
+     ?event  a gdelt:Event;
+             gdelt:hasGlobalEventID ?globalEventID;
+             gdelt:hasSourceURL ?sourceURL;
+
+      ?globalEventID gdelt:isMentionedIn ?mention.
+      ?mention gdelt:hasMentionIdentifier ?mentionIdentifier.
+
+ }
+ LIMIT 20
+
+ ###################################################GKG##################################################
+
+
+#19 get latitude, longitude, Tone and DocumentIdentifier (sourceURL) of all documents related to the Theme of "REFUGEE" and specially from "Syria" as location the GDELT GKG
+
+
+SELECT ?long ?lat ?toneVal ?documentSourceURL
+WHERE{
+
+    ?GKGDoc gdelt:hasDocIdentifier ?documentSourceURL;
+            gdelt:hasTone  ?tone;
+            gdelt:hasLocation ?loc;
+            gdelt:hasThemes ?themes.
+
+
+    ?tone gdelt:hasToneValue  ?toneVal.
+    ?loc  gdelt:hasLat ?lat.
+    ?loc  gdelt:hasLong ?long.
+    ?loc  gdelt:hasLocationFullName "Syria"^^xsd:string.
+
+    FILTER regex(?themes, "REFUGEE", "i").
+}
+
+
+
+#20 Get only the Non-English documents that are mentioning refugees and Syria
+
+
+SELECT *
+WHERE{
+
+    ?GKGDoc gdelt:hasRecordID ?recordID;
+            gdelt:hasLocation ?loc;
+            gdelt:hasThemes ?themes.
+
+     ?loc  gdelt:hasLocationFullName "Syria"^^xsd:string.
+
+     FILTER regex(?themes, "REFUGEE", "i" )
+     FILTER regex(?recordID, "T", "i" )
+}
+
+
+
+#21 Get only the English documents that are mentioning refugees and Syria
+
+
+SELECT *
+WHERE{
+
+    ?GKGDoc gdelt:hasRecordID ?GKGDocID;
+            gdelt:hasLocation ?loc;
+            gdelt:hasThemes ?themes.
+
+     ?loc  gdelt:hasLocationFullName "Syria"^^xsd:string.
+
+     FILTER regex(?themes, "REFUGEE", "i" )
+     FILTER NOT EXISTS regex(?GKGDocID, "T", "i" )
+}
+
+
+#22 Get All COUNTS  during the past 15 minutes in all documents
+
+
+SELECT ?GKGDocID ?countType ?countVal ?objectsCounted ?documentSourceURL
+WHERE{
+
+    ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+            gdelt:hasDocIdentifier  ?documentSourceURL;
+            gdelt:hasCounts ?count.
+
+    ?count gdelt:hasCountType ?countType;
+           gdelt:hasCountVal ?countVal;
+           gdelt:hasCountedObjects ?objectsCounted.
+}
+
+
+
+#23 Get number of KILLED people during the past 15 minutes in all documnets
+
+
+SELECT ?GKGDocID ?countVal ?objectsCounted ?documentSourceURL
+WHERE{
+
+    ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+            gdelt:hasDocIdentifier  ?documentSourceURL;
+            gdelt:hasCounts ?count.
+
+    ?count gdelt:hasCountType "KILL"^^xsd:string;
+           gdelt:hasCountVal ?countVal;
+           gdelt:hasCountedObjects ?objectsCounted.
+}
+
+
+#24 Get all KILLED people during the past 15 minutes whose numbers exceed 1000 (Disaster for example Earthquake) in all documents
+
+
+SELECT ?GKGDocID ?countVal ?objectsCounted ?documentSourceURL
+WHERE{
+
+    ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+            gdelt:hasDocIdentifier  ?documentSourceURL;
+            gdelt:hasCounts ?count.
+
+    ?count gdelt:hasCountType "KILL"^^xsd:string;
+           gdelt:hasCountVal ?countVal;
+           gdelt:hasCountedObjects ?objectsCounted.
+
+     FILTER ( ?countVal >= 1000)
+}
+
+
+#25 Get number of KIDNAPed people during the past 15 minutes in all documnets
+
+
+SELECT ?(sum(distinct ?countVal) as ?Total-Kidnaped)
+WHERE{
+
+    ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+            gdelt:hasDocIdentifier  ?documentSourceURL;
+            gdelt:hasCounts ?count.
+
+    ?count gdelt:hasCountType "KIDNAP"^^xsd:string;
+           gdelt:hasCountVal ?countVal;
+           gdelt:hasCountedObjects ?objectsCounted.
+
+}
+
+
+
+#26  Get total numbers of all counts during the past 15 minutes in all documents
+
+
+SELECT   ?countType  ?(sum(distinct ?countVal) as ?TotalCount)
+WHERE{
+
+    ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+            gdelt:hasDocIdentifier  ?documentSourceURL;
+            gdelt:hasCounts ?count.
+
+    ?count gdelt:hasCountType "KIDNAP"^^xsd:string;
+           gdelt:hasCountVal ?countVal;
+           gdelt:hasCountedObjects ?objectsCounted.
+
+}
+GROUP BY (?countType)
+
+
+#27 Get All 'THEMES' Related to All documents  during the past 15 minutes in all documents.
+
+
+
+SELECT ?GKGDocID ?themes
+WHERE{
+
+    ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+            gdelt:hasThemes         ?themes.
+}
+
+
+
+#28 Get All 'PERSONS'  Related to All documents  during the past 15 minutes in all documents.
+
+
+
+SELECT ?GKGDocID ?persons
+WHERE{
+
+    ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+            gdelt:hasPersons        ?persons.
+}
+
+
+#29 Get All 'QOUTATIONS'  Related to All documents  during the past 15 minutes in all documents.
+
+
+SELECT ?GKGDocID ?qoutations
+WHERE{
+
+    ?GKGDoc gdelt:hasRecordID       ?GKGDocID;
+            gdelt:hasPersons        ?qoutations.
+}
+
+
+
+#30 Get EventIDs, Actors, Counts {Or any Other Stuff from GKG} for events occurring during the past 15 minutes in all documents
+
+SELECT ?eventID  ?actor1Name ?actor2Name ?countType ?countVal ?objectsCounted
+WHERE{
+
+  ?event      a   gdelt:Event;
+              gdelt:hasEventCode ?eventCode;
+              gdelt:hasActor1 ?actor1;
+              gdelt:hasActor2 ?actor2;
+              gdelt:hasMention ?mention;
+              gdelt:hasGlobalEventID ?globalEventID.
+
+   ?mention gdelt:hasMentionIdentifier ?mentionID;
+            gdelt:hasGKGDocID ?GKGdocID;
+            gdelt:hasGKGCounts ?count.
+
+   ?count gdelt:hasCountType ?countType;
+               gdelt:hasCountVal ?countVal;
+               gdelt:hasCountedObjects ?objectsCounted.
+
+    FILTER(?globalEventID=?mentionIdentifier  && ?mentionIdentifier=GKGdocID)
+}
+
+
+#31  Filter events to just those mentioned in articles that focus on certain themes ('GENERAL_GOVERNMENT')
+    #and related somehow to (IRAQ)  or groups.
+
+
+SELECT ?eventID  ?actor1Name ?actor2Name ?countType ?countVal ?objectsCounted
+WHERE{
+
+  ?event      a   gdelt:Event;
+              gdelt:hasEventCode ?eventCode;
+              gdelt:hasActor1 ?actor1;
+              gdelt:hasActor2 ?actor2;
+              gdelt:hasMention ?mention;
+              gdelt:hasGlobalEventID ?globalEventID.
+
+   ?mention gdelt:hasMentionIdentifier ?mentionID;
+            gdelt:hasGKGDocID ?GKGdocID;
+            gdelt:hasGKGTheme ?theme;
+            gdelt:hasGKGLocation ?loc.
+
+    ?loc  gdelt:hasLocationFullName "Iraq"^^xsd:string.
+
+    FILTER(?globalEventID=?mentionIdentifier  && ?mentionIdentifier=GKGdocID)
+}
