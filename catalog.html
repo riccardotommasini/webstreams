@@ -1,0 +1,17 @@
+---
+title: Catalog
+image_view: true
+---
+<h1>Web Stream Catalog</h1>
+
+{% if page.image_view %}
+	{% for post in site.posts %}
+		{% if post.stream %}
+			<div class="streams">
+				<div class="stream" style="background-image: url('{{ post.featured_image }}')">
+					<a href="{{ site.baseurl }}{{ post.url }}"><span>{{ post.title }}</span></a>
+				</div>	
+			</div>
+		{% endif %}
+	{% endfor %}
+{% endif %}

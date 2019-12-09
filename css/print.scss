@@ -40,6 +40,39 @@ body {
 	}
 }
 
+.stream-overview {
+	padding: 0;
+	margin: 0 0 30px 0;
+
+	svg {
+		position: relative;
+		top: 6px;
+	}
+
+	span {
+		margin: 0 18px 0 3px;
+	}
+
+	li {
+		padding: 0;
+		margin: 0;
+		display: inline-block;
+	}
+}
+
+.stream-contents {
+	display: flex;
+
+	.ingredients {
+		width: 200px;
+		padding: 0 43px 0 0;
+	}
+
+	.directions {
+		flex: 1;
+	}
+}
+
 .recipe-contents {
 	display: flex;
 

@@ -17,7 +17,7 @@
 <meta property="og:url" content="http://localhost:4000/about/" />
 <meta property="og:site_name" content="The Joy of Web Streams" />
 <script type="application/ld+json">
-{"description":"A cookbook for publishing and processing Web Streams.","@type":"WebSite","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/siteicon.png"},"name":"Riccardo Tommasini"},"headline":"About","url":"http://localhost:4000/about/","sameAs":["https://github.com/riccardotommasini/webstreams"],"name":"Web Streams","author":{"@type":"Person","name":"Riccardo Tommasini"},"@context":"https://schema.org"}</script>
+{"description":"A cookbook for publishing and processing Web Streams.","@type":"WebSite","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/siteicon.png"},"name":"Riccardo Tommasini"},"url":"http://localhost:4000/about/","name":"Web Streams","headline":"About","sameAs":["https://github.com/riccardotommasini/webstreams"],"author":{"@type":"Person","name":"Riccardo Tommasini"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 		<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Joy of Web Streams" />
@@ -46,6 +46,11 @@
 	
 
 		
+		<a href="/catalog/" class="">Catalog</a>
+	
+	
+
+		
 		<a href="/contact/" class="">Contact</a>
 	
 </nav>
@@ -59,14 +64,31 @@
 		</header>
 			
 		<div class="container main-content">
-			<section class="content"><div class="editable">
+			<section class="content">	<div class="editable">
 	<h1>About</h1>
+	foo bar
+
+	Data Velocity is popular on Web. New protocols and APIs (e.g. WebSockets, and EventSource) have been designed to extend the Web architecture. The Web of Data is also evolving to tame \textit{Velocity} without neglecting \textit{Variety}. The RDF Stream Processing (RSP) community is actively addressing these challenges by proposing continuous query languages and working prototypes. 
+
+	The problem of Streaming Linked Data publication is currently under investigation. So far, the RSP community efforts have contributed middleware, engines, and vocabularies that address the scientific and technical challenges.
+	Nevertheless, a set of guidelines that showcase how to \textit{reuse} existing resources to publish streams on the Web is still missing. 
+	In this paper, we propose a Cookbook for publishing Streaming Linked Data based on the publication life-cycle prescribed by W3C. Particularly,  (i) We make use of \texttt{TripleWave}, \texttt{R2RML}/\texttt{RML}, \texttt{VoCaLS}, \texttt{RSP-QL}, as well as other resources for RDF Stream publishing and processing.  (ii) We bootstrap a catalogue of Web Streams, 
+	highlighting the requirements that drove our selection of three examples of \textit{wild} streams: \texttt{DBpedia} Live changes, \texttt{Wikimedia} EventStreams, and the Global Database of Events, Language and Tone (\texttt{GDELT}). (iii) Last but not least, we open sourced our code, and make it available on for public use at \url{https://w3id.org/webstreams}.
+
+	<h2>Authors<h2>
+
+	<b>Riccardo Tommasini<b>
+	<b>Mohamed Ragab<b>
+	<b>Alessandro Falcetta<b>
+	<b>Sherif Sackr<b>
+	<b>Emanuele Della Valle<b>
 
 	<p>I'm Jane Doe and welcome to my food blog. Each week I try out a new recipe and post it here to share it with the world. If you enjoy any of the recipes I post feel free to leave a comment.</p>
 
 	<p>I grew up in Denver, Colorado and learned to bake from my mother. After finishing highschool I started baking full time and selling baked goods at local markets. Now I work full-time at a bakery in San Francisco.</p>
 	<img src="https://source.unsplash.com/e05_q5pyMDs" alt="Jane Doe">
 </div>
+
 </section>
 			<aside class="sidebar ">
 	<div><a class="editor-link btn" href="cloudcannon:collections/_data/sidebar.yml" class="btn"><strong>&#9998;</strong> Edit sidebar</a></div>

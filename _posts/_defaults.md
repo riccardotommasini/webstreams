@@ -1,6 +1,7 @@
 ---
 title:
 categories:
+type: recipe
 date:
 featured_image:
 recipe:

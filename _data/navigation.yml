@@ -2,5 +2,7 @@
   link: /about/
 - name: Recipes
   link: /recipes/
+- name: Catalog
+  link: /catalog/
 - name: Contact
   link: /contact/

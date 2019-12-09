@@ -14,6 +14,20 @@ body { font-family: 'Fira Sans', sans-serif; font-size: .8em; }
 
 .recipe-overview li { padding: 0; margin: 0; display: inline-block; }
 
+.stream-overview { padding: 0; margin: 0 0 30px 0; }
+
+.stream-overview svg { position: relative; top: 6px; }
+
+.stream-overview span { margin: 0 18px 0 3px; }
+
+.stream-overview li { padding: 0; margin: 0; display: inline-block; }
+
+.stream-contents { display: flex; }
+
+.stream-contents .ingredients { width: 200px; padding: 0 43px 0 0; }
+
+.stream-contents .directions { flex: 1; }
+
 .recipe-contents { display: flex; }
 
 .recipe-contents .ingredients { width: 200px; padding: 0 43px 0 0; }
