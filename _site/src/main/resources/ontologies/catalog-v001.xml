@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
+        <uri id="Automatically generated entry, Timestamp=1555079571412" name="http://geldt.org/cameo/" uri="cameo.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1555079571412" name="http://geldt.org/vocab/" uri="geldt.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1555079571412" name="urn:absolute:www.gdelt.org/gcam" uri="gcam.owl"/>
+    </group>
+</catalog>
