@@ -1,0 +1,53 @@
+I"A	<h2 id="sec:wikimedia">Wikimedia EventStreams</h2>
+
+<p>Wikimedia Foundation is an American non-profit organization that hosts,
+among the other, open-knowledge projects like Wikipedia. In particular,
+Wikimedia invests financial and technical resources for the maintenance
+of projects that foster free and open knowledge.</p>
+
+<p>Wikimedia EventStream (WES) was created for internal data analysis and
+maintenance and open-sourced in 2018. WES is a web service that exposes
+streams of structured data following the Server-Sent Events (SSE)
+protocol, i.e., data is pushed to the interested clients. Schema of the
+data is versioned and available on GitHub. WES API currently generates
+eight streams:</p>
+
+<ul>
+  <li>recentchanges</li>
+  <li>revision-create</li>
+  <li>page-create</li>
+  <li>page-property-change</li>
+  <li>page-links-change</li>
+  <li>page-move</li>
+  <li>page-delete</li>
+  <li>page-undelete.</li>
+</ul>
+
+<p>All the streams are shared as structured data, i.e., JSON.</p>
+
+<p>In the following, we will focus on <em>recentchanges</em> stream that, among
+the others, is the one with the most complex content.
+Listing <a href="#lst:wes1">[lst:wes1]</a>{reference-type=”ref”
+reference=”lst:wes1”} shows an example of <em>rechentchange</em> stream data
+which is timestamped (line 1). On the <em>recentchange</em> stream, four kinds
+of events are possible: "edit" (like in
+Listing <a href="#lst:wes1">[lst:wes1]</a>{reference-type=”ref”
+reference=”lst:wes1”}) for existing page modification; "new", for new
+page creation, "log" for log action, "external" for external
+changes, and "categorize" for category membership change. Moreover,
+the "title" indicates the page title in a Wiki of the Wikimedia
+foundation. This practically links the event to an external entity.
+Listing <a href="#lst:wes1">[lst:wes1]</a>{reference-type=”ref”
+reference=”lst:wes1”} points to the Wikidata Entity at
+<a href="https://www.wikidata.org/enity/Q31218558.ttl">https://www.wikidata.org/enity/Q31218558.ttl</a> that we can retrive to
+enrich the stream<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>.</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>We excluded metadata about the Kafka Topic from the current
+modeling and from the examples. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

@@ -1,0 +1,121 @@
+I"<p>Several studies have been running using GDELT. In particular, data
+visualization techniques that take into account the spatio-temporal
+metadata of GDELT extracted events. GDELT offers different APIs to run
+analysis and a <code class="highlighter-rouge">Google Big Query</code>[^3] access to the database. GDELT
+exposes examples of pre-configures analyses via the analysis service.
+For instance, the Event <code class="highlighter-rouge">TimeMapper</code> visualizes events matching a given
+search over time.</p>
+
+<figure class="highlight"><pre><code class="language-ttl" data-lang="ttl"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre>:events a vocals:StreamDescriptor ; dcat:dataset :eventstream  .
+:eventstream a vocals:Stream ;
+ dcat:title "GDELT Event Stream"^^xsd:string ;
+ dcat:publisher &lt;http://www.streamreasoning.org&gt; ;
+ dcat:description "GDELT Events Stream"^^xsd:string ;
+ vocals:windowType vocals:logicalTumbling ;
+ vocals:windowSize "PT15M"^^xsd:duration ;
+ vocals:hasEndpoint [
+   a vocals:StreamEndpoint ;
+   dcat:license &lt;https://creativecommons.org/licenses/by-nc/4.0/&gt; ;
+   dcat:format frmt:JSON-LD;
+   dcat:accessURL "ws://examples:8080/events" ] .
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We collected all the information regarding the streams schemas into an
+OWL 2 Ontology. Moreover, we started an knowledge engineering task that
+involves both <code class="highlighter-rouge">CAMEO</code> and <code class="highlighter-rouge">GCAM</code>[^4].</p>
+
+<p>The <code class="highlighter-rouge">CAMEO</code> ontology is a coding scheme designed for the study of
+third-party mediation in international disputes. It contains
+hierarchical coding scheme for dealing with sub-state actors, event
+types, and an extensive taxonomy for religious groups and ethnic groups.
+For CAMEO, we focus on event types and actors, creating a comprehensive
+hierarchy for the stream.</p>
+
+<p><code class="highlighter-rouge">GCAM</code> is a pipeline of 18 content analysis tools. Each news article
+monitored by GDELT goes through GCAM pipeline that captures over 2230
+dimensions, reporting density and value scores for each. Using GCAM, you
+can assess the density of “<em>Anxiety</em>” speech via Linguistic Inquiry and
+Word Count (LIWC), or “<em>Smugness</em>” via WordNet Affect. The GCAM Master
+Codebook lists of all of the dimensions available[^5]. We converted the
+Codebook in RDF and we refined it manually to link it to existing
+vocabularies such as DBPedia and WordNET.</p>
+
+<p>Listing <a href="#lst:gdelt1">[lst:gdelt1]</a>{reference-type=”ref”
+reference=”lst:gdelt1”} shows a VoCaLS description for the GDELT Event
+Stream. GDELT does not use a licence format, thus we include a licence
+that is compliant with the terms of use. We also linked ontologies and
+mappings using <code class="highlighter-rouge">rdfs:seeAlso</code>. Since the stream is published regularly
+as 15 minutes batch, we include metadata about the rate, i.e.,
+<code class="highlighter-rouge">vocals:windowType</code> and <code class="highlighter-rouge">vocals:windowSize</code> at line 6 and 7.</p>
+
+<p>Due to the lack of space, we do not include a <code class="highlighter-rouge">vocals:StreamEndpoint</code>
+for the original source. However, since the complexity of the knowledge
+engineering task is high, we are particularly interested in making the
+mapping process transparent to collect feedback and improve data quality.</p>
+
+<p>GDELT content is not natively RDF. Therefore, similarly to what we did
+for WES, we need to set up a conversion mechanism. Similarly to what we
+did for Wikimedia Event, Data conversion follows the RML approach, where
+CSV data are converted using Mapping.</p>
+
+<p>The following Listings show a sample of the GDELT event mapping. We
+used <code class="highlighter-rouge">rr:class</code> to assign the <code class="highlighter-rouge">gdelt:Event</code> type to the data at line 4.
+Moreover, we also assign the CAMEO type using <code class="highlighter-rouge">rdf:type</code> at line 7. To
+model the actors and its type hierarchy, we include a separate triple
+map at line 12.</p>
+
+<figure class="highlight"><pre><code class="language-ttl" data-lang="ttl"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="code"><pre>&lt;GEM&gt; a rr:TriplesMap ; rml:logicalSource  &lt;source&gt; ;
+  rr:subjectMap [ 
+    rr:template "http://gdelt.com/instance/{GLOBALEVENTID}";
+    rr:class gdelt:Event;
+    rr:graphMap [ rr:template  "http://gdelt.com/time/{DATEADDED}"]];
+  rr:predicateObjectMap [
+    rr:predicate rdf:type;
+    rr:objectMap [rr:template "http://gdelt.com/cameo/{EventCode}"; ]];
+  rr:predicateObjectMap [
+    rr:predicate gdelt:actor;
+    rr:objectMap [ rr:parentTriplesMap &lt;Atr1TM&gt; ]]; [...] .
+&lt;Atr1TM&gt; rml:logicalSource &lt;source&gt; ;
+    rr:subjectMap [ rr:template "http://gdelt.com/cameo/{Actor1Name}" ];
+     rr:predicateObjectMap [
+         rr:predicate gdelt:actorCode;
+         rr:objectMap [ rml:reference "Actor1Code" ; ] ]; [...] .
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>CARML allows us to extrapolate multidimensional entries of the GKG
+stream like Themes or GCAM dimensions using custom functions. We develop
+functions that can split the entry content and treat it accordingly.
+Moreover, we enriched the Persons entry by retrieving relevant DBPedia
+entities using DBPedia Spotlight and GeoNames APIs for locations.</p>
+
+<p>We publish the GDELT stream using TripleWave approach. We shared the
+VoCALS description files like the first Listing as S-GRAPH via REST APIs. Since the concept of event is first-class, we opted for a graph-based stream data model that maintains the granularity of information.</p>
+:ET

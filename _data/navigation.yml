@@ -3,6 +3,8 @@
 - name: Recipes
   link: /recipes/
 - name: Catalog
-  link: /catalog/
+  link: /streams/
+- name: Resources
+  link: /resources/
 - name: Contact
   link: /contact/

@@ -1,0 +1,15 @@
+---
+title: Catalog
+image_view: true
+---
+<h1>Resources for Web Stream Processing</h1>
+
+{% if page.image_view %}
+	{% for res in site.resources %}
+			<div class="streams">
+				<div class="stream" style="background-image: url('{{ res.featured_image }}')">
+					<a href="{{ site.baseurl }}{{ res.url }}"><span>{{ res.title }}</span></a>
+				</div>	
+			</div>
+	{% endfor %}
+{% endif %}

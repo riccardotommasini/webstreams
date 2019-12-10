@@ -1,0 +1,9 @@
+I"¹<ol>
+  <li>Access the Web Stream</li>
+  <li>Convert the stream into RDF to simplify data integration using the R2RML mapping and the mapping engine</li>
+  <li>Design your query on paper simple SPARQL syntax</li>
+  <li>Extend the SPARQL query to RSP-QL by adding the prescribed window operator</li>
+  <li>Verify if the syntax is correct registering the query to YASPER</li>
+  <li>Deploy and wait for the results (every 15 minutes)</li>
+</ol>
+:ET

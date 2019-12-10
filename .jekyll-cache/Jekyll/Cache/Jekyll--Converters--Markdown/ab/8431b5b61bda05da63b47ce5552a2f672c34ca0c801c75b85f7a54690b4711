@@ -1,0 +1,188 @@
+I"�"<h2 id="sec:geldt">Global Database of Events, Language and Tone (GDELT)</h2>
+
+<p>The <code class="highlighter-rouge">GDELT</code> is the largest open-access spatio-temporal archive for human
+society. Its Global Knowledge Graph spans more than 215 years and
+connects people, organizations, locations, all over the world. GDELT
+captures themes, images, and emotions into a single holistic global
+network.</p>
+
+<p>GDELT data comes from a multitude of news sources. The extraction
+process follows techniques from Natural Language Processing and makes
+use of two ontologies, i.e., Conflict and Mediation Event Observations
+(CAMEO) [@gerner2002conflict], and Global Content Analysis Measures
+(GCAM). GDELT provisions multiple streams, in the following we discuss
+three of them, i.e., Events, Mentions and Global Knowledge Graphs (GKG).
+Consequently, GDELT information is naturally multidimensional and
+interconnected due to the usage of complex background knowledge.</p>
+
+<p>GDELT provisions streams of TSV data every 15 minutes. As anticipated,
+it includes three streams, i.e., Events, Mentions, and Global 
+Knowledge Graphs (GKG).</p>
+
+<p>The <em>Event Stream</em> makes use of the dyadic CAMEO format. The
+most important information regards the two actors participating in each
+event, and the action they perform.</p>
+
+<p>The <em>Mention Stream</em> records every
+mention of an event over time, along with the timestamp the article was
+published. The mention stream is linked to the Event stream by the
+Global Event ID field.</p>
+
+<p>The <em>GKG Stream</em> connects people, organizations,
+locations, themes, news source, and event across the planet into a
+single massive network. GKG stream is rich and multidimensional. Fields
+like the GCAM, Themes, or Persons include more than one entry, using a
+CSV or similar formats.</p>
+
+<figure class="highlight"><pre><code class="language-ttl" data-lang="ttl"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre>:events a vocals:StreamDescriptor ; dcat:dataset :eventstream  .
+:eventstream a vocals:Stream ;
+ dcat:title "GDELT Event Stream"^^xsd:string ;
+ dcat:publisher &lt;http://www.streamreasoning.org&gt; ;
+ dcat:description "GDELT Events Stream"^^xsd:string ;
+ vocals:windowType vocals:logicalTumbling ;
+ vocals:windowSize "PT15M"^^xsd:duration ;
+ vocals:hasEndpoint [
+   a vocals:StreamEndpoint ;
+   dcat:license &lt;https://creativecommons.org/licenses/by-nc/4.0/&gt; ;
+   dcat:format frmt:JSON-LD;
+   dcat:accessURL "ws://examples:8080/events" ] .
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We collected all the information regarding the streams schemas into an
+OWL 2 Ontology. Moreover, we started an knowledge engineering task that
+involves both <code class="highlighter-rouge">CAMEO</code> and <code class="highlighter-rouge">GCAM</code><sup id="fnref:4"><a href="#fn:4" class="footnote">1</a></sup>.</p>
+
+<p>The <code class="highlighter-rouge">CAMEO</code> ontology is a coding scheme designed for the study of
+third-party mediation in international disputes. It contains
+hierarchical coding scheme for dealing with sub-state actors, event
+types, and an extensive taxonomy for religious groups and ethnic groups.
+For CAMEO, we focus on event types and actors, creating a comprehensive
+hierarchy for the stream.</p>
+
+<p><code class="highlighter-rouge">GCAM</code> is a pipeline of 18 content analysis tools. Each news article
+monitored by GDELT goes through GCAM pipeline that captures over 2230
+dimensions, reporting density and value scores for each. Using GCAM, you
+can assess the density of “<em>Anxiety</em>” speech via Linguistic Inquiry and
+Word Count (LIWC), or “<em>Smugness</em>” via WordNet Affect. The GCAM Master
+Codebook lists of all of the dimensions available<sup id="fnref:5"><a href="#fn:5" class="footnote">2</a></sup>. We converted the
+Codebook in RDF and we refined it manually to link it to existing
+vocabularies such as DBPedia and WordNET.</p>
+
+<p>Listing <a href="#lst:gdelt1">[lst:gdelt1]</a>{reference-type=”ref”
+reference=”lst:gdelt1”} shows a VoCaLS description for the GDELT Event
+Stream. GDELT does not use a licence format, thus we include a licence
+that is compliant with the terms of use. We also linked ontologies and
+mappings using <code class="highlighter-rouge">rdfs:seeAlso</code>. Since the stream is published regularly
+as 15 minutes batch, we include metadata about the rate, i.e.,
+<code class="highlighter-rouge">vocals:windowType</code> and <code class="highlighter-rouge">vocals:windowSize</code> at line 6 and 7.</p>
+
+<p>Due to the lack of space, we do not include a <code class="highlighter-rouge">vocals:StreamEndpoint</code>
+for the original source. However, since the complexity of the knowledge
+engineering task is high, we are particularly interested in making the
+mapping process transparent to collect feedback and improve data quality.</p>
+
+<p>GDELT content is not natively RDF. Therefore, similarly to what we did
+for WES, we need to set up a conversion mechanism. Similarly to what we
+did for Wikimedia Event, Data conversion follows the RML approach, where
+CSV data are converted using Mapping.</p>
+
+<p>The following Listings show a sample of the GDELT event mapping. We
+used <code class="highlighter-rouge">rr:class</code> to assign the <code class="highlighter-rouge">gdelt:Event</code> type to the data at line 4.
+Moreover, we also assign the CAMEO type using <code class="highlighter-rouge">rdf:type</code> at line 7. To
+model the actors and its type hierarchy, we include a separate triple
+map at line 12.</p>
+
+<figure class="highlight"><pre><code class="language-ttl" data-lang="ttl"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="code"><pre>&lt;GEM&gt; a rr:TriplesMap ; rml:logicalSource  &lt;source&gt; ;
+  rr:subjectMap [ 
+    rr:template "http://gdelt.com/instance/{GLOBALEVENTID}";
+    rr:class gdelt:Event;
+    rr:graphMap [ rr:template  "http://gdelt.com/time/{DATEADDED}"]];
+  rr:predicateObjectMap [
+    rr:predicate rdf:type;
+    rr:objectMap [rr:template "http://gdelt.com/cameo/{EventCode}"; ]];
+  rr:predicateObjectMap [
+    rr:predicate gdelt:actor;
+    rr:objectMap [ rr:parentTriplesMap &lt;Atr1TM&gt; ]]; [...] .
+&lt;Atr1TM&gt; rml:logicalSource &lt;source&gt; ;
+    rr:subjectMap [ rr:template "http://gdelt.com/cameo/{Actor1Name}" ];
+     rr:predicateObjectMap [
+         rr:predicate gdelt:actorCode;
+         rr:objectMap [ rml:reference "Actor1Code" ; ] ]; [...] .
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>CARML allows us to extrapolate multidimensional entries of the GKG
+stream like Themes or GCAM dimensions using custom functions. We develop
+functions that can split the entry content and treat it accordingly.
+Moreover, we enriched the Persons entry by retrieving relevant DBPedia
+entities using DBPedia Spotlight and GeoNames APIs for locations.</p>
+
+<p>We publish the GDELT stream using TripleWave approach. We shared the
+VoCALS description files like the first Listing as S-GRAPH via REST APIs. Since the concept of event is first-class, we opted for a graph-based stream data model that maintains the granularity of information.</p>
+
+<p>The following Listing presents an RSP-QL query that mixes all GDELT
+streams. The query, which is inspired to an GDELT analyses available on
+the GDELT blog, counts the number of mentions in events that are
+happening in a particular area of IRAQ, and whose theme is <code class="highlighter-rouge">gcam:kill</code>.</p>
+
+<figure class="highlight"><pre><code class="language-ttl" data-lang="ttl"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre>REGISTER RSTREAM &lt;complexstrm&gt; AS
+SELECT (COUNT(?newsa) AS ?tot)
+FROM NAMED WINDOW &lt;e&gt;  ON gdelt-bq:gdeltv2.events    [RANGE 30MPT 15MPT]
+FROM NAMED WINDOW &lt;m&gt;  ON gdelt-bq:gdeltv2.mentions  [RANGE 30MPT 15MPT]
+FROM NAMED WINDOW &lt;g&gt;  ON gdelt-bq:gdeltv2.gkg       [RANGE 30MPT 15MPT]
+WHERE {
+ WINDOW &lt;e&gt; { ?event gdelt:quadClass cameo:4 ; actionGeo_cc ‘IZ’. }
+ WINDOW &lt;m&gt; { ?event gdelt:mentions ?newsa. }
+ WINDOW &lt;g&gt; { ?newsa gdelt:theme gcam:kill ; gdelt:location geo:iraq. } }
+GROUP BY ?newsa
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:4">
+      <p><a href="http://bit.ly/2CYqnAI">http://bit.ly/2CYqnAI</a>[[ftn:ontologies]]{#ftn:ontologies
+label=”ftn:ontologies”} <a href="#fnref:4" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:5">
+      <p><a href="http://bit.ly/2FOwgB3">http://bit.ly/2FOwgB3</a> <a href="#fnref:5" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

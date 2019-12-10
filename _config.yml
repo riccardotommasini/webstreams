@@ -25,6 +25,13 @@ social:
 
 timezone: Etc/UTC
 
+markdown: kramdown
+kramdown:
+    highlighter: rouge
+    syntax_highlighter_opts:
+        block:
+            line_numbers: true
+            
 paginate: 10
 paginate_path: "/:num/"
 permalink: pretty
@@ -35,10 +42,42 @@ defaults:
       path: ""
       type: "posts"
     values:
-      layout: "post"
+      layout: "recipe"
       push_sidebar_down: true
       print_stylesheet: true
       comments: true
+      _options:
+        content:
+          width: 1560
+          height: 2000
+        featured_image:
+          width: 1560
+          height: 2000
+  -
+    scope:
+      path: ""
+      type: "streams"
+    values:
+      layout: "stream"
+      push_sidebar_down: true
+      print_stylesheet: true
+      comments: false
+      _options:
+        content:
+          width: 1560
+          height: 2000
+        featured_image:
+          width: 1560
+          height: 2000
+  -
+    scope:
+      path: ""
+      type: "resources"
+    values:
+      layout: "resource"
+      push_sidebar_down: true
+      print_stylesheet: true
+      comments: false
       _options:
         content:
           width: 1560
@@ -57,6 +96,14 @@ defaults:
     values:
       layout: "default"
       push_sidebar_down: true
+
+collections:
+  streams:
+    output: true
+    permalink: /:collection/:path/
+  resources:
+    output: true
+    permalink: /:collection/:path/
 
 plugins:
   - jekyll-sitemap

@@ -1,0 +1,114 @@
+I"<h2 id="sec:wikimedia">Wikimedia EventStreams</h2>
+
+<p>Wikimedia Foundation is an American non-profit organization that hosts,
+among the other, open-knowledge projects like Wikipedia. In particular,
+Wikimedia invests financial and technical resources for the maintenance
+of projects that foster free and open knowledge.</p>
+
+<p>Wikimedia EventStream (WES) was created for internal data analysis and
+maintenance and open-sourced in 2018. WES is a web service that exposes
+streams of structured data following the Server-Sent Events (SSE)
+protocol, i.e., data is pushed to the interested clients. Schema of the
+data is versioned and available on GitHub. WES API currently generates
+eight streams:</p>
+
+<ul>
+  <li>recentchanges</li>
+  <li>revision-create</li>
+  <li>page-create</li>
+  <li>page-property-change</li>
+  <li>page-links-change</li>
+  <li>page-move</li>
+  <li>page-delete</li>
+  <li>page-undelete.</li>
+</ul>
+
+<p>All the streams are shared as structured data, i.e., JSON.</p>
+
+<p>In the following, we will focus on <em>recentchanges</em> stream that, among
+the others, is the one with the most complex content.
+Listing <a href="#lst:wes1">[lst:wes1]</a>{reference-type=”ref”
+reference=”lst:wes1”} shows an example of <em>rechentchange</em> stream data
+which is timestamped (line 1). On the <em>recentchange</em> stream, four kinds
+of events are possible: "edit" (like in
+Listing <a href="#lst:wes1">[lst:wes1]</a>{reference-type=”ref”
+reference=”lst:wes1”}) for existing page modification; "new", for new
+page creation, "log" for log action, "external" for external
+changes, and "categorize" for category membership change. Moreover,
+the "title" indicates the page title in a Wiki of the Wikimedia
+foundation. This practically links the event to an external entity.
+Listing <a href="#lst:wes1">[lst:wes1]</a>{reference-type=”ref”
+reference=”lst:wes1”} points to the Wikidata Entity at
+<a href="https://www.wikidata.org/enity/Q31218558.ttl">https://www.wikidata.org/enity/Q31218558.ttl</a> that we can retrive to
+enrich the stream<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>.</p>
+
+<p>We collected the information about the streams schemas into an OWL 2
+ontology$^{\ref{ftn:ontologies}}$. WES are designed around the notion of
+event, therefore, we ported related classes from contextual vocabularies
+like the Event Ontology<sup id="fnref:3"><a href="#fn:3" class="footnote">2</a></sup>. Data items are timestamped individually,
+and we used this timestamp to name the graph containing all the event
+data. Regarding the <em>recentchanges</em> stream, we emphasizes the modeling
+of the events types in our ontology, i.e., "edit", "new", "log",
+"categorize", or "external". Similarly, we take into account what
+could be represented as external resources like Wikidata.</p>
+
+<p>Listing <a href="#lst:es3">[lst:es3]</a>{reference-type=”ref”
+reference=”lst:es3”} shows an VoCaLS description for the <em>recentchanges</em>
+stream. We included a license that is compliant with Wikimedia terms of
+use. Using <code class="highlighter-rouge">rdfs:seeAlso</code>, we linked to our ontology, the mapping file,
+and any other relevant metadata. Due to the lack of space, we did not
+link to the original sources. However, it would be worth to create a
+<code class="highlighter-rouge">vocals:StreamEndpoint</code> that allows to track the provenance of the
+conversion.</p>
+
+<p>As anticipated, WES content is not RDF. Thus, we need to set up a
+conversion mechanism.
+The following Listings show an example of <code class="highlighter-rouge">RML</code> mapping with a
+<code class="highlighter-rouge">JSON</code> source that we used for the conversion. At line 7 using
+<code class="highlighter-rouge">rr:graphMap</code> name the RDF graph containg all the triples using the
+event timestamp. At line 10 add the event type using <code class="highlighter-rouge">rdf:type</code> and the
+"type" field in the JSON.</p>
+
+<pre><code class="language-ttl">&lt;WMM&gt; a rr:TriplesMap ;
+  rml:logicalSource &lt;source&gt; ;
+  rr:subjectMap [ rr:template "http://www.wikimedia.org/es/{id}" ;
+  rr:graphMap [ rr:template  "http://wiki.time.com/{timestamp}" ] ] ;
+  rr:predicateObjectMap [
+    rr:predicate rdf:type ;
+    rr:objectMap [ rr:template "http://....org/es/voc/{type}"] ] [...] .
+</code></pre>
+
+<p>To apply the mappings we used a modified version of <code class="highlighter-rouge">CARML</code> that handles
+the annotation process incrementally to minimize the translation
+latency.</p>
+
+<p>To publish WES RDF Streams, we decided to use <code class="highlighter-rouge">TripleWave</code> approach. We
+included a license compatible with the one from WES, and we made the
+VoCaLS description available as S-GRAPH via REST API. We included a
+Stream Endpoint that allows to consume the data directly using a
+WebSocket. Data are originally shared using a document format with a
+rich schema. Therefore, to preserve the level of granularity, we opted
+for a graph-base stream data model.</p>
+
+<p>Similarly to DBL, we include an example of statistics analysis:
+The following Listings show an example of RSP-QL query calculating
+the stream rate every minute.</p>
+
+<pre><code class="language-SPARQL">REGISTER RSTREAM &lt;outputstream&gt; AS
+SELECT (COUNT{*}/60) ?ratesec
+FROM NAMED WINDOW &lt;win&gt; ON &lt;http://wikimedia.org/recentchanges/rdf&gt; [RANGE PT60S PT60S]
+WHERE { WINDOW &lt;win&gt; { ?s ?p ?o } }
+</code></pre>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>We excluded metadata about the Kafka Topic from the current
+modeling and from the examples. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p><a href="http://motools.sourceforge.net/event/event.122.html">http://motools.sourceforge.net/event/event.122.html</a> <a href="#fnref:3" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

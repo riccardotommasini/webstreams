@@ -1,0 +1,8 @@
+I"<p>Several studies have been running using GDELT. In particular, data
+visualization techniques that take into account the spatio-temporal
+metadata of GDELT extracted events. GDELT offers different APIs to run
+analysis and a <code class="highlighter-rouge">Google Big Query</code>[^3] access to the database. GDELT
+exposes examples of pre-configures analyses via the analysis service.
+For instance, the Event <code class="highlighter-rouge">TimeMapper</code> visualizes events matching a given
+search over time.</p>
+:ET

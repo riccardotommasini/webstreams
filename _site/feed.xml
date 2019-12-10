@@ -1,7 +1,70 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-12-09T16:21:23+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">The Joy of Web Streams</title><subtitle>A cookbook for publishing and processing Web Streams.</subtitle><author><name>Riccardo Tommasini</name><email>webstreams@rictomm.me</email></author><entry><title type="html">The Most Important People Of The Last 15 minutes</title><link href="http://localhost:4000/gdelt/2019/11/05/important-peeps/" rel="alternate" type="text/html" title="The Most Important People Of The Last 15 minutes" /><published>2019-11-05T00:00:00+00:00</published><updated>2019-11-05T00:00:00+00:00</updated><id>http://localhost:4000/gdelt/2019/11/05/important-peeps</id><content type="html" xml:base="http://localhost:4000/gdelt/2019/11/05/important-peeps/"></content><author><name>Riccardo Tommasini</name><email>webstreams@rictomm.me</email></author><summary type="html"></summary></entry><entry><title type="html">DBPedia Live Updates</title><link href="http://localhost:4000/csv%20stream/web%20stream/change%20data%20capture%20stream/2018/10/09/dbl-stream/" rel="alternate" type="text/html" title="DBPedia Live Updates" /><published>2018-10-09T00:00:00+00:00</published><updated>2018-10-09T00:00:00+00:00</updated><id>http://localhost:4000/csv%20stream/web%20stream/change%20data%20capture%20stream/2018/10/09/dbl-stream</id><content type="html" xml:base="http://localhost:4000/csv%20stream/web%20stream/change%20data%20capture%20stream/2018/10/09/dbl-stream/">&lt;p&gt;TODO&lt;/p&gt;</content><author><name>Riccardo Tommasini</name><email>webstreams@rictomm.me</email></author><summary type="html">TODO</summary></entry><entry><title type="html">Global Dataset of Event, Language and Tone</title><link href="http://localhost:4000/rdf%20stream/web%20stream/event%20stream/2018/10/09/gdelt-stream/" rel="alternate" type="text/html" title="Global Dataset of Event, Language and Tone" /><published>2018-10-09T00:00:00+00:00</published><updated>2018-10-09T00:00:00+00:00</updated><id>http://localhost:4000/rdf%20stream/web%20stream/event%20stream/2018/10/09/gdelt-stream</id><content type="html" xml:base="http://localhost:4000/rdf%20stream/web%20stream/event%20stream/2018/10/09/gdelt-stream/">&lt;p&gt;TODO&lt;/p&gt;</content><author><name>Riccardo Tommasini</name><email>webstreams@rictomm.me</email></author><summary type="html">TODO</summary></entry><entry><title type="html">Wikimedia Event Streams</title><link href="http://localhost:4000/json%20stream/web%20stream/event%20stream/2018/10/09/wes-stream/" rel="alternate" type="text/html" title="Wikimedia Event Streams" /><published>2018-10-09T00:00:00+00:00</published><updated>2018-10-09T00:00:00+00:00</updated><id>http://localhost:4000/json%20stream/web%20stream/event%20stream/2018/10/09/wes-stream</id><content type="html" xml:base="http://localhost:4000/json%20stream/web%20stream/event%20stream/2018/10/09/wes-stream/">&lt;p&gt;TODO&lt;/p&gt;</content><author><name>Riccardo Tommasini</name><email>webstreams@rictomm.me</email></author><summary type="html">TODO</summary></entry><entry><title type="html">Chocolate Cupcakes</title><link href="http://localhost:4000/dbl/2017/01/07/dbl1/" rel="alternate" type="text/html" title="Chocolate Cupcakes" /><published>2017-01-07T00:00:00+00:00</published><updated>2017-01-07T00:00:00+00:00</updated><id>http://localhost:4000/dbl/2017/01/07/dbl1</id><content type="html" xml:base="http://localhost:4000/dbl/2017/01/07/dbl1/">&lt;p&gt;These chocolate chocolate cupcakes have a stunning appearance and a rich, chocolatey sweetness. I’ve found at parties people prefer bite sized deserts so I’d recommend making 24 mini cupcakes rather than 12 large. That way you won’t find half eaten cupcakes at your party!&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-12-10T11:54:08+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">The Joy of Web Streams</title><subtitle>A cookbook for publishing and processing Web Streams.</subtitle><author><name>Riccardo Tommasini</name><email>webstreams@rictomm.me</email></author><entry><title type="html">Wikimedia Event Stream Analysis Challenge in RSP</title><link href="http://localhost:4000/processing/continuous%20querying/2019/11/09/wes-challenge/" rel="alternate" type="text/html" title="Wikimedia Event Stream Analysis Challenge in RSP" /><published>2019-11-09T00:00:00+00:00</published><updated>2019-11-09T00:00:00+00:00</updated><id>http://localhost:4000/processing/continuous%20querying/2019/11/09/wes-challenge</id><content type="html" xml:base="http://localhost:4000/processing/continuous%20querying/2019/11/09/wes-challenge/">&lt;p&gt;A recent challenge triggered a real-time data analysis of WES data, most
+of which focus on the data visualization aspect[^2]. The projects
+empower simple statistical analyses such as comparison of &lt;em&gt;bot vs human&lt;/em&gt;
+editor, &lt;em&gt;minor vs major&lt;/em&gt; changes detection, or categorizing the type of
+events.&lt;/p&gt;</content><author><name>Riccardo Tommasini</name><email>webstreams@rictomm.me</email></author><summary type="html">A recent challenge triggered a real-time data analysis of WES data, most of which focus on the data visualization aspect[^2]. The projects empower simple statistical analyses such as comparison of bot vs human editor, minor vs major changes detection, or categorizing the type of events.</summary></entry><entry><title type="html">Convert and Publish the Wikimedia Event Stream</title><link href="http://localhost:4000/publishing/2019/11/09/wes-convert-and-publish/" rel="alternate" type="text/html" title="Convert and Publish the Wikimedia Event Stream" /><published>2019-11-09T00:00:00+00:00</published><updated>2019-11-09T00:00:00+00:00</updated><id>http://localhost:4000/publishing/2019/11/09/wes-convert-and-publish</id><content type="html" xml:base="http://localhost:4000/publishing/2019/11/09/wes-convert-and-publish/">&lt;p&gt;&lt;img src=&quot;/images/lifecycleragab.jpg&quot; alt=&quot;Publish&quot; /&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;![Cupcakes](https://images.unsplash.com/photo-1448131063153-f1e240f98a72?w=1560&amp;amp;h=940&amp;amp;fit=crop)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;We collected the information about the streams schemas into an OWL 2
+ontology$^{\ref{ftn:ontologies}}$. WES are designed around the notion of
+event, therefore, we ported related classes from contextual vocabularies
+like the Event Ontology[^3]. Data items are timestamped individually,
+and we used this timestamp to name the graph containing all the event
+data. Regarding the &lt;em&gt;recentchanges&lt;/em&gt; stream, we emphasizes the modeling
+of the events types in our ontology, i.e., &quot;edit&quot;, &quot;new&quot;, &quot;log&quot;,
+&quot;categorize&quot;, or &quot;external&quot;. Similarly, we take into account what
+could be represented as external resources like Wikidata.&lt;/p&gt;
+
+&lt;p&gt;Listing &lt;a href=&quot;#lst:es3&quot;&gt;[lst:es3]&lt;/a&gt;{reference-type=”ref”
+reference=”lst:es3”} shows an VoCaLS description for the &lt;em&gt;recentchanges&lt;/em&gt;
+stream. We included a license that is compliant with Wikimedia terms of
+use. Using &lt;code class=&quot;highlighter-rouge&quot;&gt;rdfs:seeAlso&lt;/code&gt;, we linked to our ontology, the mapping file,
+and any other relevant metadata. Due to the lack of space, we did not
+link to the original sources. However, it would be worth to create a
+&lt;code class=&quot;highlighter-rouge&quot;&gt;vocals:StreamEndpoint&lt;/code&gt; that allows to track the provenance of the
+conversion.&lt;/p&gt;
+
+&lt;p&gt;As anticipated, WES content is not RDF. Thus, we need to set up a
+conversion mechanism.
+The following Listings show an example of &lt;code class=&quot;highlighter-rouge&quot;&gt;RML&lt;/code&gt; mapping with a
+&lt;code class=&quot;highlighter-rouge&quot;&gt;JSON&lt;/code&gt; source that we used for the conversion. At line 7 using
+&lt;code class=&quot;highlighter-rouge&quot;&gt;rr:graphMap&lt;/code&gt; name the RDF graph containg all the triples using the
+event timestamp. At line 10 add the event type using &lt;code class=&quot;highlighter-rouge&quot;&gt;rdf:type&lt;/code&gt; and the
+&quot;type&quot; field in the JSON.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-ttl&quot;&gt;&amp;lt;WMM&amp;gt; a rr:TriplesMap ;
+  rml:logicalSource &amp;lt;source&amp;gt; ;
+  rr:subjectMap [ rr:template &quot;http://www.wikimedia.org/es/{id}&quot; ;
+  rr:graphMap [ rr:template  &quot;http://wiki.time.com/{timestamp}&quot; ] ] ;
+  rr:predicateObjectMap [
+    rr:predicate rdf:type ;
+    rr:objectMap [ rr:template &quot;http://....org/es/voc/{type}&quot;] ] [...] .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To apply the mappings we used a modified version of &lt;code class=&quot;highlighter-rouge&quot;&gt;CARML&lt;/code&gt; that handles
+the annotation process incrementally to minimize the translation
+latency.&lt;/p&gt;
+
+&lt;p&gt;To publish WES RDF Streams, we decided to use &lt;code class=&quot;highlighter-rouge&quot;&gt;TripleWave&lt;/code&gt; approach. We
+included a license compatible with the one from WES, and we made the
+VoCaLS description available as S-GRAPH via REST API. We included a
+Stream Endpoint that allows to consume the data directly using a
+WebSocket. Data are originally shared using a document format with a
+rich schema. Therefore, to preserve the level of granularity, we opted
+for a graph-base stream data model.&lt;/p&gt;
+
+&lt;p&gt;Similarly to DBL, we include an example of statistics analysis:
+The following Listings show an example of RSP-QL query calculating
+the stream rate every minute.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-SPARQL&quot;&gt;REGISTER RSTREAM &amp;lt;outputstream&amp;gt; AS
+SELECT (COUNT{*}/60) ?ratesec
+FROM NAMED WINDOW &amp;lt;win&amp;gt; ON &amp;lt;http://wikimedia.org/recentchanges/rdf&amp;gt; [RANGE PT60S PT60S]
+WHERE { WINDOW &amp;lt;win&amp;gt; { ?s ?p ?o } }
+&lt;/code&gt;&lt;/pre&gt;</content><author><name>Riccardo Tommasini</name><email>webstreams@rictomm.me</email></author><summary type="html"></summary></entry><entry><title type="html">Publishing DBPedia Live Updates as RDF Streams</title><link href="http://localhost:4000/publishing/2019/11/07/dbl1/" rel="alternate" type="text/html" title="Publishing DBPedia Live Updates as RDF Streams" /><published>2019-11-07T00:00:00+00:00</published><updated>2019-11-07T00:00:00+00:00</updated><id>http://localhost:4000/publishing/2019/11/07/dbl1</id><content type="html" xml:base="http://localhost:4000/publishing/2019/11/07/dbl1/">&lt;p&gt;These chocolate chocolate cupcakes have a stunning appearance and a rich, chocolatey sweetness. I’ve found at parties people prefer bite sized deserts so I’d recommend making 24 mini cupcakes rather than 12 large. That way you won’t find half eaten cupcakes at your party!&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;![Cupcakes](https://images.unsplash.com/photo-1448131063153-f1e240f98a72?w=1560&amp;amp;h=940&amp;amp;fit=crop)
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;You can never go wrong with sprinkles.&lt;/p&gt;
 
@@ -11,16 +74,129 @@
 
 &lt;p&gt;&lt;img src=&quot;https://images.unsplash.com/photo-1457508252818-162dc1934c2f?w=1560&amp;amp;h=940&amp;amp;fit=crop&quot; alt=&quot;Cupcakes&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Why not add some popcorn?&lt;/p&gt;</content><author><name>Riccardo Tommasini</name><email>webstreams@rictomm.me</email></author><summary type="html">These chocolate chocolate cupcakes have a stunning appearance and a rich, chocolatey sweetness. I’ve found at parties people prefer bite sized deserts so I’d recommend making 24 mini cupcakes rather than 12 large. That way you won’t find half eaten cupcakes at your party!</summary></entry><entry><title type="html">Lemon Cake</title><link href="http://localhost:4000/wes/2017/01/06/wes1/" rel="alternate" type="text/html" title="Lemon Cake" /><published>2017-01-06T00:00:00+00:00</published><updated>2017-01-06T00:00:00+00:00</updated><id>http://localhost:4000/wes/2017/01/06/wes1</id><content type="html" xml:base="http://localhost:4000/wes/2017/01/06/wes1/">&lt;p&gt;If you’re a sour fan you’re going to love this cake. Lemon Cake is one of my favorite year-round desserts, but it is a perfect choice for spring and summer, when everyone tends to crave citrus or light &amp;amp; flavorful recipes&lt;/p&gt;
+&lt;p&gt;Why not add some popcorn?&lt;/p&gt;</content><author><name>Riccardo Tommasini</name><email>webstreams@rictomm.me</email></author><summary type="html">These chocolate chocolate cupcakes have a stunning appearance and a rich, chocolatey sweetness. I’ve found at parties people prefer bite sized deserts so I’d recommend making 24 mini cupcakes rather than 12 large. That way you won’t find half eaten cupcakes at your party!</summary></entry><entry><title type="html">The Most Important People Of The Last 15 minutes in GKG</title><link href="http://localhost:4000/publishing/2019/11/05/gdel-event-stream-publication/" rel="alternate" type="text/html" title="The Most Important People Of The Last 15 minutes in GKG" /><published>2019-11-05T00:00:00+00:00</published><updated>2019-11-05T00:00:00+00:00</updated><id>http://localhost:4000/publishing/2019/11/05/gdel-event-stream-publication</id><content type="html" xml:base="http://localhost:4000/publishing/2019/11/05/gdel-event-stream-publication/">&lt;p&gt;Several studies have been running using GDELT. In particular, data
+visualization techniques that take into account the spatio-temporal
+metadata of GDELT extracted events. GDELT offers different APIs to run
+analysis and a &lt;code class=&quot;highlighter-rouge&quot;&gt;Google Big Query&lt;/code&gt;[^3] access to the database. GDELT
+exposes examples of pre-configures analyses via the analysis service.
+For instance, the Event &lt;code class=&quot;highlighter-rouge&quot;&gt;TimeMapper&lt;/code&gt; visualizes events matching a given
+search over time.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://source.unsplash.com/1HPTYLozDGw&quot; alt=&quot;Cake&quot; /&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ttl&quot; data-lang=&quot;ttl&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;:events a vocals:StreamDescriptor ; dcat:dataset :eventstream  .
+:eventstream a vocals:Stream ;
+ dcat:title &quot;GDELT Event Stream&quot;^^xsd:string ;
+ dcat:publisher &amp;lt;http://www.streamreasoning.org&amp;gt; ;
+ dcat:description &quot;GDELT Events Stream&quot;^^xsd:string ;
+ vocals:windowType vocals:logicalTumbling ;
+ vocals:windowSize &quot;PT15M&quot;^^xsd:duration ;
+ vocals:hasEndpoint [
+   a vocals:StreamEndpoint ;
+   dcat:license &amp;lt;https://creativecommons.org/licenses/by-nc/4.0/&amp;gt; ;
+   dcat:format frmt:JSON-LD;
+   dcat:accessURL &quot;ws://examples:8080/events&quot; ] .
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Straight out of the oven.&lt;/p&gt;
+&lt;p&gt;We collected all the information regarding the streams schemas into an
+OWL 2 Ontology. Moreover, we started an knowledge engineering task that
+involves both &lt;code class=&quot;highlighter-rouge&quot;&gt;CAMEO&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;GCAM&lt;/code&gt;[^4].&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://source.unsplash.com/WoVGndRTx2o&quot; alt=&quot;Cake&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;CAMEO&lt;/code&gt; ontology is a coding scheme designed for the study of
+third-party mediation in international disputes. It contains
+hierarchical coding scheme for dealing with sub-state actors, event
+types, and an extensive taxonomy for religious groups and ethnic groups.
+For CAMEO, we focus on event types and actors, creating a comprehensive
+hierarchy for the stream.&lt;/p&gt;
 
-&lt;p&gt;You can add extra flavour with berries.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;GCAM&lt;/code&gt; is a pipeline of 18 content analysis tools. Each news article
+monitored by GDELT goes through GCAM pipeline that captures over 2230
+dimensions, reporting density and value scores for each. Using GCAM, you
+can assess the density of “&lt;em&gt;Anxiety&lt;/em&gt;” speech via Linguistic Inquiry and
+Word Count (LIWC), or “&lt;em&gt;Smugness&lt;/em&gt;” via WordNet Affect. The GCAM Master
+Codebook lists of all of the dimensions available[^5]. We converted the
+Codebook in RDF and we refined it manually to link it to existing
+vocabularies such as DBPedia and WordNET.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://source.unsplash.com/7JYVKRo7i5Q&quot; alt=&quot;Cake&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Listing &lt;a href=&quot;#lst:gdelt1&quot;&gt;[lst:gdelt1]&lt;/a&gt;{reference-type=”ref”
+reference=”lst:gdelt1”} shows a VoCaLS description for the GDELT Event
+Stream. GDELT does not use a licence format, thus we include a licence
+that is compliant with the terms of use. We also linked ontologies and
+mappings using &lt;code class=&quot;highlighter-rouge&quot;&gt;rdfs:seeAlso&lt;/code&gt;. Since the stream is published regularly
+as 15 minutes batch, we include metadata about the rate, i.e.,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;vocals:windowType&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;vocals:windowSize&lt;/code&gt; at line 6 and 7.&lt;/p&gt;
 
-&lt;p&gt;Or a caramel sauce.&lt;/p&gt;</content><author><name>Riccardo Tommasini</name><email>webstreams@rictomm.me</email></author><summary type="html">If you’re a sour fan you’re going to love this cake. Lemon Cake is one of my favorite year-round desserts, but it is a perfect choice for spring and summer, when everyone tends to crave citrus or light &amp;amp; flavorful recipes</summary></entry></feed>
+&lt;p&gt;Due to the lack of space, we do not include a &lt;code class=&quot;highlighter-rouge&quot;&gt;vocals:StreamEndpoint&lt;/code&gt;
+for the original source. However, since the complexity of the knowledge
+engineering task is high, we are particularly interested in making the
+mapping process transparent to collect feedback and improve data quality.&lt;/p&gt;
+
+&lt;p&gt;GDELT content is not natively RDF. Therefore, similarly to what we did
+for WES, we need to set up a conversion mechanism. Similarly to what we
+did for Wikimedia Event, Data conversion follows the RML approach, where
+CSV data are converted using Mapping.&lt;/p&gt;
+
+&lt;p&gt;The following Listings show a sample of the GDELT event mapping. We
+used &lt;code class=&quot;highlighter-rouge&quot;&gt;rr:class&lt;/code&gt; to assign the &lt;code class=&quot;highlighter-rouge&quot;&gt;gdelt:Event&lt;/code&gt; type to the data at line 4.
+Moreover, we also assign the CAMEO type using &lt;code class=&quot;highlighter-rouge&quot;&gt;rdf:type&lt;/code&gt; at line 7. To
+model the actors and its type hierarchy, we include a separate triple
+map at line 12.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ttl&quot; data-lang=&quot;ttl&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&amp;lt;GEM&amp;gt; a rr:TriplesMap ; rml:logicalSource  &amp;lt;source&amp;gt; ;
+  rr:subjectMap [ 
+    rr:template &quot;http://gdelt.com/instance/{GLOBALEVENTID}&quot;;
+    rr:class gdelt:Event;
+    rr:graphMap [ rr:template  &quot;http://gdelt.com/time/{DATEADDED}&quot;]];
+  rr:predicateObjectMap [
+    rr:predicate rdf:type;
+    rr:objectMap [rr:template &quot;http://gdelt.com/cameo/{EventCode}&quot;; ]];
+  rr:predicateObjectMap [
+    rr:predicate gdelt:actor;
+    rr:objectMap [ rr:parentTriplesMap &amp;lt;Atr1TM&amp;gt; ]]; [...] .
+&amp;lt;Atr1TM&amp;gt; rml:logicalSource &amp;lt;source&amp;gt; ;
+    rr:subjectMap [ rr:template &quot;http://gdelt.com/cameo/{Actor1Name}&quot; ];
+     rr:predicateObjectMap [
+         rr:predicate gdelt:actorCode;
+         rr:objectMap [ rml:reference &quot;Actor1Code&quot; ; ] ]; [...] .
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;CARML allows us to extrapolate multidimensional entries of the GKG
+stream like Themes or GCAM dimensions using custom functions. We develop
+functions that can split the entry content and treat it accordingly.
+Moreover, we enriched the Persons entry by retrieving relevant DBPedia
+entities using DBPedia Spotlight and GeoNames APIs for locations.&lt;/p&gt;
+
+&lt;p&gt;We publish the GDELT stream using TripleWave approach. We shared the
+VoCALS description files like the first Listing as S-GRAPH via REST APIs. Since the concept of event is first-class, we opted for a graph-based stream data model that maintains the granularity of information.&lt;/p&gt;</content><author><name>Riccardo Tommasini</name><email>webstreams@rictomm.me</email></author><summary type="html">Several studies have been running using GDELT. In particular, data visualization techniques that take into account the spatio-temporal metadata of GDELT extracted events. GDELT offers different APIs to run analysis and a Google Big Query[^3] access to the database. GDELT exposes examples of pre-configures analyses via the analysis service. For instance, the Event TimeMapper visualizes events matching a given search over time.</summary></entry><entry><title type="html">The Most Important People Of The Last 15 minutes in GKG</title><link href="http://localhost:4000/processing/continuous%20querying/2019/11/05/important-peeps/" rel="alternate" type="text/html" title="The Most Important People Of The Last 15 minutes in GKG" /><published>2019-11-05T00:00:00+00:00</published><updated>2019-11-05T00:00:00+00:00</updated><id>http://localhost:4000/processing/continuous%20querying/2019/11/05/important-peeps</id><content type="html" xml:base="http://localhost:4000/processing/continuous%20querying/2019/11/05/important-peeps/">&lt;p&gt;Several studies have been running using GDELT. In particular, data
+visualization techniques that take into account the spatio-temporal
+metadata of GDELT extracted events. GDELT offers different APIs to run
+analysis and a &lt;code class=&quot;highlighter-rouge&quot;&gt;Google Big Query&lt;/code&gt;[^3] access to the database. GDELT
+exposes examples of pre-configures analyses via the analysis service.
+For instance, the Event &lt;code class=&quot;highlighter-rouge&quot;&gt;TimeMapper&lt;/code&gt; visualizes events matching a given
+search over time.&lt;/p&gt;</content><author><name>Riccardo Tommasini</name><email>webstreams@rictomm.me</email></author><summary type="html">Several studies have been running using GDELT. In particular, data visualization techniques that take into account the spatio-temporal metadata of GDELT extracted events. GDELT offers different APIs to run analysis and a Google Big Query[^3] access to the database. GDELT exposes examples of pre-configures analyses via the analysis service. For instance, the Event TimeMapper visualizes events matching a given search over time.</summary></entry></feed>
