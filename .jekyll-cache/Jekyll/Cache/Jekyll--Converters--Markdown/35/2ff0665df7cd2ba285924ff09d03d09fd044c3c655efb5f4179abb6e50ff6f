@@ -1,0 +1,48 @@
+I"!<h2 id="dbpedia-live">DBPedia Live</h2>
+
+<p>DBPedia is a community project to extract structured data from Wikipedia
+in the form of an Open Knowledge Graph. DBPedia is served as linked data
+using Entity-Pages, REST APIs, or SPARQL endpoints. The latest version
+of DBPedia counts more than 470 millions of RDF triples<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>.</p>
+
+<p>DBPedia Live (DBL) a changelog stream continuously published to keep
+DBPedia replicas in-synch. A Synchronization Tool designed to consume
+the batches and update the local DBPedia copy is
+available <a href="https://dblp.uni-trier.de/rec/bibtex/journals/program/MorseyLASH12">[1]</a>.</p>
+
+<p>DBL data are obtained by means of the DBpedia Live extraction
+framework <a href="https://dblp.uni-trier.de/rec/bibtex/journals/program/MorseyLASH12">[2]</a> that produces extracted
+metadata with annotations from Wikipedia infoboxes. DBL is composed by
+three sub-streams carrying the entities to add, those to remove, and the
+triples to re-add upon propagating the deletion of an entity. Entities
+and triples make use of DBO types and properties.</p>
+
+<p>DBL uses a pull-based mechanism. An update of DBL consists of four
+compressed NT files. Two main diff files, i.e., <em>removed</em>, and <em>added</em>,
+determine the insertion and deletion stream. Two further streams share
+files for clean updates that are optional to execute: <em>reinserted</em>,
+which corresponds to unchanged triples that can be reinserted, and
+<em>clear</em>, which prescribe the delete queries that clear all triples for a
+resource. Relevant metadata about the DBPedia Live stream corresponds to
+license, format and human-readable description.</p>
+
+<p>DBPedia Live already provides RDF Data that make use of DBPpedia
+ontology (DBO), i.e., a cross-domain ontology, manually created from the
+most used Wikipedia info-boxes. The latest version of DBO covers 685
+classes and 2795 different properties. It is a directed-acyclic graph,
+i.e., classes may have multiple super-classes, as required to map it to
+<code class="highlighter-rouge">schema.org</code>. Although edits are often done in bulk, this information is
+not present at the level of granularity the data are shared from DBL.
+Changes come unordered and, thus, we decided to ingest them using
+time-stamped triples similar to what
+<code class="highlighter-rouge">C-SPARQL</code> <a href="https://dblp.uni-trier.de/rec/bibtex/conf/www/BarbieriV10">[4]</a>
+<code class="highlighter-rouge">CQELS</code> <a href="https://dblp.uni-trier.de/rec/bibtex/conf/debs/PhuocDTDH15">[5]</a> engines do.</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p><a href="http://dbpedia-live.openlinksw.com/live/">http://dbpedia-live.openlinksw.com/live/</a> <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

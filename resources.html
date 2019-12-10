@@ -6,10 +6,12 @@ image_view: true
 
 {% if page.image_view %}
 	{% for res in site.resources %}
-			<div class="streams">
-				<div class="stream" style="background-image: url('{{ res.featured_image }}')">
-					<a href="{{ site.baseurl }}{{ res.url }}"><span>{{ res.title }}</span></a>
-				</div>	
-			</div>
+			{%if res.public %}
+				<div class="streams">
+					<div class="stream" style="background-image: url('{{ res.featured_image }}')">
+						<a href="{{ site.baseurl }}{{ res.url }}"><span>{{ res.title }}</span></a>
+					</div>	
+				</div>
+			{% endif %}	
 	{% endfor %}
 {% endif %}

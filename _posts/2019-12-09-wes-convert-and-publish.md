@@ -4,7 +4,7 @@ title: Convert and Publish the Wikimedia Event Stream
 categories:
   - Publishing
 recipe: true
-featured_image: https://source.unsplash.com/NAN22eh754c/1560x940
+featured_image: https://wikimediablog.files.wordpress.com/2017/10/wikidata-birthday1.jpg
 recipe:
   servings: 12 slices
   prep: 15 minutes

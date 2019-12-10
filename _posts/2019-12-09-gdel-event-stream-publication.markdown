@@ -1,16 +1,15 @@
 ---
 date: 2019-11-05
-title: The Most Important People Of The Last 15 minutes in GKG
+title: Publishing GDELT Event as RDF Stream.
 categories:
   - Publishing
 recipe: true
 featured_image: https://blog.gdeltproject.org/wp-content/uploads/2019-top-people-of-2019-20191206-header-1064x410.png
 recipe:
-  servings: 1 query
+  servings: 1 Web Stream
   prep: 20 minutes
-  cook: 15 minutes
   ingredients_markdown: |-
-    * GDELT Global Knowledge Graph Stream
+    * Access to GDELT Global Event  Stream
     * An R2RML Mapping
     * An RML Mapping Engine
     * An RDF Stream Processor, e.g., YASPER
@@ -18,10 +17,6 @@ recipe:
   directions_markdown: |-
     1. Access the Web Stream 
     2. Convert the stream into RDF to simplify data integration using the R2RML mapping and the mapping engine 
-    3. Design your query on paper simple SPARQL syntax
-    4. Extend the SPARQL query to RSP-QL by adding the prescribed window operator
-    5. Verify if the syntax is correct registering the query to YASPER
-    6. Deploy and wait for the results (every 15 minutes)
 ---
 
 Several studies have been running using GDELT. In particular, data

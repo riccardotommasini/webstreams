@@ -2,8 +2,8 @@
 date: 2019-11-05
 title: The Most Important People Of The Last 15 minutes in GKG
 categories:
-  - Processing
   - Continuous Querying
+  - Processing
 recipe: true
 featured_image: https://blog.gdeltproject.org/wp-content/uploads/2019-top-people-of-2019-20191206-header-1064x410.png
 recipe:
