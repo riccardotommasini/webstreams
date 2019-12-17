@@ -1,28 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-12-17T16:13:26+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">The Joy of Web Streams</title><subtitle>A cookbook for publishing and processing Web Streams.</subtitle><author><name>Riccardo Tommasini</name><email>webstreams@rictomm.me</email></author><entry><title type="html">Wikimedia Event Stream Analysis Challenge in RSP</title><link href="http://localhost:4000/processing/continuous%20querying/2019/11/09/wes-challenge/" rel="alternate" type="text/html" title="Wikimedia Event Stream Analysis Challenge in RSP" /><published>2019-11-09T00:00:00+00:00</published><updated>2019-11-09T00:00:00+00:00</updated><id>http://localhost:4000/processing/continuous%20querying/2019/11/09/wes-challenge</id><content type="html" xml:base="http://localhost:4000/processing/continuous%20querying/2019/11/09/wes-challenge/">&lt;p&gt;A recent challenge triggered a real-time data analysis of WES data, most
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-12-17T16:43:50+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">The Joy of Web Streams</title><subtitle>A cookbook for publishing and processing Web Streams.</subtitle><author><name>Riccardo Tommasini</name><email>webstreams@rictomm.me</email></author><entry><title type="html">Wikimedia Event Stream Analysis Challenge in RSP</title><link href="http://localhost:4000/processing/continuous%20querying/2019/11/09/wes-challenge/" rel="alternate" type="text/html" title="Wikimedia Event Stream Analysis Challenge in RSP" /><published>2019-11-09T00:00:00+00:00</published><updated>2019-11-09T00:00:00+00:00</updated><id>http://localhost:4000/processing/continuous%20querying/2019/11/09/wes-challenge</id><content type="html" xml:base="http://localhost:4000/processing/continuous%20querying/2019/11/09/wes-challenge/">&lt;p&gt;A recent challenge triggered a real-time data analysis of WES data, most
 of which focus on the data visualization aspect[^2]. The projects
 empower simple statistical analyses such as comparison of &lt;em&gt;bot vs human&lt;/em&gt;
 editor, &lt;em&gt;minor vs major&lt;/em&gt; changes detection, or categorizing the type of
 events.&lt;/p&gt;</content><author><name>Riccardo Tommasini</name><email>webstreams@rictomm.me</email></author><summary type="html">A recent challenge triggered a real-time data analysis of WES data, most of which focus on the data visualization aspect[^2]. The projects empower simple statistical analyses such as comparison of bot vs human editor, minor vs major changes detection, or categorizing the type of events.</summary></entry><entry><title type="html">Convert and Publish the Wikimedia Event Stream</title><link href="http://localhost:4000/publishing/2019/11/09/wes-convert-and-publish/" rel="alternate" type="text/html" title="Convert and Publish the Wikimedia Event Stream" /><published>2019-11-09T00:00:00+00:00</published><updated>2019-11-09T00:00:00+00:00</updated><id>http://localhost:4000/publishing/2019/11/09/wes-convert-and-publish</id><content type="html" xml:base="http://localhost:4000/publishing/2019/11/09/wes-convert-and-publish/">&lt;p&gt;&lt;img src=&quot;/images/wes1.png&quot; alt=&quot;fig:wes1&quot; title=&quot;Figure 1&quot; id=&quot;fig:wes1&quot; /&gt;&lt;em&gt;Figure 1&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;fig:wes1&quot;&gt;Figure 1&lt;/a&gt; shows the three situations a practitioner might find when she/he wants to publish Web Streams. The lower-right quadrant identifies our ultimate goal, i.e., Streaming Linked Data. The other quadrants presents possible starting points, i.e., (upper-left) Web Data published in batches; (upper-right) Linked Data published in batches; and (lower-left) Web Data published as streams.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;#fig:wes1&quot;&gt;Figure 1&lt;/a&gt; shows the three situations a practitioner might find when she/he wants to publish Web Streams. The lower-right quadrant identifies our ultimate goal, i.e., Streaming Linked Data. The other quadrants presents possible starting points, i.e., (upper-left) Web Data published in batches; (upper-right) Linked Data published in batches; and (lower-left) Web Data published as streams.&lt;/p&gt;
 
 &lt;p&gt;The case of Wikimedia Event Stream is the one identified by the lower-left quadrant, i.e., a Web Stream that is not linked yet.&lt;/p&gt;
 
-&lt;p&gt;To proceed creating a Linked Data Stream we follow the publication pipeline included in the following &lt;a href=&quot;fig:wes2&quot;&gt;Figure&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To proceed creating a Linked Data Stream we follow the publication pipeline included in the following &lt;a href=&quot;#fig:wes2&quot;&gt;Figure&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/lifecycleragab.jpg&quot; alt=&quot;fig:wes2&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/lifecycleragab.jpg&quot; alt=&quot;fig:wes2&quot; id=&quot;fig:wes2&quot; /&gt;
+&lt;em&gt;Figure 2&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;We collected the information about the streams schemas on GitHub&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.
 We also assume to have an OWL 2 ontology that capture the semantics of the WESs domain Notably, WESs are designed around the notion of
 event, therefore, reasonable vocabularies to annotate the data existing, e.g., Event Ontology&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 
-&lt;p&gt;Data items are timestamped individually,
-and we used this timestamp to name the graph containing all the event
-data. Regarding the &lt;em&gt;recentchanges&lt;/em&gt; stream, we emphasizes the modeling
-of the events types in our ontology, i.e., &quot;edit&quot;, &quot;new&quot;, &quot;log&quot;,
+&lt;p&gt;The following listing shows an example of WES recentchange data item.
+As the listing shows, data items are timestamped individually. We used this timestamp to name the graph containing all the event data. Regarding the &lt;em&gt;recentchanges&lt;/em&gt; stream. We emphasize the modeling of the events types when mapping into RDF data, i.e., &quot;edit&quot;, &quot;new&quot;, &quot;log&quot;,
 &quot;categorize&quot;, or &quot;external&quot;. Similarly, we take into account what
-could be represented as external resources like Wikidata.
-The following listing shows an example of WES recentchange data item.&lt;/p&gt;
+could be represented as external resources like Wikidata.&lt;/p&gt;
 
 &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -131,9 +129,36 @@ The following listing shows an example of WES recentchange data item.&lt;/p&gt;
   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;#listing-1&quot;&gt;Listing 1&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Listing &lt;a href=&quot;#lst:es3&quot;&gt;[lst:es3]&lt;/a&gt;{reference-type=”ref”
-reference=”lst:es3”} shows an VoCaLS description for the &lt;em&gt;recentchanges&lt;/em&gt;
+&lt;p&gt;The following Listings show the portion of an &lt;code class=&quot;highlighter-rouge&quot;&gt;RML&lt;/code&gt; mapping with a
+&lt;code class=&quot;highlighter-rouge&quot;&gt;JSON&lt;/code&gt; source that we used for the conversion. At line 7 using
+&lt;code class=&quot;highlighter-rouge&quot;&gt;rr:graphMap&lt;/code&gt; name the RDF graph containg all the triples using the
+event timestamp. At line 10 add the event type using &lt;code class=&quot;highlighter-rouge&quot;&gt;rdf:type&lt;/code&gt; and the
+&quot;type&quot; field in the JSON. The full mapping is available &lt;a href=&quot;https://github.com/riccardotommasini/webstreams/blob/master/src/main/resources/streams/mapping/wikimedia_recentchanges.ttl&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-sparql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;&amp;lt;WMM&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;rr:&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;TriplesMap&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;rml:&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;logicalSource&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;&amp;lt;source&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;rr:&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;subjectMap&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;rr:&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://www.wikimedia.org/es/{id}&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;rr:&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;graphMap&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;rr:&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://wiki.time.com/{timestamp}&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;rr:&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;predicateObjectMap&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;rr:&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;predicate&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;rdf:&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;rr:&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;objectMap&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;rr:&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://....org/es/voc/{type}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[...]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;#listing-2&quot;&gt;Listing 2&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;To apply the mappings we used a modified version of &lt;a href=&quot;https://github.com/riccardotommasini/carml&quot;&gt;CARML&lt;/a&gt; that handles the annotation process incrementally to minimize the translation latency.&lt;/p&gt;
+
+&lt;p&gt;To publish WES RDF Streams, we decided to use &lt;a href=&quot;/resources/triplewave&quot;&gt;TripleWave&lt;/a&gt; approach, i.e., we separate the stream description from the stream content.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#listing-3&quot;&gt;Listing 3&lt;/a&gt; shows an VoCaLS description for the &lt;em&gt;recentchanges&lt;/em&gt;
 stream. We included a license that is compliant with Wikimedia terms of
 use. Using &lt;code class=&quot;highlighter-rouge&quot;&gt;rdfs:seeAlso&lt;/code&gt;, we linked to our ontology, the mapping file,
 and any other relevant metadata. Due to the lack of space, we did not
@@ -141,37 +166,36 @@ link to the original sources. However, it would be worth to create a
 &lt;code class=&quot;highlighter-rouge&quot;&gt;vocals:StreamEndpoint&lt;/code&gt; that allows to track the provenance of the
 conversion.&lt;/p&gt;
 
-&lt;p&gt;As anticipated, WES content is not RDF. Thus, we need to set up a
-conversion mechanism.
-The following Listings show an example of &lt;code class=&quot;highlighter-rouge&quot;&gt;RML&lt;/code&gt; mapping with a
-&lt;code class=&quot;highlighter-rouge&quot;&gt;JSON&lt;/code&gt; source that we used for the conversion. At line 7 using
-&lt;code class=&quot;highlighter-rouge&quot;&gt;rr:graphMap&lt;/code&gt; name the RDF graph containg all the triples using the
-event timestamp. At line 10 add the event type using &lt;code class=&quot;highlighter-rouge&quot;&gt;rdf:type&lt;/code&gt; and the
-&quot;type&quot; field in the JSON.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&amp;lt;recentchanges&amp;gt; a vocals:StreamDescriptor ; dcat:dataset &amp;lt;wesRCStream&amp;gt;  .
+&amp;lt;wesRCStream&amp;gt; a vocals:RDFStream ;
+    dcat:title &quot;Wikimedia Recentchanges Event Stream&quot;^^xsd:string ;
+    dcat:publisher &amp;lt;http://www.streamreasoning.org&amp;gt; ;
+    dcat:license &amp;lt;https://creativecommons.org/licenses/by-nc/4.0/&amp;gt; ;
+    rdfs:seeAlso &amp;lt;http://...mappings.ttl&amp;gt;
+    rdfs:seeAlso &amp;lt;http://...org/wikimediavocab.owl&amp;gt;
+    vocals:hasEndpoint [  a vocals:StreamEndpoint ;
+     dcat:format frmt:JSON-LD;
+     dcat:accessURL &quot;ws://.../recentchanges&quot; ] .
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;#listing-3&quot;&gt;Listing 3&lt;/a&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-ttl&quot;&gt;&amp;lt;WMM&amp;gt; a rr:TriplesMap ;
-  rml:logicalSource &amp;lt;source&amp;gt; ;
-  rr:subjectMap [ rr:template &quot;http://www.wikimedia.org/es/{id}&quot; ;
-  rr:graphMap [ rr:template  &quot;http://wiki.time.com/{timestamp}&quot; ] ] ;
-  rr:predicateObjectMap [
-    rr:predicate rdf:type ;
-    rr:objectMap [ rr:template &quot;http://....org/es/voc/{type}&quot;] ] [...] .
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To apply the mappings we used a modified version of &lt;code class=&quot;highlighter-rouge&quot;&gt;CARML&lt;/code&gt; that handles
-the annotation process incrementally to minimize the translation
-latency.&lt;/p&gt;
-
-&lt;p&gt;To publish WES RDF Streams, we decided to use &lt;code class=&quot;highlighter-rouge&quot;&gt;TripleWave&lt;/code&gt; approach. We
-included a license compatible with the one from WES, and we made the
-VoCaLS description available as S-GRAPH via REST API. We included a
+&lt;p&gt;In the Sgraph, we included a license compatible with the one from WES, and we made the VoCaLS description available as S-GRAPH via REST API. We included a
 Stream Endpoint that allows to consume the data directly using a
 WebSocket. Data are originally shared using a document format with a
 rich schema. Therefore, to preserve the level of granularity, we opted
 for a graph-base stream data model.&lt;/p&gt;
 
-&lt;p&gt;Similarly to DBL, we include an example of statistics analysis:
-The following Listings show an example of RSP-QL query calculating
+&lt;p&gt;Last but not least, we can include an example of descriptive statistics. For instance, the following Listings show an example of RSP-QL query calculating
 the stream rate every minute.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-SPARQL&quot;&gt;REGISTER RSTREAM &amp;lt;outputstream&amp;gt; AS

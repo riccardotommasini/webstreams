@@ -27,25 +27,24 @@ recipe:
 
 ![fig:wes1](/images/wes1.png "Figure 1"){:id="fig:wes1"}*Figure 1*
 
-[Figure 1](fig:wes1) shows the three situations a practitioner might find when she/he wants to publish Web Streams. The lower-right quadrant identifies our ultimate goal, i.e., Streaming Linked Data. The other quadrants presents possible starting points, i.e., (upper-left) Web Data published in batches; (upper-right) Linked Data published in batches; and (lower-left) Web Data published as streams. 
+[Figure 1](#fig:wes1) shows the three situations a practitioner might find when she/he wants to publish Web Streams. The lower-right quadrant identifies our ultimate goal, i.e., Streaming Linked Data. The other quadrants presents possible starting points, i.e., (upper-left) Web Data published in batches; (upper-right) Linked Data published in batches; and (lower-left) Web Data published as streams. 
 
 The case of Wikimedia Event Stream is the one identified by the lower-left quadrant, i.e., a Web Stream that is not linked yet.
 
-To proceed creating a Linked Data Stream we follow the publication pipeline included in the following [Figure](fig:wes2).
+To proceed creating a Linked Data Stream we follow the publication pipeline included in the following [Figure](#fig:wes2).
 
-![fig:wes2](/images/lifecycleragab.jpg)
+![fig:wes2](/images/lifecycleragab.jpg){:id="fig:wes2"}
+*Figure 2*
 
 We collected the information about the streams schemas on GitHub[^1].
 We also assume to have an OWL 2 ontology that capture the semantics of the WESs domain Notably, WESs are designed around the notion of
 event, therefore, reasonable vocabularies to annotate the data existing, e.g., Event Ontology[^2]. 
 
-Data items are timestamped individually,
-and we used this timestamp to name the graph containing all the event
-data. Regarding the *recentchanges* stream, we emphasizes the modeling
-of the events types in our ontology, i.e., \"edit\", \"new\", \"log\",
+The following listing shows an example of WES recentchange data item.
+As the listing shows, data items are timestamped individually. We used this timestamp to name the graph containing all the event data. Regarding the *recentchanges* stream. We emphasize the modeling of the events types when mapping into RDF data, i.e., \"edit\", \"new\", \"log\",
 \"categorize\", or \"external\". Similarly, we take into account what
 could be represented as external resources like Wikidata.
-The following listing shows an example of WES recentchange data item.
+
 
 ```json
 {
@@ -102,26 +101,16 @@ The following listing shows an example of WES recentchange data item.
   }
 }
 ```
+[Listing 1](#listing-1)
 
-Listing [\[lst:es3\]](#lst:es3){reference-type="ref"
-reference="lst:es3"} shows an VoCaLS description for the *recentchanges*
-stream. We included a license that is compliant with Wikimedia terms of
-use. Using `rdfs:seeAlso`, we linked to our ontology, the mapping file,
-and any other relevant metadata. Due to the lack of space, we did not
-link to the original sources. However, it would be worth to create a
-`vocals:StreamEndpoint` that allows to track the provenance of the
-conversion.
-
-As anticipated, WES content is not RDF. Thus, we need to set up a
-conversion mechanism.
-The following Listings show an example of `RML` mapping with a
+The following Listings show the portion of an `RML` mapping with a
 `JSON` source that we used for the conversion. At line 7 using
 `rr:graphMap` name the RDF graph containg all the triples using the
 event timestamp. At line 10 add the event type using `rdf:type` and the
-\"type\" field in the JSON.
+\"type\" field in the JSON. The full mapping is available [here](https://github.com/riccardotommasini/webstreams/blob/master/src/main/resources/streams/mapping/wikimedia_recentchanges.ttl).
 
-```ttl
-<WMM> a rr:TriplesMap ;
+```sparql
+ <WMM> a rr:TriplesMap ;
   rml:logicalSource <source> ;
   rr:subjectMap [ rr:template "http://www.wikimedia.org/es/{id}" ;
   rr:graphMap [ rr:template  "http://wiki.time.com/{timestamp}" ] ] ;
@@ -129,21 +118,42 @@ event timestamp. At line 10 add the event type using `rdf:type` and the
     rr:predicate rdf:type ;
     rr:objectMap [ rr:template "http://....org/es/voc/{type}"] ] [...] .
 ```
+[Listing 2](#listing-2)
 
-To apply the mappings we used a modified version of `CARML` that handles
-the annotation process incrementally to minimize the translation
-latency.
+To apply the mappings we used a modified version of [CARML](https://github.com/riccardotommasini/carml) that handles the annotation process incrementally to minimize the translation latency.
 
-To publish WES RDF Streams, we decided to use `TripleWave` approach. We
-included a license compatible with the one from WES, and we made the
-VoCaLS description available as S-GRAPH via REST API. We included a
+To publish WES RDF Streams, we decided to use [TripleWave](/resources/triplewave) approach, i.e., we separate the stream description from the stream content. 
+
+[Listing 3](#listing-3) shows an VoCaLS description for the *recentchanges*
+stream. We included a license that is compliant with Wikimedia terms of
+use. Using `rdfs:seeAlso`, we linked to our ontology, the mapping file,
+and any other relevant metadata. Due to the lack of space, we did not
+link to the original sources. However, it would be worth to create a
+`vocals:StreamEndpoint` that allows to track the provenance of the
+conversion.
+
+
+```
+<recentchanges> a vocals:StreamDescriptor ; dcat:dataset <wesRCStream>  .
+<wesRCStream> a vocals:RDFStream ;
+    dcat:title "Wikimedia Recentchanges Event Stream"^^xsd:string ;
+    dcat:publisher <http://www.streamreasoning.org> ;
+    dcat:license <https://creativecommons.org/licenses/by-nc/4.0/> ;
+    rdfs:seeAlso <http://...mappings.ttl>
+    rdfs:seeAlso <http://...org/wikimediavocab.owl>
+    vocals:hasEndpoint [  a vocals:StreamEndpoint ;
+     dcat:format frmt:JSON-LD;
+     dcat:accessURL "ws://.../recentchanges" ] .
+```
+[Listing 3](#listing-3)
+
+In the Sgraph, we included a license compatible with the one from WES, and we made the VoCaLS description available as S-GRAPH via REST API. We included a
 Stream Endpoint that allows to consume the data directly using a
 WebSocket. Data are originally shared using a document format with a
 rich schema. Therefore, to preserve the level of granularity, we opted
 for a graph-base stream data model.
 
-Similarly to DBL, we include an example of statistics analysis:
-The following Listings show an example of RSP-QL query calculating
+Last but not least, we can include an example of descriptive statistics. For instance, the following Listings show an example of RSP-QL query calculating
 the stream rate every minute.
 
 ```SPARQL

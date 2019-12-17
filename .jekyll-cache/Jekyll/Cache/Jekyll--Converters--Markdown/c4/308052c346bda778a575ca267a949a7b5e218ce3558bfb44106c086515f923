@@ -1,0 +1,214 @@
+I"�=<p><img src="/images/wes1.png" alt="fig:wes1" title="Figure 1" id="fig:wes1" /><em>Figure 1</em></p>
+
+<p><a href="#fig:wes1">Figure 1</a> shows the three situations a practitioner might find when she/he wants to publish Web Streams. The lower-right quadrant identifies our ultimate goal, i.e., Streaming Linked Data. The other quadrants presents possible starting points, i.e., (upper-left) Web Data published in batches; (upper-right) Linked Data published in batches; and (lower-left) Web Data published as streams.</p>
+
+<p>The case of Wikimedia Event Stream is the one identified by the lower-left quadrant, i.e., a Web Stream that is not linked yet.</p>
+
+<p>To proceed creating a Linked Data Stream we follow the publication pipeline included in the following <a href="#fig:wes2">Figure</a>.</p>
+
+<p><img src="/images/lifecycleragab.jpg" alt="fig:wes2" id="fig:wes2" />
+<em>Figure 2</em></p>
+
+<p>We collected the information about the streams schemas on GitHub<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>.
+We also assume to have an OWL 2 ontology that capture the semantics of the WESs domain Notably, WESs are designed around the notion of
+event, therefore, reasonable vocabularies to annotate the data existing, e.g., Event Ontology<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>.</p>
+
+<p>The following listing shows an example of WES recentchange data item.
+As the listing shows, data items are timestamped individually. We used this timestamp to name the graph containing all the event data. Regarding the <em>recentchanges</em> stream. We emphasize the modeling of the events types when mapping into RDF data, i.e., "edit", "new", "log",
+"categorize", or "external". Similarly, we take into account what
+could be represented as external resources like Wikidata.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+</pre></td><td class="rouge-code"><pre><span class="p">{</span><span class="w">
+  </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eqiad.mediawiki.recentchange"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"partition"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1576599002001</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"codfw.mediawiki.recentchange"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"partition"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"$schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/mediawiki/recentchange/1.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.wikidata.org/wiki/Q78902990"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"request_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Xfj92gpAAK4AAG77O64AAABP"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a99cd5d4-981a-42af-9947-f065d1ee28bb"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"dt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-12-17T16:10:02Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.wikidata.org"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"stream"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mediawiki.recentchange"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eqiad.mediawiki.recentchange"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"partition"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">2039616376</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"log"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"namespace"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Q78902990"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1576599002</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alicia Fagerving (WMSE)"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bot"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"log_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"log_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abusefilter"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"log_action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hit"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"log_params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"edit"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"filter"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"actions"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"log"</span><span class="p">:</span><span class="w"> </span><span class="mi">10906339</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"log_action_comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alicia Fagerving (WMSE) triggered 
+    [[Special:AbuseFilter/64|filter 64]], performing the action </span><span class="se">\"</span><span class="s2">edit</span><span class="se">\"</span><span class="s2"> on 
+    [[Q78902990]]. Actions taken: none ([[Special:AbuseLog/10906339|details]])"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"server_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.wikidata.org"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"server_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.wikidata.org"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"server_script_path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/w"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"wiki"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wikidatawiki"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"parsedcomment"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The following Listings show the portion of an <code class="highlighter-rouge">RML</code> mapping with a
+<code class="highlighter-rouge">JSON</code> source that we used for the conversion. At line 7 using
+<code class="highlighter-rouge">rr:graphMap</code> name the RDF graph containg all the triples using the
+event timestamp. At line 10 add the event type using <code class="highlighter-rouge">rdf:type</code> and the
+"type" field in the JSON. The full mapping is available <a href="https://github.com/riccardotommasini/webstreams/blob/master/src/main/resources/streams/mapping/wikimedia_recentchanges.ttl">here</a>.</p>
+
+<div class="language-sparql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="w"> </span><span class="nn">&lt;WMM&gt;</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="nn">rr:</span><span class="ss">TriplesMap</span><span class="w"> </span><span class="p">;</span><span class="w">
+  </span><span class="nn">rml:</span><span class="ss">logicalSource</span><span class="w"> </span><span class="nn">&lt;source&gt;</span><span class="w"> </span><span class="p">;</span><span class="w">
+  </span><span class="nn">rr:</span><span class="ss">subjectMap</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="nn">rr:</span><span class="ss">template</span><span class="w"> </span><span class="s2">"http://www.wikimedia.org/es/{id}"</span><span class="w"> </span><span class="p">;</span><span class="w">
+  </span><span class="nn">rr:</span><span class="ss">graphMap</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="nn">rr:</span><span class="ss">template</span><span class="w">  </span><span class="s2">"http://wiki.time.com/{timestamp}"</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">;</span><span class="w">
+  </span><span class="nn">rr:</span><span class="ss">predicateObjectMap</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="nn">rr:</span><span class="ss">predicate</span><span class="w"> </span><span class="nn">rdf:</span><span class="ss">type</span><span class="w"> </span><span class="p">;</span><span class="w">
+    </span><span class="nn">rr:</span><span class="ss">objectMap</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="nn">rr:</span><span class="ss">template</span><span class="w"> </span><span class="s2">"http://....org/es/voc/{type}"</span><span class="p">]</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">[...]</span><span class="w"> </span><span class="p">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>To apply the mappings we used a modified version of <a href="https://github.com/riccardotommasini/carml">CARML</a> that handles the annotation process incrementally to minimize the translation latency.</p>
+
+<p>To publish WES RDF Streams, we decided to use <a href="/resources/triplewave">TripleWave</a> approach, i.e., we separate the stream description from the stream content.</p>
+
+<p>The following listing shows an VoCaLS description for the <em>recentchanges</em>
+stream. We included a license that is compliant with Wikimedia terms of
+use. Using <code class="highlighter-rouge">rdfs:seeAlso</code>, we linked to our ontology, the mapping file,
+and any other relevant metadata. Due to the lack of space, we did not
+link to the original sources. However, it would be worth to create a
+<code class="highlighter-rouge">vocals:StreamEndpoint</code> that allows to track the provenance of the
+conversion.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre>&lt;recentchanges&gt; a vocals:StreamDescriptor ; dcat:dataset &lt;wesRCStream&gt;  .
+&lt;wesRCStream&gt; a vocals:RDFStream ;
+    dcat:title "Wikimedia Recentchanges Event Stream"^^xsd:string ;
+    dcat:publisher &lt;http://www.streamreasoning.org&gt; ;
+    dcat:license &lt;https://creativecommons.org/licenses/by-nc/4.0/&gt; ;
+    rdfs:seeAlso &lt;http://...mappings.ttl&gt;
+    rdfs:seeAlso &lt;http://...org/wikimediavocab.owl&gt;
+    vocals:hasEndpoint [  a vocals:StreamEndpoint ;
+     dcat:format frmt:JSON-LD;
+     dcat:accessURL "ws://.../recentchanges" ] .
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p><a href="#anchors-in-markdown">SGraph</a></p>
+
+<p>e
+included a license compatible with the one from WES, and we made the
+VoCaLS description available as S-GRAPH via REST API. We included a
+Stream Endpoint that allows to consume the data directly using a
+WebSocket. Data are originally shared using a document format with a
+rich schema. Therefore, to preserve the level of granularity, we opted
+for a graph-base stream data model.</p>
+
+<p>Similarly to DBL, we include an example of statistics analysis:
+The following Listings show an example of RSP-QL query calculating
+the stream rate every minute.</p>
+
+<pre><code class="language-SPARQL">REGISTER RSTREAM &lt;outputstream&gt; AS
+SELECT (COUNT{*}/60) ?ratesec
+FROM NAMED WINDOW &lt;win&gt; ON &lt;http://wikimedia.org/recentchanges/rdf&gt; [RANGE PT60S PT60S]
+WHERE { WINDOW &lt;win&gt; { ?s ?p ?o } }
+</code></pre>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>https://github.com/wikimedia/mediawiki-event-schemas/tree/master/jsonschema/mediawiki/recentchange <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>event ontology <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET
