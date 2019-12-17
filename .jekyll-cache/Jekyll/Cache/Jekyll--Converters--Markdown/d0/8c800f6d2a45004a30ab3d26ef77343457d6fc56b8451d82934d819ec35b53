@@ -1,0 +1,61 @@
+I"0<p><img src="/images/lifecycleragab.jpg" alt="quadrant" />
+<img src="/images/lifecycleragab.jpg" alt="Publish" /></p>
+
+<p>We collected the information about the streams schemas into an OWL 2
+ontology$^{\ref{ftn:ontologies}}$. WES are designed around the notion of
+event, therefore, we ported related classes from contextual vocabularies
+like the Event Ontology[^3]. Data items are timestamped individually,
+and we used this timestamp to name the graph containing all the event
+data. Regarding the <em>recentchanges</em> stream, we emphasizes the modeling
+of the events types in our ontology, i.e., "edit", "new", "log",
+"categorize", or "external". Similarly, we take into account what
+could be represented as external resources like Wikidata.</p>
+
+<p>Listing <a href="#lst:es3">[lst:es3]</a>{reference-type=”ref”
+reference=”lst:es3”} shows an VoCaLS description for the <em>recentchanges</em>
+stream. We included a license that is compliant with Wikimedia terms of
+use. Using <code class="highlighter-rouge">rdfs:seeAlso</code>, we linked to our ontology, the mapping file,
+and any other relevant metadata. Due to the lack of space, we did not
+link to the original sources. However, it would be worth to create a
+<code class="highlighter-rouge">vocals:StreamEndpoint</code> that allows to track the provenance of the
+conversion.</p>
+
+<p>As anticipated, WES content is not RDF. Thus, we need to set up a
+conversion mechanism.
+The following Listings show an example of <code class="highlighter-rouge">RML</code> mapping with a
+<code class="highlighter-rouge">JSON</code> source that we used for the conversion. At line 7 using
+<code class="highlighter-rouge">rr:graphMap</code> name the RDF graph containg all the triples using the
+event timestamp. At line 10 add the event type using <code class="highlighter-rouge">rdf:type</code> and the
+"type" field in the JSON.</p>
+
+<pre><code class="language-ttl">&lt;WMM&gt; a rr:TriplesMap ;
+  rml:logicalSource &lt;source&gt; ;
+  rr:subjectMap [ rr:template "http://www.wikimedia.org/es/{id}" ;
+  rr:graphMap [ rr:template  "http://wiki.time.com/{timestamp}" ] ] ;
+  rr:predicateObjectMap [
+    rr:predicate rdf:type ;
+    rr:objectMap [ rr:template "http://....org/es/voc/{type}"] ] [...] .
+</code></pre>
+
+<p>To apply the mappings we used a modified version of <code class="highlighter-rouge">CARML</code> that handles
+the annotation process incrementally to minimize the translation
+latency.</p>
+
+<p>To publish WES RDF Streams, we decided to use <code class="highlighter-rouge">TripleWave</code> approach. We
+included a license compatible with the one from WES, and we made the
+VoCaLS description available as S-GRAPH via REST API. We included a
+Stream Endpoint that allows to consume the data directly using a
+WebSocket. Data are originally shared using a document format with a
+rich schema. Therefore, to preserve the level of granularity, we opted
+for a graph-base stream data model.</p>
+
+<p>Similarly to DBL, we include an example of statistics analysis:
+The following Listings show an example of RSP-QL query calculating
+the stream rate every minute.</p>
+
+<pre><code class="language-SPARQL">REGISTER RSTREAM &lt;outputstream&gt; AS
+SELECT (COUNT{*}/60) ?ratesec
+FROM NAMED WINDOW &lt;win&gt; ON &lt;http://wikimedia.org/recentchanges/rdf&gt; [RANGE PT60S PT60S]
+WHERE { WINDOW &lt;win&gt; { ?s ?p ?o } }
+</code></pre>
+:ET
