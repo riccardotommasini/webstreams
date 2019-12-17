@@ -145,7 +145,7 @@ conversion.
      dcat:format frmt:JSON-LD;
      dcat:accessURL "ws://.../recentchanges" ] .
 ```
-[Listing 3](#listing-3)
+[Listing 3](){:id="listing-3"}
 
 In the Sgraph, we included a license compatible with the one from WES, and we made the VoCaLS description available as S-GRAPH via REST API. We included a
 Stream Endpoint that allows to consume the data directly using a
