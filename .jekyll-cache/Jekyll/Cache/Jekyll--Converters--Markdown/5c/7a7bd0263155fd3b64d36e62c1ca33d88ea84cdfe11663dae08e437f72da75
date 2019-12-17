@@ -1,0 +1,61 @@
+I"0<p>The  <strong>Vo</strong>cabulary for <strong>Ca</strong>taloging and <strong>L</strong>inking <strong>S</strong>treams (VoCaLS) is a OWL 2 ontology that aims at enabling Web Stream selection and discovery.</p>
+
+<p>The vocabulary is organized in three modules:
+VoCaLS Core, which describes the core elements of the vocabulary,
+VoCaLS Service
+Description, which describes RDF stream service descriptions, and
+VoCaLS Provenance, focused on streaming data transformation and manipulation.
+We will introduce each module separately.</p>
+
+<p><img src="/images/vcore.png" alt="fig:vcore" />
+<em>Figure 1: VoCaLS Core module</em></p>
+
+<p><strong>VoCALS Core Vocabulary</strong> contains the concepts that are based on an extension
+of <a href="https://www.w3.org/TR/vocab-dcat-2/">dcat</a> to represent streams on the Web. As depicted in <a href="#fig:vcore">Figure 1</a> the model introduces the basic abstractions to represent streams.</p>
+
+<p>A <em>vocals:StreamDescriptor</em> is a document accessible via HTTP that holds
+metadata about the stream and its contents. A <em>vocals:Stream</em> represents a Web stream, i.e., an unbounded sequence of time-varying data elements that might be findable and accessible on the Web, and which can be consumed via a <em>vocals:StreamEndpoint</em>. Finally, a <em>vocals:FiniteStreamPartition</em> is a portion of the stream available for regular Linked Data services to access and process its content.</p>
+
+<p><img src="/images/vsd.png" alt="fig:vsd" /> 
+<em>Figure 2: VoCaLS Service Description module</em>.</p>
+
+<p><strong>VoCaLS Service Description</strong> focuses on metadata
+related to streaming services and their capabilities, enabling consumers
+to discover and select services suitable to their needs as shown in <a href="#fig:vsd">Figure 2</a> 
+<em>vsd:StreamingService</em> is an abstraction to represent a service that deals
+data streams of any type. Continuous query engines, stream reasoners,
+and RDF stream publishers are valid examples. Three classes of RDF
+streaming services were identified, although others could be added if
+needed:</p>
+
+<ul>
+  <li><em>vsd:CatalogService</em>, a service that may provide metadata about streams,
+  their content, query endpoints and more.</li>
+  <li><em>vsd:PublishingService</em>, which represents a service that publishes RDF
+  streams, possibly following a Linked Data compliant scheme, and</li>
+  <li><em>vsd:ProcessingService</em>, which models a stream processing service that
+  performs any kind of transformation on streaming data, e.g. querying,
+  reasoning, filtering.</li>
+</ul>
+
+<p><img src="/images/vprov.png" alt="fig:vprov" /> 
+<em>Figure 3: VoCaLS Provenance  module</em>.</p>
+
+<p><strong>VoCaLS Stream Provenance</strong>  focuses on tracking the
+provenance of stream processing services, i.e., tracing the consequences
+of operations performed over the streams. The module defines four main
+classes also shown in <a href="#fig:vprov">Figure 3</a>.</p>
+
+<ul>
+  <li><em>vprov:R2ROperator</em> refers to operators that produce RDF mappings
+(relations) from other RDF mappings.</li>
+  <li><em>vprov:R2SOperator</em> represents operators that produce a stream from a
+relation.</li>
+  <li><em>vprov:S2ROperator</em> refers to operators that produce relations from
+streams, e.g., windowing. Finally,</li>
+  <li><em>vprov:S2SOperator</em> allows describing operators that produce a stream from
+another stream.</li>
+</ul>
+
+<p>More details about the ontology can be found in the <a href="https://w3id.org/rsp/vocals">documentation</a> or in the <a href="https://link.springer.com/chapter/10.1007/978-3-030-00668-6_16">paper</a>.</p>
+:ET
