@@ -25,18 +25,34 @@ recipe:
 
 ![fig:dbl1](/images/dbl1.png "Figure 1"){:id="fig:dbl1"}*Figure 1*
 
-[Figure 1](#fig:dbl1) shows the three situations a practitioner might find when she/he wants to publish Web Streams. The lower-right quadrant identifies our ultimate goal, i.e., Streaming Linked Data. The other quadrants presents possible starting points, i.e., (upper-left) Web Data published in batches; (upper-right) Linked Data published in batches; and (lower-left) Web Data published as streams. 
+[Figure 1](#fig:dbl1) shows the possible situations practitioners may find when they want to publish streams on the Web. The lower-right quadrant identifies our ultimate goal, i.e., Streaming Linked Data. The other quadrants presents possible starting points, i.e., (upper-left) Web Data published in batches; (upper-right) Linked Data published in batches; and (lower-left) Web Data published as streams. 
 
-The case of DBPedia Live Update Stream is the one identified by the upper-right quadrant, i.e., a Web Stream that is not linked yet.
+The case of DBPedia Live Update (DBL) Stream is the one identified by the upper-right quadrant, i.e., a Web Stream that is not linked yet.
 
 To proceed creating a Linked Data Stream we follow the publication pipeline included in the following [Figure](#fig:wes2).
 
 ![fig:wes2](/images/lifecycleragab.jpg){:id="fig:wes2"}
 *Figure 2*
 
+DBL data are already in RDF. Thus, it is not necessary to set up any conversion mechanism. Nevertheless, it is relevant to identify which
+ontology/vocabulary is used as well as identify the structure of the 
+streams.
+
+DBL a *changelog* stream, i.e., the data represent changes to DBPedia and have
+the goal of keeping DBPedia replicas in-synch. A [Synchronization Tool](https://github.com/dbpedia/dbpedia-live-mirror/) designed to consume the batches and update the local DBPedia copy is available. 
+
+The Stream, accessible via HTTP [at](http://downloads.dbpedia.org/live/changesets) is organized in four sub-streams:
+  - added, i.e., the RDF triples corresponding to added pages.
+  - removed, i.e., the RDF triples corresponding to removed pages.
+  - reinserted, i.e., RDF triples that need to be left unmodified after the update
+  - clear, i.e., only subjects of all added, removed and reInserted triples
+
+The ontology used is [DBPedia's Ontology](http://dbpedia.org/ontology/), which is generated from the manually created specifications in the DBpedia Mappings Wiki.
+
+For the publication, we wrote the stream annotation using [VoCaLS](/resources/vocals) and we released it using [TripleWave](/resource/triplewave).
 The following Listing presents the DBPedia Live VoCaLS Stream
 Descriptor. It contains basic information about the publisher and the
-licence. We linked DBPedia ontology and other relevant datasets (lines
+license. We linked DBPedia ontology and other relevant datasets (lines
 5-6). Finally, the VoCaLS file indicates an RSP engine accessible for
 query answering using the `vsd:publishedBy` property.
 
@@ -56,28 +72,3 @@ query answering using the `vsd:publishedBy` property.
 
 {% endhighlight %}
 
-
-DBPedia Live already provides RDF Data, thus, we do not have to apply
-any conversion mechanism.
-
-We decided to use a RDF Stream Processor to publish DBL as a linked
-stream. In particular, we make use of
-`YASPER` [https://dblp.uni-trier.de/rec/bibtex/conf/semweb/0001CDB0VA16] to compute the aforementioned
-statistics. We feed data to YASPER directly by means of an adapter that
-time-stamps each triple independently. We shared the VoCaLS file of
-Listing [\[lst:dbpedia1\]](#lst:dbpedia1){reference-type="ref"
-reference="lst:dbpedia1"} using the RSP engine. Last but not least, we
-compute simple analytics in the VoCaLS description using RSP-QL. An
-RSP-QL query example that counts the top-20 most edited entities in the
-last minute is presented in the following Listings.
-
-{% highlight sparql linenos %}
-PREFIX dbl: <http://live.dbpedia.org/changesets/>
-REGISTER RSTREAM <top20MosteditedEntities> AS
-SELECT (COUNT (?entity) AS ?count) ?entity
-FROM NAMED WINDOW <wa> ON dbl:added [RANGE PT1M STEP PT10S]
-FROM NAMED WINDOW <wr> ON dbl:removed [RANGE PT1M STEP PT10S]
-WHERE { WINDOW ?w { ?entity ?p ?o . } }
-GROUP BY ?entity ORDER BY DESC(?count) LIMIT 20
-
-{% endhighlight %}

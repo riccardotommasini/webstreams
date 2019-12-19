@@ -1,9 +1,0 @@
-I"œ<ol>
-  <li>Get access to DBPedia Live Updates</li>
-  <li>Identify the publication case ( see <a href="#fig:dbl1">Figure 1</a>)</li>
-  <li>Find the schema that is used for the messages, if any</li>
-  <li>Design an ontology to be used for conversion into RDF Stream</li>
-  <li>Use the Text Editor to map the schema into a common ontology</li>
-  <li>Using an mapping engine, apply the mapping on the fly</li>
-</ol>
-:ET

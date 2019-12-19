@@ -181,18 +181,36 @@
 	<div id="content" class="recipe-body">
 		<p><img src="/images/dbl1.png" alt="fig:dbl1" title="Figure 1" id="fig:dbl1" /><em>Figure 1</em></p>
 
-<p><a href="#fig:dbl1">Figure 1</a> shows the three situations a practitioner might find when she/he wants to publish Web Streams. The lower-right quadrant identifies our ultimate goal, i.e., Streaming Linked Data. The other quadrants presents possible starting points, i.e., (upper-left) Web Data published in batches; (upper-right) Linked Data published in batches; and (lower-left) Web Data published as streams.</p>
+<p><a href="#fig:dbl1">Figure 1</a> shows the possible situations practitioners may find when they want to publish streams on the Web. The lower-right quadrant identifies our ultimate goal, i.e., Streaming Linked Data. The other quadrants presents possible starting points, i.e., (upper-left) Web Data published in batches; (upper-right) Linked Data published in batches; and (lower-left) Web Data published as streams.</p>
 
-<p>The case of DBPedia Live Update Stream is the one identified by the upper-right quadrant, i.e., a Web Stream that is not linked yet.</p>
+<p>The case of DBPedia Live Update (DBL) Stream is the one identified by the upper-right quadrant, i.e., a Web Stream that is not linked yet.</p>
 
 <p>To proceed creating a Linked Data Stream we follow the publication pipeline included in the following <a href="#fig:wes2">Figure</a>.</p>
 
 <p><img src="/images/lifecycleragab.jpg" alt="fig:wes2" id="fig:wes2" />
 <em>Figure 2</em></p>
 
-<p>The following Listing presents the DBPedia Live VoCaLS Stream
+<p>DBL data are already in RDF. Thus, it is not necessary to set up any conversion mechanism. Nevertheless, it is relevant to identify which
+ontology/vocabulary is used as well as identify the structure of the 
+streams.</p>
+
+<p>DBL a <em>changelog</em> stream, i.e., the data represent changes to DBPedia and have
+the goal of keeping DBPedia replicas in-synch. A <a href="https://github.com/dbpedia/dbpedia-live-mirror/">Synchronization Tool</a> designed to consume the batches and update the local DBPedia copy is available.</p>
+
+<p>The Stream, accessible via HTTP <a href="http://downloads.dbpedia.org/live/changesets">at</a> is organized in four sub-streams:</p>
+<ul>
+  <li>added, i.e., the RDF triples corresponding to added pages.</li>
+  <li>removed, i.e., the RDF triples corresponding to removed pages.</li>
+  <li>reinserted, i.e., RDF triples that need to be left unmodified after the update</li>
+  <li>clear, i.e., only subjects of all added, removed and reInserted triples</li>
+</ul>
+
+<p>The ontology used is <a href="http://dbpedia.org/ontology/">DBPedia’s Ontology</a>, which is generated from the manually created specifications in the DBpedia Mappings Wiki.</p>
+
+<p>For the publication, we wrote the stream annotation using <a href="/resources/vocals">VoCaLS</a> and we released it using <a href="/resource/triplewave">TripleWave</a>.
+The following Listing presents the DBPedia Live VoCaLS Stream
 Descriptor. It contains basic information about the publisher and the
-licence. We linked DBPedia ontology and other relevant datasets (lines
+license. We linked DBPedia ontology and other relevant datasets (lines
 5-6). Finally, the VoCaLS file indicates an RSP engine accessible for
 query answering using the <code class="highlighter-rouge">vsd:publishedBy</code> property.</p>
 
@@ -220,35 +238,6 @@ query answering using the <code class="highlighter-rouge">vsd:publishedBy</code>
     vsd:rspEndpoint "http://streamreasoning.org/yasper/queries" .
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>DBPedia Live already provides RDF Data, thus, we do not have to apply
-any conversion mechanism.</p>
-
-<p>We decided to use a RDF Stream Processor to publish DBL as a linked
-stream. In particular, we make use of
-<code class="highlighter-rouge">YASPER</code> [https://dblp.uni-trier.de/rec/bibtex/conf/semweb/0001CDB0VA16] to compute the aforementioned
-statistics. We feed data to YASPER directly by means of an adapter that
-time-stamps each triple independently. We shared the VoCaLS file of
-Listing <a href="#lst:dbpedia1">[lst:dbpedia1]</a>{reference-type=”ref”
-reference=”lst:dbpedia1”} using the RSP engine. Last but not least, we
-compute simple analytics in the VoCaLS description using RSP-QL. An
-RSP-QL query example that counts the top-20 most edited entities in the
-last minute is presented in the following Listings.</p>
-
-<figure class="highlight"><pre><code class="language-sparql" data-lang="sparql"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre><span class="k">PREFIX</span><span class="w"> </span><span class="nn">dbl:</span><span class="w"> </span><span class="nn">&lt;http://live.dbpedia.org/changesets/&gt;</span><span class="w">
-</span><span class="err">REGISTER</span><span class="w"> </span><span class="err">RSTREAM</span><span class="w"> </span><span class="nn">&lt;top20MosteditedEntities&gt;</span><span class="w"> </span><span class="k">AS</span><span class="w">
-</span><span class="k">SELECT</span><span class="w"> </span><span class="p">(</span><span class="nb">COUNT</span><span class="w"> </span><span class="p">(</span><span class="nv">?entity</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="nv">?count</span><span class="p">)</span><span class="w"> </span><span class="nv">?entity</span><span class="w">
-</span><span class="k">FROM</span><span class="w"> </span><span class="k">NAMED</span><span class="w"> </span><span class="err">WINDOW</span><span class="w"> </span><span class="nn">&lt;wa&gt;</span><span class="w"> </span><span class="err">ON</span><span class="w"> </span><span class="nn">dbl:</span><span class="ss">added</span><span class="w"> </span><span class="p">[</span><span class="err">RANGE</span><span class="w"> </span><span class="err">PT1M</span><span class="w"> </span><span class="err">STEP</span><span class="w"> </span><span class="err">PT10S</span><span class="p">]</span><span class="w">
-</span><span class="k">FROM</span><span class="w"> </span><span class="k">NAMED</span><span class="w"> </span><span class="err">WINDOW</span><span class="w"> </span><span class="nn">&lt;wr&gt;</span><span class="w"> </span><span class="err">ON</span><span class="w"> </span><span class="nn">dbl:</span><span class="ss">removed</span><span class="w"> </span><span class="p">[</span><span class="err">RANGE</span><span class="w"> </span><span class="err">PT1M</span><span class="w"> </span><span class="err">STEP</span><span class="w"> </span><span class="err">PT10S</span><span class="p">]</span><span class="w">
-</span><span class="k">WHERE</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">WINDOW</span><span class="w"> </span><span class="nv">?w</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nv">?entity</span><span class="w"> </span><span class="nv">?p</span><span class="w"> </span><span class="nv">?o</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="nv">?entity</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">DESC</span><span class="p">(</span><span class="nv">?count</span><span class="p">)</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">20</span>
-</pre></td></tr></tbody></table></code></pre></figure>
 
 	</div>
 

@@ -1,6 +1,0 @@
-I"t<p>The following Listing presents the DBPedia Live VoCaLS Stream
-Descriptor. It contains basic information about the publisher and the
-licence. We linked DBPedia ontology and other relevant datasets (lines
-5-6). Finally, the VoCaLS file indicates an RSP engine accessible for
-query answering using the <code class="highlighter-rouge">vsd:publishedBy</code> property.</p>
-:ET
