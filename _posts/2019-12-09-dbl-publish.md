@@ -15,18 +15,24 @@ recipe:
     * Knowledge About OWL and RDF
     * [Optional] an RSP engine to calculate some descriptive statistics
   directions_markdown: |-
-    **Cupcakes**
-
-    1. Preheat Oven 350 degree
-    2. In a bowl combine flour, cocoa baking powder, baking soda and salt.
-    3. In a food processor combine butter and sugar and process until smooth. Add the eggs, 4 oz. of chocolate pieces and vanilla. Add half of the flour mixture and ½ of the milk. Process and add the other half of the flour and the remainder of the milk. Slowly, add the hot water.
-    4. Grease and fill muffin tins to top.
-    5. Bake 20 25 minutes or until toothpick test comes out clean.
-    6. Let cool.
-
- 
+    1. Get access to DBPedia Live Updates
+    2. Identify the publication case ( see [Figure 1](#fig:dbl1))
+    3. Find the schema that is used for the messages, if any.
+    4. Find/design an ontology to be used for conversion into RDF Stream
+    4. Use the Text Editor to map the schema into a common ontology
+    5. Using an mapping engine, apply the mapping on the fly
 ---
 
+![fig:dbl1](/images/dbl1.png "Figure 1"){:id="fig:dbl1"}*Figure 1*
+
+[Figure 1](#fig:dbl1) shows the three situations a practitioner might find when she/he wants to publish Web Streams. The lower-right quadrant identifies our ultimate goal, i.e., Streaming Linked Data. The other quadrants presents possible starting points, i.e., (upper-left) Web Data published in batches; (upper-right) Linked Data published in batches; and (lower-left) Web Data published as streams. 
+
+The case of DBPedia Live Update Stream is the one identified by the upper-right quadrant, i.e., a Web Stream that is not linked yet.
+
+To proceed creating a Linked Data Stream we follow the publication pipeline included in the following [Figure](#fig:wes2).
+
+![fig:wes2](/images/lifecycleragab.jpg){:id="fig:wes2"}
+*Figure 2*
 
 The following Listing presents the DBPedia Live VoCaLS Stream
 Descriptor. It contains basic information about the publisher and the

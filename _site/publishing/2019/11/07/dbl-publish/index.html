@@ -11,15 +11,15 @@
 <meta property="og:title" content="Publishing DBPedia Live Updates as RDF Streams" />
 <meta name="author" content="Riccardo Tommasini" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="The following Listing presents the DBPedia Live VoCaLS Stream Descriptor. It contains basic information about the publisher and the licence. We linked DBPedia ontology and other relevant datasets (lines 5-6). Finally, the VoCaLS file indicates an RSP engine accessible for query answering using the vsd:publishedBy property." />
-<meta property="og:description" content="The following Listing presents the DBPedia Live VoCaLS Stream Descriptor. It contains basic information about the publisher and the licence. We linked DBPedia ontology and other relevant datasets (lines 5-6). Finally, the VoCaLS file indicates an RSP engine accessible for query answering using the vsd:publishedBy property." />
+<meta name="description" content="Figure 1" />
+<meta property="og:description" content="Figure 1" />
 <link rel="canonical" href="http://localhost:4000/publishing/2019/11/07/dbl-publish/" />
 <meta property="og:url" content="http://localhost:4000/publishing/2019/11/07/dbl-publish/" />
 <meta property="og:site_name" content="The Joy of Web Streams" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-11-07T00:00:00+00:00" />
 <script type="application/ld+json">
-{"description":"The following Listing presents the DBPedia Live VoCaLS Stream Descriptor. It contains basic information about the publisher and the licence. We linked DBPedia ontology and other relevant datasets (lines 5-6). Finally, the VoCaLS file indicates an RSP engine accessible for query answering using the vsd:publishedBy property.","@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/siteicon.png"},"name":"Riccardo Tommasini"},"url":"http://localhost:4000/publishing/2019/11/07/dbl-publish/","headline":"Publishing DBPedia Live Updates as RDF Streams","dateModified":"2019-11-07T00:00:00+00:00","datePublished":"2019-11-07T00:00:00+00:00","author":{"@type":"Person","name":"Riccardo Tommasini"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/publishing/2019/11/07/dbl-publish/"},"@context":"https://schema.org"}</script>
+{"description":"Figure 1","@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/siteicon.png"},"name":"Riccardo Tommasini"},"url":"http://localhost:4000/publishing/2019/11/07/dbl-publish/","headline":"Publishing DBPedia Live Updates as RDF Streams","dateModified":"2019-11-07T00:00:00+00:00","datePublished":"2019-11-07T00:00:00+00:00","author":{"@type":"Person","name":"Riccardo Tommasini"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/publishing/2019/11/07/dbl-publish/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 		<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Joy of Web Streams" />
@@ -166,22 +166,31 @@
 
 		<div class="directions">
 			<h2>Directions</h2>
-			<p><strong>Cupcakes</strong></p>
-
-<ol>
-  <li>Preheat Oven 350 degree</li>
-  <li>In a bowl combine flour, cocoa baking powder, baking soda and salt.</li>
-  <li>In a food processor combine butter and sugar and process until smooth. Add the eggs, 4 oz. of chocolate pieces and vanilla. Add half of the flour mixture and ½ of the milk. Process and add the other half of the flour and the remainder of the milk. Slowly, add the hot water.</li>
-  <li>Grease and fill muffin tins to top.</li>
-  <li>Bake 20 25 minutes or until toothpick test comes out clean.</li>
-  <li>Let cool.</li>
+			<ol>
+  <li>Get access to DBPedia Live Updates</li>
+  <li>Identify the publication case ( see <a href="#fig:dbl1">Figure 1</a>)</li>
+  <li>Find the schema that is used for the messages, if any.</li>
+  <li>Find/design an ontology to be used for conversion into RDF Stream</li>
+  <li>Use the Text Editor to map the schema into a common ontology</li>
+  <li>Using an mapping engine, apply the mapping on the fly</li>
 </ol>
 
 		</div>
 	</div>
 
 	<div id="content" class="recipe-body">
-		<p>The following Listing presents the DBPedia Live VoCaLS Stream
+		<p><img src="/images/dbl1.png" alt="fig:dbl1" title="Figure 1" id="fig:dbl1" /><em>Figure 1</em></p>
+
+<p><a href="#fig:dbl1">Figure 1</a> shows the three situations a practitioner might find when she/he wants to publish Web Streams. The lower-right quadrant identifies our ultimate goal, i.e., Streaming Linked Data. The other quadrants presents possible starting points, i.e., (upper-left) Web Data published in batches; (upper-right) Linked Data published in batches; and (lower-left) Web Data published as streams.</p>
+
+<p>The case of DBPedia Live Update Stream is the one identified by the upper-right quadrant, i.e., a Web Stream that is not linked yet.</p>
+
+<p>To proceed creating a Linked Data Stream we follow the publication pipeline included in the following <a href="#fig:wes2">Figure</a>.</p>
+
+<p><img src="/images/lifecycleragab.jpg" alt="fig:wes2" id="fig:wes2" />
+<em>Figure 2</em></p>
+
+<p>The following Listing presents the DBPedia Live VoCaLS Stream
 Descriptor. It contains basic information about the publisher and the
 licence. We linked DBPedia ontology and other relevant datasets (lines
 5-6). Finally, the VoCaLS file indicates an RSP engine accessible for

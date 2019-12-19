@@ -14,7 +14,6 @@ recipe:
     * Access to DBPedia Live Update as RDF Stream
     * An RSP Engine
     * Knowledge About OWL and RDF
-    * 
   directions_markdown: |-
 
     1. Preheat Oven 350 degree
@@ -26,6 +25,7 @@ recipe:
 
  
 ---
+
 
 DBL was successfully used to analyze DBPedia evolution. In particular,
 it was used to satisfy information needs like *How many entities are

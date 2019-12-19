@@ -18,14 +18,15 @@ recipe:
     * [Optional] an RSP engine to calculate some descriptive statistics
   directions_markdown: |-
     1. Select one among the Wikimedia Event Streams, e.g., the recent change
-    2. Identify the publication case ( see [Figure 1](#fig:quadrant))
-    3. Find the schema that is used for the messages
-    4. Design an ontology to be used for conversion into RDF Stream
+    2. Identify the publication case ( see [Figure 1](#fig:wes1))
+    3. Find the schema that is used for the messages, if any
+    4. Find/design an ontology to be used for conversion into RDF Stream
     4. Use the Text Editor to map the schema into a common ontology
     5. Using an mapping engine, apply the mapping on the fly
 ---
 
 ![fig:wes1](/images/wes1.png "Figure 1"){:id="fig:wes1"}*Figure 1*
+*Figure 1*
 
 [Figure 1](#fig:wes1) shows the three situations a practitioner might find when she/he wants to publish Web Streams. The lower-right quadrant identifies our ultimate goal, i.e., Streaming Linked Data. The other quadrants presents possible starting points, i.e., (upper-left) Web Data published in batches; (upper-right) Linked Data published in batches; and (lower-left) Web Data published as streams. 
 
