@@ -56,38 +56,6 @@ defaults:
   -
     scope:
       path: ""
-      type: "streams"
-    values:
-      layout: "stream"
-      push_sidebar_down: true
-      print_stylesheet: true
-      comments: false
-      _options:
-        content:
-          width: 1560
-          height: 2000
-        featured_image:
-          width: 1560
-          height: 2000
-  -
-    scope:
-      path: ""
-      type: "resources"
-    values:
-      layout: "resource"
-      push_sidebar_down: true
-      print_stylesheet: true
-      comments: false
-      _options:
-        content:
-          width: 1560
-          height: 2000
-        featured_image:
-          width: 1560
-          height: 2000
-  -
-    scope:
-      path: ""
     values:
       layout: "default"
   -
@@ -100,10 +68,10 @@ defaults:
 collections:
   streams:
     output: true
-    permalink: /:collection/:path/
+    permalink: /page/:path
   resources:
     output: true
-    permalink: /:collection/:path/
+    permalink: /resource/:path
 
 plugins:
   - jekyll-sitemap

@@ -6,18 +6,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Catalog | The Joy of Web Streams</title>
+<title>Wikimedia Event Streams | The Joy of Web Streams</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Catalog" />
+<meta property="og:title" content="Wikimedia Event Streams" />
 <meta name="author" content="Riccardo Tommasini" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="A cookbook for publishing and processing Web Streams." />
-<meta property="og:description" content="A cookbook for publishing and processing Web Streams." />
-<link rel="canonical" href="http://localhost:4000/streams/" />
-<meta property="og:url" content="http://localhost:4000/streams/" />
+<meta name="description" content="Wikimedia EventStreams" />
+<meta property="og:description" content="Wikimedia EventStreams" />
+<link rel="canonical" href="http://localhost:4000/page/wed" />
+<meta property="og:url" content="http://localhost:4000/page/wed" />
 <meta property="og:site_name" content="The Joy of Web Streams" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-10-09T00:00:00+00:00" />
 <script type="application/ld+json">
-{"description":"A cookbook for publishing and processing Web Streams.","@type":"WebPage","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/siteicon.png"},"name":"Riccardo Tommasini"},"url":"http://localhost:4000/streams/","headline":"Catalog","author":{"@type":"Person","name":"Riccardo Tommasini"},"@context":"https://schema.org"}</script>
+{"headline":"Wikimedia Event Streams","dateModified":"2018-10-09T00:00:00+00:00","datePublished":"2018-10-09T00:00:00+00:00","author":{"@type":"Person","name":"Riccardo Tommasini"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/page/wed"},"description":"Wikimedia EventStreams","@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/siteicon.png"},"name":"Riccardo Tommasini"},"url":"http://localhost:4000/page/wed","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 		<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Joy of Web Streams" />
@@ -46,7 +48,7 @@
 	
 
 		
-		<a href="/streams/" class=" active">Catalog</a>
+		<a href="/page/" class="">Catalog</a>
 	
 	
 
@@ -69,35 +71,58 @@
 		</header>
 			
 		<div class="container main-content">
-			<section class="content"><h1>Web Stream Catalog</h1>
+			<section class="content"><h2 id="sec:wikimedia">Wikimedia EventStreams</h2>
 
+<p>Wikimedia Foundation is an American non-profit organization that hosts,
+among the other, open-knowledge projects like Wikipedia. In particular,
+Wikimedia invests financial and technical resources for the maintenance
+of projects that foster free and open knowledge.</p>
 
-	
-		
-			<div class="streams">
-				<div class="stream" style="background-image: url('https://source.unsplash.com/NAN22eh754c/1560x940')">
-					<a href="/streams/2018-10-09-dbl-stream/"><span>DBPedia Live Updates</span></a>
-				</div>	
-			</div>
-		
-	
-		
-			<div class="streams">
-				<div class="stream" style="background-image: url('https://blog.gdeltproject.org/wp-content/uploads/2019-top-people-of-2019-20191206-header-1064x410.png')">
-					<a href="/streams/2018-10-09-gdelt-stream/"><span>Global Dataset of Event, Language and Tone</span></a>
-				</div>	
-			</div>
-		
-	
-		
-			<div class="streams">
-				<div class="stream" style="background-image: url('https://source.unsplash.com/NAN22eh754c/1560x940')">
-					<a href="/streams/2018-10-09-wes-stream/"><span>Wikimedia Event Streams</span></a>
-				</div>	
-			</div>
-		
-	
+<p>Wikimedia EventStream (WES) was created for internal data analysis and
+maintenance and open-sourced in 2018. WES is a web service that exposes
+streams of structured data following the Server-Sent Events (SSE)
+protocol, i.e., data is pushed to the interested clients. Schema of the
+data is versioned and available on GitHub. WES API currently generates
+eight streams:</p>
 
+<ul>
+  <li>recentchanges</li>
+  <li>revision-create</li>
+  <li>page-create</li>
+  <li>page-property-change</li>
+  <li>page-links-change</li>
+  <li>page-move</li>
+  <li>page-delete</li>
+  <li>page-undelete.</li>
+</ul>
+
+<p>All the streams are shared as structured data, i.e., JSON.</p>
+
+<p>In the following, we will focus on <em>recentchanges</em> stream that, among
+the others, is the one with the most complex content.
+Listing <a href="#lst:wes1">[lst:wes1]</a>{reference-type=”ref”
+reference=”lst:wes1”} shows an example of <em>rechentchange</em> stream data
+which is timestamped (line 1). On the <em>recentchange</em> stream, four kinds
+of events are possible: "edit" (like in
+Listing <a href="#lst:wes1">[lst:wes1]</a>{reference-type=”ref”
+reference=”lst:wes1”}) for existing page modification; "new", for new
+page creation, "log" for log action, "external" for external
+changes, and "categorize" for category membership change. Moreover,
+the "title" indicates the page title in a Wiki of the Wikimedia
+foundation. This practically links the event to an external entity.
+Listing <a href="#lst:wes1">[lst:wes1]</a>{reference-type=”ref”
+reference=”lst:wes1”} points to the Wikidata Entity at
+<a href="https://www.wikidata.org/enity/Q31218558.ttl">https://www.wikidata.org/enity/Q31218558.ttl</a> that we can retrive to
+enrich the stream<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>.</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>We excluded metadata about the Kafka Topic from the current
+modeling and from the examples. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 </section>
 			<aside class="sidebar ">
 	<div><a class="editor-link btn" href="cloudcannon:collections/_data/sidebar.yml" class="btn"><strong>&#9998;</strong> Edit sidebar</a></div>
@@ -138,7 +163,7 @@
 		<footer>
 			<div class="container">
 				<hr>
-				&copy; The Joy of Web Streams 2019. All rights reserved.
+				&copy; The Joy of Web Streams 2020. All rights reserved.
 			</div>
 		</footer>
 	</body>
