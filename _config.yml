@@ -72,6 +72,10 @@ collections:
   resources:
     output: true
     permalink: /resource/:path
+  ontologies:
+    output: true
+    permalink: /:collection/:path
+
 
 plugins:
   - jekyll-sitemap
