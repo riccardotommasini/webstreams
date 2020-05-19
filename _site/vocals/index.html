@@ -6,20 +6,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>TripleWave | The Joy of Web Streams</title>
+<title>VoCaLS | The Joy of Web Streams</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="TripleWave" />
+<meta property="og:title" content="VoCaLS" />
 <meta name="author" content="Riccardo Tommasini" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="TripleWave is an open-source tool, under Apache 2.0 license, to publish streams to the Web. It is a reusable and generic resource that enables the publication of RDF Streams on the Web. It is independent of any specific engine implementation, and it can be fed with existing Web streams (e.g. Twitter and Wikipedia streams) or time-annotated RDF datasets (e.g. the Linked Sensor Data dataset). It can be invoked through both pull- and push-based mechanisms, thus enabling RSP engines to automatically register and receive data from TripleWave." />
-<meta property="og:description" content="TripleWave is an open-source tool, under Apache 2.0 license, to publish streams to the Web. It is a reusable and generic resource that enables the publication of RDF Streams on the Web. It is independent of any specific engine implementation, and it can be fed with existing Web streams (e.g. Twitter and Wikipedia streams) or time-annotated RDF datasets (e.g. the Linked Sensor Data dataset). It can be invoked through both pull- and push-based mechanisms, thus enabling RSP engines to automatically register and receive data from TripleWave." />
-<link rel="canonical" href="http://localhost:4000/resource/triplewave" />
-<meta property="og:url" content="http://localhost:4000/resource/triplewave" />
+<meta name="description" content="A cookbook for publishing and processing Web Streams." />
+<meta property="og:description" content="A cookbook for publishing and processing Web Streams." />
+<link rel="canonical" href="http://localhost:4000/vocals/" />
+<meta property="og:url" content="http://localhost:4000/vocals/" />
 <meta property="og:site_name" content="The Joy of Web Streams" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-12-01T00:00:00+00:00" />
 <script type="application/ld+json">
-{"headline":"TripleWave","dateModified":"2019-12-01T00:00:00+00:00","datePublished":"2019-12-01T00:00:00+00:00","author":{"@type":"Person","name":"Riccardo Tommasini"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/resource/triplewave"},"description":"TripleWave is an open-source tool, under Apache 2.0 license, to publish streams to the Web. It is a reusable and generic resource that enables the publication of RDF Streams on the Web. It is independent of any specific engine implementation, and it can be fed with existing Web streams (e.g. Twitter and Wikipedia streams) or time-annotated RDF datasets (e.g. the Linked Sensor Data dataset). It can be invoked through both pull- and push-based mechanisms, thus enabling RSP engines to automatically register and receive data from TripleWave.","@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/siteicon.png"},"name":"Riccardo Tommasini"},"url":"http://localhost:4000/resource/triplewave","@context":"https://schema.org"}</script>
+{"datePublished":"2019-12-01T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/vocals/"},"author":{"@type":"Person","name":"Riccardo Tommasini"},"description":"A cookbook for publishing and processing Web Streams.","@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/siteicon.png"},"name":"Riccardo Tommasini"},"headline":"VoCaLS","dateModified":"2019-12-01T00:00:00+00:00","url":"http://localhost:4000/vocals/","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 		<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Joy of Web Streams" />
@@ -71,9 +71,66 @@
 		</header>
 			
 		<div class="container main-content">
-			<section class="content"><p>TripleWave is an open-source tool,  under Apache 2.0 license, to publish streams to the Web. It is a reusable and generic resource that enables the publication of <a href="https://www.w3.org/community/rsp/">RDF Streams</a> on the Web. It is independent of any specific engine implementation, and it can be fed with existing Web streams (e.g. Twitter and Wikipedia streams) or time-annotated RDF datasets (e.g. the Linked Sensor Data dataset). It can be invoked through both pull- and push-based mechanisms, thus enabling RSP engines to automatically register and receive data from TripleWave.</p>
+			<section class="content"><p>The  <strong>Vo</strong>cabulary for <strong>Ca</strong>taloging and <strong>L</strong>inking <strong>S</strong>treams (VoCaLS) is a OWL 2 ontology that aims at enabling Web Stream selection and discovery.</p>
 
-<p>TripleWave is available in <a href="https://github.com/streamreasoning/TripleWave">Github</a>. Instructions about how to install and configure it are available in the <a href="http://streamreasoning.github.io/TripleWave/docs.html">documentation</a> page. You can find additional material, such as publications and presentations, in <a href="http://streamreasoning.github.io/TripleWave/publications.html">this</a> page.</p>
+<p>The vocabulary is organized in three modules:
+VoCaLS Core, which describes the core elements of the vocabulary,
+VoCaLS Service
+Description, which describes RDF stream service descriptions, and
+VoCaLS Provenance, focused on streaming data transformation and manipulation.
+We will introduce each module separately.</p>
+
+<p><img src="/images/vcore.png" alt="fig:vcore" />
+<em>Figure 1: VoCaLS Core module</em></p>
+
+<p><strong>VoCALS Core Vocabulary</strong> contains the concepts that are based on an extension
+of <a href="https://www.w3.org/TR/vocab-dcat-2/">dcat</a> to represent streams on the Web. As depicted in <a href="#fig:vcore">Figure 1</a> the model introduces the basic abstractions to represent streams.</p>
+
+<p>A <em>vocals:StreamDescriptor</em> is a document accessible via HTTP that holds
+metadata about the stream and its contents. A <em>vocals:Stream</em> represents a Web stream, i.e., an unbounded sequence of time-varying data elements that might be findable and accessible on the Web, and which can be consumed via a <em>vocals:StreamEndpoint</em>. Finally, a <em>vocals:FiniteStreamPartition</em> is a portion of the stream available for regular Linked Data services to access and process its content.</p>
+
+<p><img src="/images/vsd.png" alt="fig:vsd" /> 
+<em>Figure 2: VoCaLS Service Description module</em>.</p>
+
+<p><strong>VoCaLS Service Description</strong> focuses on metadata
+related to streaming services and their capabilities, enabling consumers
+to discover and select services suitable to their needs as shown in <a href="#fig:vsd">Figure 2</a> 
+<em>vsd:StreamingService</em> is an abstraction to represent a service that deals
+data streams of any type. Continuous query engines, stream reasoners,
+and RDF stream publishers are valid examples. Three classes of RDF
+streaming services were identified, although others could be added if
+needed:</p>
+
+<ul>
+  <li><em>vsd:CatalogService</em>, a service that may provide metadata about streams,
+  their content, query endpoints and more.</li>
+  <li><em>vsd:PublishingService</em>, which represents a service that publishes RDF
+  streams, possibly following a Linked Data compliant scheme, and</li>
+  <li><em>vsd:ProcessingService</em>, which models a stream processing service that
+  performs any kind of transformation on streaming data, e.g. querying,
+  reasoning, filtering.</li>
+</ul>
+
+<p><img src="/images/vprov.png" alt="fig:vprov" /> 
+<em>Figure 3: VoCaLS Provenance  module</em>.</p>
+
+<p><strong>VoCaLS Stream Provenance</strong>  focuses on tracking the
+provenance of stream processing services, i.e., tracing the consequences
+of operations performed over the streams. The module defines four main
+classes also shown in <a href="#fig:vprov">Figure 3</a>.</p>
+
+<ul>
+  <li><em>vprov:R2ROperator</em> refers to operators that produce RDF mappings
+(relations) from other RDF mappings.</li>
+  <li><em>vprov:R2SOperator</em> represents operators that produce a stream from a
+relation.</li>
+  <li><em>vprov:S2ROperator</em> refers to operators that produce relations from
+streams, e.g., windowing. Finally,</li>
+  <li><em>vprov:S2SOperator</em> allows describing operators that produce a stream from
+another stream.</li>
+</ul>
+
+<p>More details about the ontology can be found in the <a href="https://w3id.org/rsp/vocals">documentation</a> or in the <a href="https://link.springer.com/chapter/10.1007/978-3-030-00668-6_16">paper</a>.</p>
 </section>
 			<aside class="sidebar ">
 	<div><a class="editor-link btn" href="cloudcannon:collections/_data/sidebar.yml" class="btn"><strong>&#9998;</strong> Edit sidebar</a></div>

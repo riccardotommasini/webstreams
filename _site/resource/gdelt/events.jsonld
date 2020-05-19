@@ -1,0 +1,43 @@
+{
+  "@graph": [
+    {
+      "@id": "https://www.linkeddata.stream/events",
+      "@type": "http://w3id.org/rsp/vocals#StreamDescriptor",
+      "http://www.w3.org/ns/dcat#dataset": {
+        "@id": "https://www.linkeddata.stream/events"
+      },
+      "http://www.w3.org/ns/dcat#description": "GDELT Events Stream",
+      "http://www.w3.org/ns/dcat#license": {
+        "@id": "https://creativecommons.org/licenses/by-nc/4.0/"
+      },
+      "http://www.w3.org/ns/dcat#publisher": {
+        "@id": "http://www.linkeddata.stream/about"
+      },
+      "http://www.w3.org/ns/dcat#title": "GDELT Events Stream"
+    },
+    {
+      "@id": "https://www.linkeddata.stream/eventstream",
+      "@type": "http://w3id.org/rsp/vocals#RDFStream",
+      "http://w3id.org/rsp/vocals#hasEndpoint": {
+        "@id": "ws://localhost:8080/events"
+      },
+      "http://w3id.org/rsp/vocals#windowSize": {
+        "@type": "http://www.w3.org/2001/XMLSchema#duration",
+        "@value": "PT15M"
+      },
+      "http://w3id.org/rsp/vocals#windowType": {
+        "@id": "http://w3id.org/rsp/vocals#logicalTumbling"
+      }
+    },
+    {
+      "@id": "ws://localhost:8080/events",
+      "@type": "http://w3id.org/rsp/vocals#StreamEndpoint",
+      "http://www.w3.org/ns/dcat#accessURL": "ws://localhost:8080/events",
+      "http://www.w3.org/ns/dcat#format": {
+        "@id": "http://www.w3.org/ns/formats/JSON-LD"
+      },
+      "https://www.linkeddata.stream/ontologies/dockerhomepage": "https://hub.docker.com/r/streamreasoning/webstreams_gdelt_events",
+      "https://www.linkeddata.stream/ontologies/dockerimage": "streamreasoning/webstreams_gdelt_events"
+    }
+  ]
+}

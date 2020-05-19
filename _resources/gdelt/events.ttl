@@ -1,4 +1,4 @@
-@prefix : <https://www.linkeddata.stream/resource/> .
+@prefix : <https://www.linkeddata.stream/> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -8,26 +8,28 @@
 @prefix vocals: <http://w3id.org/rsp/vocals#> .
 @prefix vprov: <http://w3id.org/rsp/vocals-prov#> .
 @prefix vsd: <http://w3id.org/rsp/vocals-sd#> .
-@prefix dcat: <http://www.w3.org/TR/vocab-dcat/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix time: <http://www.w3.org/2006/time#> .
 @prefix frmt: <http://www.w3.org/ns/formats/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix docker: <https://www.linkeddata.stream/ontologies/docker> .
 
-:gdelt a vocals:StreamDescriptor ;
-        dcat:dataset <http://data.gdeltproject.org/gdeltv2/lastupdate.txt> ;
-        dcat:title "GDELT-DATA Stream"^^xsd:string ;
-        dcat:publisher <http://www.gdeltproject.org> ;
+:events a vocals:StreamDescriptor ;
+        dcat:dataset :events  ;
+        dcat:title "GDELT Events Stream"^^xsd:string ;
         dcat:publisher <http://www.linkeddata.stream/about> ;
-        dcat:description "GDELT DATA Stream"^^xsd:string ;
+        dcat:description "GDELT Events Stream"^^xsd:string ;
         dcat:license <https://creativecommons.org/licenses/by-nc/4.0/> .
 
-<http://data.gdeltproject.org> a vocals:Stream ;
+:eventstream a vocals:RDFStream ;
         vocals:windowType vocals:logicalTumbling ;
         vocals:windowSize "PT15M"^^xsd:duration ;
-        vocals:hasEndpoint <http://data.gdeltproject.org/gdeltv2/lastupdate.txt>  ;
-        vocals:hasAffluent <https://linkeddata.streams/resource/gdelt/events> .
+        vocals:hasEndpoint <ws://localhost:8080/events> .
 
-<http://data.gdeltproject.org/gdeltv2/lastupdate.txt>  a vocals:StreamEndpoint ;
-        dcat:format frmt:CSV ;
-        dcat:accessURL "http://data.gdeltproject.org/gdeltv2/lastupdate.txt" .
+<ws://localhost:8080/events>   a vocals:StreamEndpoint ;
+        docker:image "streamreasoning/webstreams_gdelt_events"^^xsd:string ;
+        docker:homepage "https://hub.docker.com/r/streamreasoning/webstreams_gdelt_events" ;
+        dcat:format frmt:JSON-LD ;
+        dcat:accessURL "ws://localhost:8080/events"  .
 

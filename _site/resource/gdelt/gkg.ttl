@@ -1,0 +1,36 @@
+@prefix : <https://www.linkeddata.stream/resource/gdelt/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vocals: <http://w3id.org/rsp/vocals#> .
+@prefix vprov: <http://w3id.org/rsp/vocals-prov#> .
+@prefix vsd: <http://w3id.org/rsp/vocals-sd#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix frmt: <http://www.w3.org/ns/formats/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix docker: <https://www.linkeddata.stream/ontologies/docker> .
+
+:gkg a vocals:StreamDescriptor ;
+        dcat:dataset :gkgstream  ;
+        dcat:title "GDELT GKG Stream"^^xsd:string ;
+        dcat:description "GDELT Global Knowledge Graph Stream"^^xsd:string ;
+        dcat:publisher <http://www.linkeddata.stream/about> ;
+        dcat:license <https://creativecommons.org/licenses/by-nc/4.0/> .
+
+:gkgstream a vocals:RDFStream ;
+        vocals:windowType vocals:logicalTumbling ;
+        vocals:windowSize "PT15M"^^xsd:duration ;
+        vocals:hasEndpoint <ws://localhost:8080/gkg> .
+
+<ws://localhost:8080/gkg>  a vocals:StreamEndpoint ;
+                docker:image "streamreasoning/webstreams_gdelt_gkg"^^xsd:string ;
+                docker:home "https://hub.docker.com/repository/docker/streamreasoning/webstreams_gdelt_gkg"
+                dcat:format frmt:JSON-LD;
+                dcat:accessURL "ws://localhost:8080/gkg"  .
+
+.

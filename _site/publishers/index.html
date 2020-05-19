@@ -6,20 +6,18 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Global Dataset of Event, Language and Tone | The Joy of Web Streams</title>
+<title>Publishers | The Joy of Web Streams</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Global Dataset of Event, Language and Tone" />
+<meta property="og:title" content="Publishers" />
 <meta name="author" content="Riccardo Tommasini" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Global Database of Events, Language and Tone (GDELT)" />
-<meta property="og:description" content="Global Database of Events, Language and Tone (GDELT)" />
-<link rel="canonical" href="http://localhost:4000/page/gdelt" />
-<meta property="og:url" content="http://localhost:4000/page/gdelt" />
+<meta name="description" content="A cookbook for publishing and processing Web Streams." />
+<meta property="og:description" content="A cookbook for publishing and processing Web Streams." />
+<link rel="canonical" href="http://localhost:4000/publishers/" />
+<meta property="og:url" content="http://localhost:4000/publishers/" />
 <meta property="og:site_name" content="The Joy of Web Streams" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2018-10-09T00:00:00+00:00" />
 <script type="application/ld+json">
-{"datePublished":"2018-10-09T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/page/gdelt"},"author":{"@type":"Person","name":"Riccardo Tommasini"},"description":"Global Database of Events, Language and Tone (GDELT)","@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/siteicon.png"},"name":"Riccardo Tommasini"},"headline":"Global Dataset of Event, Language and Tone","dateModified":"2018-10-09T00:00:00+00:00","url":"http://localhost:4000/page/gdelt","@context":"https://schema.org"}</script>
+{"author":{"@type":"Person","name":"Riccardo Tommasini"},"description":"A cookbook for publishing and processing Web Streams.","@type":"WebPage","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/siteicon.png"},"name":"Riccardo Tommasini"},"headline":"Publishers","url":"http://localhost:4000/publishers/","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 		<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Joy of Web Streams" />
@@ -71,69 +69,16 @@
 		</header>
 			
 		<div class="container main-content">
-			<section class="content"><h2 id="sec:geldt">Global Database of Events, Language and Tone (GDELT)</h2>
+			<section class="content"><h2>Authors</h2>
 
-<p>The <code class="highlighter-rouge">GDELT</code> is the largest open-access spatio-temporal archive for human
-society. Its Global Knowledge Graph spans more than 215 years and
-connects people, organizations, locations, all over the world. GDELT
-captures themes, images, and emotions into a single holistic global
-network.</p>
+	<lu>
+		<li> 	<a href="https://rictomm.me"><b>Riccardo Tommasini</b></a> </li>
+		<li> 	<a href="https://bigdata.cs.ut.ee/mohamed-ragab"><b>Mohamed Ragab</b></a></li>
+		<li> 	<a href="http://kodu.ut.ee/~sakr/"><b>Sherif Sakr</b></a></li>
+		<li> 	<a href="http://emanueledellavalle.org"><b>Emanuele Della Valle</b></a></li>
+	</lu>
 
-<p>GDELT data comes from a multitude of news sources. The extraction
-process follows techniques from Natural Language Processing and makes
-use of two ontologies, i.e., Conflict and Mediation Event Observations
-(CAMEO) [@gerner2002conflict], and Global Content Analysis Measures
-(GCAM). GDELT provisions multiple streams, in the following we discuss
-three of them, i.e., Events, Mentions and Global Knowledge Graphs (GKG).
-Consequently, GDELT information is naturally multidimensional and
-interconnected due to the usage of complex background knowledge.</p>
-
-<p>GDELT provisions streams of TSV data every 15 minutes. As anticipated,
-it includes three streams, i.e., Events, Mentions, and Global 
-Knowledge Graphs (GKG).</p>
-
-<p>The <em>Event Stream</em> makes use of the dyadic CAMEO format. The
-most important information regards the two actors participating in each
-event, and the action they perform.</p>
-
-<p>The <em>Mention Stream</em> records every
-mention of an event over time, along with the timestamp the article was
-published. The mention stream is linked to the Event stream by the
-Global Event ID field.</p>
-
-<p>The <em>GKG Stream</em> connects people, organizations,
-locations, themes, news source, and event across the planet into a
-single massive network. GKG stream is rich and multidimensional. Fields
-like the GCAM, Themes, or Persons include more than one entry, using a
-CSV or similar formats.</p>
-
-<p>The following Listing presents an RSP-QL query that mixes all GDELT
-streams. The query, which is inspired to an GDELT analyses available on
-the GDELT blog, counts the number of mentions in events that are
-happening in a particular area of IRAQ, and whose theme is <code class="highlighter-rouge">gcam:kill</code>.</p>
-
-<figure class="highlight"><pre><code class="language-ttl" data-lang="ttl"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="code"><pre>REGISTER RSTREAM &lt;complexstrm&gt; AS
-SELECT (COUNT(?newsa) AS ?tot)
-FROM NAMED WINDOW &lt;e&gt;  ON gdelt-bq:gdeltv2.events    [RANGE 30MPT 15MPT]
-FROM NAMED WINDOW &lt;m&gt;  ON gdelt-bq:gdeltv2.mentions  [RANGE 30MPT 15MPT]
-FROM NAMED WINDOW &lt;g&gt;  ON gdelt-bq:gdeltv2.gkg       [RANGE 30MPT 15MPT]
-WHERE {
- WINDOW &lt;e&gt; { ?event gdelt:quadClass cameo:4 ; actionGeo_cc ‘IZ’. }
- WINDOW &lt;m&gt; { ?event gdelt:mentions ?newsa. }
- WINDOW &lt;g&gt; { ?newsa gdelt:theme gcam:kill ; gdelt:location geo:iraq. } }
-GROUP BY ?newsa
-</pre></td></tr></tbody></table></code></pre></figure>
-
+	<img src="/images/authors.png" alt="Authors">
 </section>
 			<aside class="sidebar ">
 	<div><a class="editor-link btn" href="cloudcannon:collections/_data/sidebar.yml" class="btn"><strong>&#9998;</strong> Edit sidebar</a></div>
