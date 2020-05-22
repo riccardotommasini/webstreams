@@ -1,0 +1,79 @@
+[
+    {
+        "@id": "https://www.linkeddata.stream/resource/gdelt",
+        "@type": [
+            "http://w3id.org/rsp/vocals#StreamDescriptor"
+        ],
+        "http://www.w3.org/TR/vocab-dcat/dataset": [
+            {
+                "@id": "http://data.gdeltproject.org/gdeltv2/lastupdate.txt"
+            }
+        ],
+        "http://www.w3.org/TR/vocab-dcat/description": [
+            {
+                "@value": "GDELT DATA Stream"
+            }
+        ],
+        "http://www.w3.org/TR/vocab-dcat/license": [
+            {
+                "@id": "https://creativecommons.org/licenses/by-nc/4.0/"
+            }
+        ],
+        "http://www.w3.org/TR/vocab-dcat/publisher": [
+            {
+                "@id": "http://www.linkeddata.stream/about"
+            },
+            {
+                "@id": "http://www.gdeltproject.org"
+            }
+        ],
+        "http://www.w3.org/TR/vocab-dcat/title": [
+            {
+                "@value": "GDELT-DATA Stream"
+            }
+        ]
+    },
+    {
+        "@id": "http://data.gdeltproject.org/gdeltv2/lastupdate.txt",
+        "@type": [
+            "http://w3id.org/rsp/vocals#StreamEndpoint"
+        ],
+        "http://www.w3.org/TR/vocab-dcat/accessURL": [
+            {
+                "@value": "http://data.gdeltproject.org/gdeltv2/lastupdate.txt"
+            }
+        ],
+        "http://www.w3.org/TR/vocab-dcat/format": [
+            {
+                "@id": "http://www.w3.org/ns/formats/CSV"
+            }
+        ]
+    },
+    {
+        "@id": "http://data.gdeltproject.org",
+        "@type": [
+            "http://w3id.org/rsp/vocals#Stream"
+        ],
+        "http://w3id.org/rsp/vocals#hasAffluent": [
+            {
+                "@id": "https://linkeddata.streams/resource/gdelt/events"
+            }
+        ],
+        "http://w3id.org/rsp/vocals#hasEndpoint": [
+            {
+                "@id": "http://data.gdeltproject.org/gdeltv2/lastupdate.txt"
+            }
+        ],
+        "http://w3id.org/rsp/vocals#windowSize": [
+            {
+                "@type": "http://www.w3.org/2001/XMLSchema#duration",
+                "@value": "PT15M"
+            }
+        ],
+        "http://w3id.org/rsp/vocals#windowType": [
+            {
+                "@id": "http://w3id.org/rsp/vocals#logicalTumbling"
+            }
+        ]
+    }
+]

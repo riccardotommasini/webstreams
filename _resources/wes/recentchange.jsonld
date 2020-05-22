@@ -1,0 +1,44 @@
+[
+    {
+        "@id": "http://localhost/recentchanges",
+        "@type": [
+            "http://w3id.org/rsp/vocals#RDFStream"
+        ],
+        "http://w3id.org/rsp/vocals#hasEndpoint": [
+            {
+                "@id": "_:ub7bL18C24"
+            }
+        ],
+        "http://www.w3.org/ns/dcat#license": [
+            {
+                "@id": "https://creativecommons.org/licenses/by-nc/4.0/"
+            }
+        ],
+        "http://www.w3.org/ns/dcat#publisher": [
+            {
+                "@id": "http://www.streamreasoning.org"
+            }
+        ],
+        "http://www.w3.org/ns/dcat#title": [
+            {
+                "@value": "Wikimedia Recentchanges Event Stream"
+            }
+        ]
+    },
+    {
+        "@id": "_:ub7bL18C24",
+        "@type": [
+            "http://w3id.org/rsp/vocals#StreamEndpoint"
+        ],
+        "http://www.w3.org/ns/dcat#accessURL": [
+            {
+                "@value": "ws://localhost:8080/recentchanges"
+            }
+        ],
+        "http://www.w3.org/ns/dcat#format": [
+            {
+                "@id": "http://www.w3.org/ns/formats/JSON-LD"
+            }
+        ]
+    }
+]

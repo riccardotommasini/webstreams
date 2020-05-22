@@ -1,0 +1,81 @@
+[
+    {
+        "@id": "https://www.linkeddata.stream/resource/gdelt/gkgstream",
+        "@type": [
+            "http://w3id.org/rsp/vocals#RDFStream"
+        ],
+        "http://w3id.org/rsp/vocals#hasEndpoint": [
+            {
+                "@id": "ws://localhost:8080/gkg"
+            }
+        ],
+        "http://w3id.org/rsp/vocals#windowSize": [
+            {
+                "@type": "http://www.w3.org/2001/XMLSchema#duration",
+                "@value": "PT15M"
+            }
+        ],
+        "http://w3id.org/rsp/vocals#windowType": [
+            {
+                "@id": "http://w3id.org/rsp/vocals#logicalTumbling"
+            }
+        ]
+    },
+    {
+        "@id": "ws://localhost:8080/gkg",
+        "@type": [
+            "http://w3id.org/rsp/vocals#StreamEndpoint"
+        ],
+        "http://www.w3.org/ns/dcat#accessURL": [
+            {
+                "@value": "ws://localhost:8080/gkg"
+            }
+        ],
+        "http://www.w3.org/ns/dcat#format": [
+            {
+                "@id": "http://www.w3.org/ns/formats/JSON-LD"
+            }
+        ],
+        "https://www.linkeddata.stream/ontologies/dockerhome": [
+            {
+                "@value": "https://hub.docker.com/repository/docker/streamreasoning/webstreams_gdelt_gkg"
+            }
+        ],
+        "https://www.linkeddata.stream/ontologies/dockerimage": [
+            {
+                "@value": "streamreasoning/webstreams_gdelt_gkg"
+            }
+        ]
+    },
+    {
+        "@id": "https://www.linkeddata.stream/resource/gdelt/gkg",
+        "@type": [
+            "http://w3id.org/rsp/vocals#StreamDescriptor"
+        ],
+        "http://www.w3.org/ns/dcat#dataset": [
+            {
+                "@id": "https://www.linkeddata.stream/resource/gdelt/gkgstream"
+            }
+        ],
+        "http://www.w3.org/ns/dcat#description": [
+            {
+                "@value": "GDELT Global Knowledge Graph Stream"
+            }
+        ],
+        "http://www.w3.org/ns/dcat#license": [
+            {
+                "@id": "https://creativecommons.org/licenses/by-nc/4.0/"
+            }
+        ],
+        "http://www.w3.org/ns/dcat#publisher": [
+            {
+                "@id": "http://www.linkeddata.stream/about"
+            }
+        ],
+        "http://www.w3.org/ns/dcat#title": [
+            {
+                "@value": "GDELT GKG Stream"
+            }
+        ]
+    }
+]

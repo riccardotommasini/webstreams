@@ -29,8 +29,6 @@
 
 <ws://localhost:8080/gkg>  a vocals:StreamEndpoint ;
                 docker:image "streamreasoning/webstreams_gdelt_gkg"^^xsd:string ;
-                docker:home "https://hub.docker.com/repository/docker/streamreasoning/webstreams_gdelt_gkg"
+                docker:home "https://hub.docker.com/repository/docker/streamreasoning/webstreams_gdelt_gkg" ;
                 dcat:format frmt:JSON-LD;
                 dcat:accessURL "ws://localhost:8080/gkg"  .
-
-.

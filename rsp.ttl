@@ -1,0 +1,19 @@
+[
+    {
+        "@id": "http://localhost/gdelt/rsp",
+        "@type": [
+            "http://w3id.org/rsp/vocals-sd#CatalogService"
+        ],
+        "http://www.w3.org/ns/dcat#dataset": [
+            {
+                "@id": "http://localhost:8081/gkg"
+            },
+            {
+                "@id": "http://localhost:8081/mentions"
+            },
+            {
+                "@id": "http://localhost:8081/events"
+            }
+        ]
+    }
+]
