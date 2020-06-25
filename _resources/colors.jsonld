@@ -1,0 +1,87 @@
+{
+  "@graph": [
+    {
+      "@id": "http://colorstream:8080/ColorStreamEndpoint",
+      "@type": "vocals:StreamEndpoint",
+      "publishedBy": "http://streamhub:9292/streamhub",
+      "accessURL": "ws://colorstream:5555",
+      "description": "Streaming endpoint to consume color instances via websocket",
+      "format": "frmt:JSON-LD",
+      "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+      "title": "Color Stream Endpoint"
+    },
+    {
+      "@id": "http://colorstream:8080/colors",
+      "@type": [
+        "vocals:RDFStream",
+        "vocals:StreamDescriptor"
+      ],
+      "hasEndpoint": "http://colorstream:8080/ColorStreamEndpoint",
+      "description": "Periodically produces instances of the Color Class",
+      "landingPage": "https://example.org/colors",
+      "publisher": "http://streamhub:9292/streamhub",
+      "title": "Color Stream"
+    },
+    {
+      "@id": "http://streamhub:9292/streamhub",
+      "@type": "vsd:PublishingService",
+      "hasFeature": "vsd:replaying",
+      "resultFormat": "frmt:JSON-LD"
+    }
+  ],
+  "@context": {
+    "publishedBy": {
+      "@id": "http://w3id.org/rsp/vocals-sd#publishedBy",
+      "@type": "@id"
+    },
+    "accessURL": {
+      "@id": "http://www.w3.org/ns/dcat#accessURL"
+    },
+    "format": {
+      "@id": "http://www.w3.org/ns/dcat#format",
+      "@type": "@id"
+    },
+    "license": {
+      "@id": "http://www.w3.org/ns/dcat#license",
+      "@type": "@id"
+    },
+    "description": {
+      "@id": "http://www.w3.org/ns/dcat#description"
+    },
+    "title": {
+      "@id": "http://www.w3.org/ns/dcat#title"
+    },
+    "resultFormat": {
+      "@id": "http://w3id.org/rsp/vocals-sd#resultFormat",
+      "@type": "@id"
+    },
+    "hasFeature": {
+      "@id": "http://w3id.org/rsp/vocals-sd#hasFeature",
+      "@type": "@id"
+    },
+    "hasEndpoint": {
+      "@id": "http://w3id.org/rsp/vocals#hasEndpoint",
+      "@type": "@id"
+    },
+    "landingPage": {
+      "@id": "http://www.w3.org/ns/dcat#landingPage",
+      "@type": "@id"
+    },
+    "publisher": {
+      "@id": "http://www.w3.org/ns/dcat#publisher",
+      "@type": "@id"
+    },
+    "frmt": "http://www.w3.org/ns/formats/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "vsd": "http://w3id.org/rsp/vocals-sd#",
+    "xml": "http://www.w3.org/XML/1998/namespace",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "vocals": "http://w3id.org/rsp/vocals#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "time": "http://www.w3.org/2006/time#",
+    "vprov": "http://w3id.org/rsp/vocals-prov#",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "prov": "http://www.w3.org/ns/prov#"
+  }
+}
